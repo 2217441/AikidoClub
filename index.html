@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>IIUM Aikido</title>
+  <!-- Load HTMX from CDN -->
+  <script src="https://unpkg.com/htmx.org"></script>
+  <!-- Load the history extension for browser navigation -->
+  <script src="https://unpkg.com/htmx.org/dist/ext/htmx-history.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <header>
+    <h1>Welcome to IIUM Aikido</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/gallery.html">Gallery</a>
+      <a href="/news.html">News</a>
+      <a href="/join.html">Join</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <!-- A button that triggers a POST request to /join and replaces itself with the response -->
+    <!-- Use hx-history-elt to update the browser history with the response URL -->
+    <button id="join-button" hx-post="/join" hx-swap="outerHTML" hx-history-elt>Join</button>
+    <!-- A form that triggers a GET request to /events with the input value and updates the events div -->
+    <!-- Use hx-boost to send the request without waiting for the form submission -->
+    <form id="search-form" hx-get="/events" hx-target="#events" hx-boost>
+        <input type="text" name="date" placeholder="Enter a date">
+        <button type="submit">Search</button>
+    </form>
+    <!-- A div that displays the events -->
+    <!-- Use hx-select to specify which part of the response to use for updating -->
+    <div id="events" hx-select=".event-list"></div>
+    <!-- A div that connects to a WebSocket and displays the latest news from IIUM Aikido -->
+    <div id="news" hx-ws="wss://iiumaikido.com/news" hx-swap="innerHTML">No news yet</div>
+  </main>
+  <footer>
+    <!-- Add your site or application content here -->
+    <p>Hello world! This is HTML5 Boilerplate.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
