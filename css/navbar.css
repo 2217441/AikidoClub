@@ -1,0 +1,202 @@
+/* Styles for the navigation bar */
+#navbar {
+  background-color: #b17070; /* Background color for the navbar */
+  margin: 0;
+  display: flex;
+  justify-content:center;
+  width: 100%;
+  z-index: 20;
+  text-align: center;
+}
+
+/* Styles for the club name in the navbar */
+#club-name{
+  display: inline;
+  margin: auto 3px auto 3px;
+  z-index: inherit;
+  color: white; /* Text color for the club name */
+}
+
+/* Adds space between the club name and navigation links */
+#space-nav{
+  width: 20vw;
+}
+
+/* Styles for the club logo */
+.logo-club {
+  display: inline-block;
+  margin: 2px 10px 2px 80px;
+}
+
+/* Styles for the logo image */
+.logo-club img {
+  width: 70px; 
+  height: auto;
+  margin: 0px 4px;
+}
+
+/* Styles for the navigation links */
+#nav {
+  list-style-type: none;/* Remove default link style */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  padding-right: 10px;
+  z-index: inherit;
+  text-align: center;
+}
+
+/* Styles for individual navigation links */
+#nav li {
+  margin-right: 20px;
+}
+
+/* Styles for the navigation link text */
+#nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-family: inherit;
+  transition: color 0.5s ease, text-decoration 0.5s ease; /* Add transition for color and text-decoration */
+}
+
+/* Styles for navigation links on hover */
+#nav a:hover {
+  color: black; /* Change color to black on hover */
+  text-decoration: underline; /* Add underline on hover */
+  text-decoration-thickness: 3px; /* Set thickness of underline */
+  text-underline-offset: 5px; /* Set offset of underline */
+  text-decoration-color: black; /* Set color of underline */
+  text-decoration-style: solid; /* Set style of underline */
+}
+
+/* Styles for the navigation image(for phone navigation) */
+#nav-image{
+  width: 70px;
+}
+
+/* Styles for the menu icon(group of bar)(for phone layout) */
+#menu-icon {
+  display: none; /* Make it none when not in phone layout */
+  cursor: pointer;
+  align-self: center;
+  margin-left: 30px;
+}
+
+/* Styles for each bar line (for phone design) */
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.20s;
+  z-index: 10;
+}
+
+/* Animation for the menu icon on click */
+.change .bar1 {
+  transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change .bar2 {
+  opacity: 0;/* Middle bar dissappear */
+}
+
+.change .bar3 {
+  transform: translate(0, -11px) rotate(45deg);
+}
+
+/* Styles for the floating navigation container(phone layout) */
+#floatingNavContainer{
+  display: none;/* Make it none first when not in phone layout */
+}
+
+/* Media query for screen sizes up to 830px(tablet layout) */
+@media (max-width: 830px) {
+  .logo-club {
+      margin: 2px 10px 2px 20px; /* Resize Aikido logo*/
+  }
+  #space-nav{
+      width: 10%;/* Resize space between club name and navigational links*/
+  }
+  #club-name{
+      font-size:2vw;/* Resize club name*/
+  }
+
+  /* Styles for active state of navigation links */
+  #nav a:active{
+      transition: color 0.5s ease, text-decoration 0.5s ease-in;
+      color: rgba(0, 0, 255, 0.415);
+      text-decoration-style: solid;
+      text-decoration: underline; /* Add underline when clicked */
+      text-decoration-thickness: 1px; 
+  }
+}
+
+/* Media query for screen sizes up to 500px(phone layout) */
+@media (max-width: 500px) {
+  #nav {
+      display: none; /* Hide the navigation links (the desktop version) */
+  }
+
+  #club-name{
+      font-size:3vw;/* Resize club name*/
+  }
+
+  /* Styles for the floating navigation container on small screens */
+  #floatingNavContainer {
+      display: none;
+      position: absolute;
+      top: 4.8rem;
+      right: 0;
+      width: 250px;
+      height: auto;
+      background-color: #b17070;
+      overflow-y: auto;
+      z-index: 100;
+  }
+
+  /* Styles for the floating navigation links  */
+  #floatingNav {
+      padding: 20px;
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      align-content: space-between;
+      z-index: inherit;
+  }
+
+  /* Styles for individual floating navigation links */
+  #floatingNav li{
+      margin: 10px;
+  }
+
+  /* Styles for the floating navigation link text */
+  #floatingNav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+  }
+
+  /* Styles for the active state of floating navigation links */
+  #floatingNav a:active {
+      transition: color 0.2s ease, text-decoration 0.2s ease-in;
+      color: rgba(0, 0, 255, 0.415);
+      text-decoration-style: solid;
+      text-decoration: underline; /* Add underline on hover */
+      text-decoration-thickness: 1px; /* Set thickness of underline */
+  }
+
+  /* Styles for the menu icon on small screens */
+  #menu-icon {
+      display: block; /* Show the list logo as a menu icon */
+      padding: 2vw;
+  }
+
+  /* Styles for the active state of the menu icon */
+  #menu-icon.active  {
+      display: flex;
+  }
+}

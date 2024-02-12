@@ -1,0 +1,23 @@
+/* Styling of scroll-to-top button for the whole website */
+#scrollToTop {
+  display: block;
+  position: fixed;/*  Fixed/sticky position */
+  bottom: 20px;/*  Position it at bottom and right of page*/
+  right: 20px;
+  background-color: #b3843ae0;
+  color: #fff;
+  border: none;
+  font-size: 30px;
+  border-radius: 10px;
+  padding: 10px 15px 10px 15px;
+  text-align: center;
+  height: 60px;
+  cursor: pointer;
+  opacity: 0;/*  Hidden by default */
+  z-index: 100;
+  transition: opacity 0.3s ease;
+}
+/* Smooth transition when hover the button */
+#scrollToTop:hover {
+  background-color: #986f2d;
+}

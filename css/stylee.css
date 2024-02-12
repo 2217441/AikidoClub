@@ -1,0 +1,252 @@
+/* ===== Google Font Import - Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+/* Global styling and font family setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the body, setting minimum height and background color */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #686868;
+}
+
+/* Styling for the main container, providing layout and appearance */
+.container {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 30px;
+    margin: 30px 15px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the header within the container */
+.container header {
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Styling for a decorative line beneath the header */
+.container header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #ec2929;
+}
+
+/* Styling for the form section, including transition effects */
+.container form {
+    position: relative;
+    margin-top: 16px;
+    min-height: 490px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+/* Styling for form sections with transitions between them */
+.container form .form {
+    position: absolute;
+    background-color: #fff;
+    transition: 0.3s ease;
+}
+
+.container form .form.second {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
+}
+
+form.secActive .form.second {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+}
+
+form.secActive .form.first {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+}
+
+/* Styling for titles within the form */
+.container form .title {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Styling for form fields and their arrangement */
+.container form .fields {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+form .fields .input-field {
+    display: flex;
+    width: calc(100% / 3 - 15px);
+    flex-direction: column;
+    margin: 4px 0;
+}
+
+/* Styling for the second part image in the form */
+.form.second img {
+    width: 87%;
+    border-radius: 10px;
+    height: 65%;
+}
+
+/* Styling for labels of input fields */
+.input-field label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #2e2e2e;
+}
+
+/* Styling for input fields and select dropdowns */
+.input-field input,
+.input-field select {
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    color: #333;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    height: 42px;
+    margin: 8px 0;
+}
+
+/* Styling for the focus state of input fields */
+.input-field input:focus,
+.input-field select:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+.input-field select,
+.input-field input[type="date"] {
+    color: #707070;
+}
+
+.input-field input[type="date"]:valid {
+    color: #333;
+}
+
+/* Styling for form buttons, including hover effects */
+.container form button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    max-width: 200px;
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    margin: 25px 0;
+    background-color: #777;
+    transition: all 0.3s linear;
+    cursor: pointer;
+}
+
+/* Styling for text within form buttons */
+.container form .btnText {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* Styling for the hover state of form buttons */
+form button:hover {
+    background-color: #ec2929;
+}
+
+/* Styling for icons within form buttons */
+form button i {
+    margin: 0 6px;
+}
+
+/* Styling for the buttons section within the form */
+form .buttons {
+    display: flex;
+    align-items: center;
+}
+/* Styling for individual buttons within the buttons section */
+form .buttons button {
+    margin-right: 14px;
+}
+
+/* Media queries for responsive design adjustments */
+@media (max-width: 750px) {
+
+
+    .container form {
+        overflow-y: auto;
+    }
+
+    .container form .form {
+        overflow-y: auto; /* Enable scrolling for .form */
+        max-height: 100%; /* Allow .form to take full height */
+        position: absolute; /* Position absolute to fill container */
+        top: 0; /* Align to top of container */
+        left: 0; /* Align to left of container */
+        right: 0; /* Align to right of container */
+        bottom: 0; /* Align to bottom of container */
+    }
+ /*styling adjustments for the image */
+    img{
+        margin-left: 30px;
+        margin-top: 100px;
+    }
+
+    .container form::-webkit-scrollbar {
+        display: none;
+    }
+
+    form .fields .input-field {
+        width: calc(100% / 2 - 15px);
+    }
+
+    .container .form.first {
+        overflow-y: auto; /* Enable scrolling for first form */
+    }
+
+    .container .form.second {
+        overflow-y: hidden; /* Hide scrollbar for second form */
+    }
+
+ 
+
+}
+
+@media (max-width: 550px) {
+    form .fields .input-field {
+        width: 100%;
+    }
+
+    .container {
+        margin-top: 130px; /* Add this line to remove space at the top */
+        margin-bottom: 130px; /* Add this line to remove space at the bottom */
+    }
+
+}

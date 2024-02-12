@@ -1,0 +1,112 @@
+
+[
+  {
+    "eventTitle": "Aikido Induction 2.0",
+    "eventDate": "09/11/2023",
+    "img": [
+      {
+        "src": "img/event-images/Aikido Induction Training 2.0/img01.jpg",
+        "alt": "Image 1 Alt Induction 2.0"
+      },
+      {
+        "src": "img/event-images/Aikido Induction Training 2.0/img02.jpg",
+        "alt": "Image 2 Alt Induction 2.0"
+      },
+      {
+        "src": "img/event-images/Aikido Induction Training 2.0/img03.jpg",
+        "alt": "Image 3 Alt Induction 2.0"
+      },
+      {
+        "src": "img/event-images/Aikido Induction Training 2.0/img04.jpg",
+        "alt": "Image 4 Alt Induction 2.0"
+      },
+      {
+        "src": "img/event-images/Aikido Induction Training 2.0/img05.jpg",
+        "alt": "Image 5 Alt Induction 2.0"
+      },
+      {
+        "src": "img/event-images/Aikido Induction Training 2.0/img06.jpg",
+        "alt": "Image 6 Alt Induction 2.0"
+      }
+    ]
+  }, {
+    "eventTitle": "Aikido Talk 6.0",
+    "eventDate": "11/11/2023",
+    "img": [
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img01.jpg",
+        "alt": "Image 1 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img02.jpg",
+        "alt": "Image 2 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img03.jpg",
+        "alt": "Image 3 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img04.jpg",
+        "alt": "Image 4 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img05.jpg",
+        "alt": "Image 5 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img06.jpg",
+        "alt": "Image 6 Alt Induction 2.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img07.jpg",
+        "alt": "Image 7 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img08.jpg",
+        "alt": "Image 8 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img09.jpg",
+        "alt": "Image 9 Alt Talk 6.0"
+      },
+      {
+        "src": "img/event-images/Aikido Talk 6.0/img10.jpg",
+        "alt": "Image 10 Alt Talk 6.0"
+      }
+    ]
+  },
+  {
+    "eventTitle": "Aikido Design Contest",
+    "eventDate": "06/11/2023 - 27/11/2023",
+    "img": [
+      {
+        "src": "img/event-images/Aikido Design Contest/img01.jpg",
+        "alt": "Image 1 Alt Design Contest"
+      },
+      {
+        "src": "img/event-images/Aikido Design Contest/img02.jpg",
+        "alt": "Image 2 Alt Design Contest"
+      },
+      {
+        "src": "img/event-images/Aikido Design Contest/img03.jpg",
+        "alt": "Image 3 Alt Design Contest"
+      },
+      {
+        "src": "img/event-images/Aikido Design Contest/img04.jpg",
+        "alt": "Image 4 Alt Design Contest"
+      },
+      {
+        "src": "img/event-images/Aikido Design Contest/img05.jpg",
+        "alt": "Image 5 Alt Design Contest"
+      },
+      {
+        "src": "img/event-images/Aikido Design Contest/img06.jpg",
+        "alt": "Image 6 Alt Design Contest"
+      },
+      {
+        "src": "img/event-images/Aikido Design Contest/img07.jpg",
+        "alt": "Image 7 Alt Design Contest"
+      }
+    ]
+  }
+]

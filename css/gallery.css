@@ -1,0 +1,241 @@
+/* Styling for the gallery section. Some part in gallery-container 
+  was designed based on https://www.w3docs.com/tools/code-editor/3718#google_vignette */
+#gallery {
+  display: flex;/* Children flex vertically */
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 5px;
+  background-color: #2ebfa473; /* Light green background color */
+  gap: 15px; /* Gap between gallery items */
+}
+
+/* Styling for the parent container of the gallery */
+#gallery-parent {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for each gallery container */
+.gallery-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;/* Children display vertically*/
+  height: 70%;
+  background-color: rgba(255, 255, 255, 0.356); /* Semi-transparent white background */
+}
+
+/* Styling for event details within each gallery container */
+.eventDetail {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  position: relative;
+  background-color: rgba(137, 6, 32, 0.162); /* Semi-transparent red background */
+  transition: background-color 0.5s ease-in-out; /* Smooth background color transition */
+  filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.5)); /* Drop shadow effect */
+}
+
+/* Hover effect on event details within the gallery container */
+.gallery-container:hover .eventDetail {
+  background-color: rgba(137, 6, 32, 0.495); /* Darker red background on hover */
+}
+
+/* Styling for slides in the gallery */
+.mySlides {
+  width: 100%;
+  padding: 10px;
+  height: auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+/* Styling for the image wrapper within slides */
+.img-wrapper {
+  width: 500px;
+  height: 400px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Styling for images within the image wrapper */
+.img-el {
+  vertical-align: middle;
+  align-self: center;
+  max-width: 100%;
+  height: inherit;
+  object-fit: contain; /*  Ensure that images don't stretch beyond their parent element */
+}
+
+/* Styling for the slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  align-items: center;
+}
+
+/* Styling for previous and next buttons in the slideshow */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 3px 0 0 3px;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Styling for the dots/bullets/indicators in the slideshow */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 4px;
+  background-color: #999999;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+/* Styling for active dots/bullets/indicators */
+.active,
+.dot:hover {
+  background-color: #111111;
+}
+
+/* Styling for the dot group container */
+.dot-group {
+  padding: 10px;
+}
+
+/* Fading animation for the slideshow */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+/* Style for fade webkit animation*/
+@-webkit-keyframes fade {
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
+}
+/* Style for fade animation*/
+@keyframes fade {
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
+}
+
+/* Styling for the button within the gallery */
+#gallery button {
+  align-self: center;
+  padding: 20px 50px;
+  margin: 20px;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  border-radius: 10px;
+  background-color: rgba(222, 184, 135, 0.684); /* Semi-transparent burlywood background */
+}
+
+/* Media query for responsiveness at a maximum width of 830px */
+@media (max-width: 830px) {
+  /* Adjust styles for smaller screens */
+
+  /* Hover effect on event details within the gallery container */
+  .eventDetail {
+    background-color: rgba(137, 6, 32, 0.495);
+  }
+
+  /* Styling for previous and next buttons in the slideshow */
+  .prev,
+  .next {
+    background-color: black;
+  }
+
+  /* Margin adjustment for dots/bullets/indicators */
+  .dot {
+    margin: 10px;
+  }
+
+  /* Responsive styles for the slideshow container */
+  .slideshow-container {
+    max-width: 95vw;
+    position: relative;
+    margin: auto;
+    align-items: center;
+  }
+
+  /* Responsive styles for images within the image wrapper */
+  .img-el {
+    vertical-align: middle;
+    align-self: center;
+    width: 100%;
+    height: inherit;
+    object-fit: contain;
+  }
+
+  /* Responsive styles for the image wrapper within slides */
+  .img-wrapper {
+    width: 80vw;
+    height: 400px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+}
+
+/* On smaller screens, decrease text size */
+@media (max-width: 500px) {
+  /* Further adjustments for even smaller screens */
+
+  /* Margin adjustment for dots/bullets/indicators */
+  .dot {
+    margin: 7px;
+  }
+
+  /* Responsive font size for event details within the gallery container */
+  .eventDetail {
+    font-size: 0.9em;
+  }
+}

@@ -1,0 +1,475 @@
+/* Styles for the overall body of the homepage */
+body {
+  display: grid; /* Children display in grid */
+  margin: 0;
+  padding: 0;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #2ebfa473; /* Background color for the body */
+}
+
+/*Positioning the navigation bar */
+#navbar {
+  grid-column: 1/span 4;
+  grid-row: 1;/* At the top of page */
+}
+
+/* Positioning the slides container */
+#slides-container {
+  grid-column: 1/span 4;
+  grid-row: 2;/* Below the navbar */
+}
+
+/* Positioning and styling the main information section */
+#main-info {
+  grid-column: 1/span 4;
+  grid-row: 3;/* Below the slides-container section */
+  margin: 20px;
+  margin-top: 50px;
+  background-color: #ffffff51;
+  align-items: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;/*Children display vertically */
+  padding: 20px;
+  border-top: solid 7px rgba(0, 128, 0, 0.566);/*Add border top and bottom */
+  border-bottom: solid 7px rgba(0, 128, 0, 0.566);
+  border-radius: 10px;
+}
+
+/* Styles for the heading in the main information section */
+#main-info h1 {
+  text-align: center;
+  color: rgb(0, 0, 0);
+  transition: background-color 0.5s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+  padding: 10px 6vw;
+  border-bottom: solid 3px rgba(0, 128, 0, 0.566);
+}
+
+/* Hover styles for the heading in the main information section */
+#main-info:hover h1 {
+  background-color: rgba(0, 128, 0, 0.566);
+  border: none;
+  color: #ffffff;
+}
+
+/* Styles for the greet content section */
+#greet-content {
+  display: grid; /* Children display in grid */
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Positioning and Styles for the image container in the greet content section */
+.image-container {
+  grid-column: 1/span 2; /*Position at row 1 and take 2 columns*/
+  grid-row: 1;
+  padding-left: 55px;
+  width: 70%;
+}
+
+/* Positioning and Styles for the paragraph in the greet content section */
+#greet-content > p {
+  grid-column: 3/span 2;/*Position at row 1 and take 2 columns right of image-container*/
+  grid-row: 1;
+  text-align: justify;
+  align-self: center;
+  border: dashed brown 2px;
+  line-height: 1.7;
+  padding: 40px;
+  margin-right: 20px;
+}
+
+/* Positioning and Styles for the button that link to About Us page*/
+#btn-aboutUs {
+  grid-column: 3/span 2;/*Position at row 2 and take 2 columns below of paragraph*/
+  grid-row: 2;
+  width: 180px;
+  height: 30px;
+  font-size: 0.9em;
+  align-self: center;
+  justify-self: center;
+  margin: 20px;
+  margin-right: 40px;
+  background-color: rgba(228, 207, 183, 0.903);
+  border-radius: 10px;
+}
+
+/* Hover styles for the button */
+#btn-aboutUs:hover {
+  background-color: rgba(0, 128, 0, 0.414);
+  transition: color 0.5s ease;
+}
+
+/* Styles for the link within the  button */
+#btn-aboutUs a {
+  text-decoration: none;
+  width: 100%;
+  font-size: 12px;
+  color: white;
+}
+
+/* Styles for the aside section */
+#add-info {
+  display: flex;
+  grid-column: 1/span 4; /* Positioning the aside section below main info*/
+  grid-row: 4;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  margin: 20px;
+  padding: 10px;
+  border-top: solid 7px rgba(0, 128, 0, 0.566);
+  border-bottom: solid 7px rgba(0, 128, 0, 0.566);
+  border-radius: 10px;
+  background-color: #ffffff51;
+}
+
+/* Styles for the additional information heading container */
+#add-info-head-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgb(197, 68, 68);
+  width: 20%;
+  height: 100%;
+}
+
+/* Styles for the additional information heading */
+#add-info-head {
+  transition: background-color 0.5s ease-in-out, color 0.3s ease-in-out, border 0.3s ease-in-out;
+  border-bottom: solid 3px rgba(0, 128, 0, 0.566);
+  padding: 2vh 2vw;
+  width: 30vw;
+}
+
+/* Hover styles for the additional information heading */
+#add-info:hover #add-info-head {
+  background-color: rgba(0, 128, 0, 0.566);
+  border: none;
+  color: #ffffff;
+}
+
+/* Styles for the card container */
+#card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+}
+
+/* Styles for the individual card */
+.card {
+  position: relative;
+  width: 30%;
+  height: 0;
+  padding-bottom: 30%;
+  overflow: hidden;
+  margin: 10px;
+  border-radius: 10px;
+  z-index: 2;
+  transition: transform 0.3s ease, height 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+/* Hover styles for the individual card */
+.card:hover {
+  transform: scale(1.1);/*Make it bigger when hover*/
+}
+
+
+/* Styles for the card image(cover whole card) */
+.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 3;/*Stacking lowest order in card layout*/
+}
+
+/* Styles for the card overlay(on top of card-image) */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 4;/*Stacking above card image*/
+}
+
+/* Styles for the card text(on top of card overlay) */
+.card-txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  z-index: 5;/*Stacking above card overlay*/
+  font-family: Tahoma;
+}
+
+/* Styles for the card link/card container with hyperlink */
+.card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+/* Styles for the information stats section */
+#info-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background-color: rgba(58, 119, 58, 0.158);
+  border-radius: 10px;
+  margin: 20px 0;
+  grid-column: 1/span 4;
+  grid-row: 5;
+  border-radius: 10px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+/* Hover styles for the information stats section */
+#info-stats:hover {
+  background-color: rgba(58, 119, 58, 0.47); 
+}
+
+/* Styles for the member stats and event stats part */
+#member-stats, #event-stats {
+  display: flex; /* Make the children display vertically */
+  flex-direction: column;
+  align-items: center;
+  margin: 0 50px;
+}
+
+/* Styles for the member stats section */
+#member-stats {
+  margin-right: 200px;
+}
+
+/* Styles for the event stats section */
+#event-stats {
+  margin-left: 200px;
+}
+
+/* Styles for the icons in the member and event stats part */
+#member-stats img, #event-stats img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Styles for the paragraphs in the member and event stats part */
+#member-stats p, #event-stats p {
+  margin: 5px 0;
+  font-size: 1.2vw;
+  text-align: center;
+  align-self: center;
+}
+
+/* Styles for the first paragraphs in the member and event stats part */
+#member-stats p:first-child, #event-stats p:first-child {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Styles for the sub-information section/footer */
+#sub-info {
+  grid-column: 1/span 4;/*Below add-info section*/
+  grid-row: 6;
+}
+
+/* Media query for screen sizes up to 830px(tablet layout) */
+@media screen and (max-width: 830px) {
+ 
+  /* Styles for the paragraphs in the main information section in smaller screens */
+  #main-info p {
+    font-size: 1.5vw;
+  } 
+ 
+  /* Styles for the additional information section in smaller screens */
+  #add-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Styles for the additional information heading container in smaller screens */
+  #add-info-head-container {
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Styles for the additional information heading in smaller screens */
+  #add-info-head {
+    border-bottom: solid 3px rgba(0, 128, 0, 0.566);
+  }
+
+  /* Styles for the individual cards in smaller screens */
+  .card {
+    width: 30%;
+    height: 0%;
+    padding-bottom: 30%;
+    margin: 10px auto;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  /* Styles for the card container in smaller screens */
+  #card-container {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+
+  /* Styles for the heading in the main information section and additional information heading in smaller screens */
+  #main-info h1, #add-info-head {
+    background-color: rgba(0, 128, 0, 0.565);
+    padding: 20px;
+    color: white;
+    border-top: solid 3px rgba(0, 128, 0, 0.566);
+  }
+
+  /* Styles for the paragraphs in the member and event stats part for smaller screen*/
+  #member-stats p, #event-stats p {
+    font-size: 2.2vw;
+  }
+}
+
+/* Media query for screen sizes up to 500px(phone layout) */
+@media screen and (max-width: 500px) {
+  /* Styles for the heading in the main information section in smaller screens */
+  #main-info h1 {
+    font-size: 7vw;
+  }
+
+  /* Styles for the greet content section in smaller screens */
+  #greet-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+
+  /* Styles for the image container in the greet content section in smaller screens */
+  .image-container {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+    align-items: center;
+    margin: 20px;
+    text-align: center;
+    padding: 10px;
+    height: 220px;
+    margin-bottom: 40px;
+  }
+
+  /* Styles for the paragraph in the greet content section in smaller screens */
+  #greet-content > p {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: center;
+    align-self: center;
+    padding: 5px;
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+  }
+
+  /* Styles for the "About Us" button in smaller screens */
+  #btn-aboutUs {
+    grid-column: 1;
+    grid-row: 3;
+    width: 180px;
+    align-self: center;
+    justify-self: center;
+    margin: 20px;
+    margin-right: 0;
+    margin-top: 10px;
+    background-color: rgb(230, 169, 97);
+    border-radius: 10px;
+  }
+
+  /* Styles for the link within the "About Us" button in smaller screens */
+  #btn-aboutUs a {
+    width: 100%;
+  }
+
+  /* Styles for the additional information section in smaller screens */
+  #add-info {
+    flex-direction: column;
+  }
+
+  /* Styles for the additional information heading container in smaller screens */
+  #add-info-head-container {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  /* Styles for the additional information heading in smaller screens */
+  #add-info-head {
+    width: 60vw;
+  }
+
+  /* Styles for the card container in smaller screens */
+  #card-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Styles for the individual cards in smaller screens */
+  .card {
+    width: 50vw;
+    height: 5vh;
+    padding-bottom: 45%;
+  }
+
+  /* Styles for the card text in smaller screens */
+  .card-txt {
+    font-size: 1.2rem;
+  }
+
+  /* Styles for the information stats section in smaller screens */
+  #info-stats {
+    flex-direction: row; /* Change the flex direction to column */
+    height: auto;
+    padding: 20px 0; /* Adjust padding for smaller screens */
+    margin: 20px;
+  }
+
+  /* Styles for the member stats and event stats sections in smaller screens */
+  #member-stats, #event-stats {
+    margin: 50px; /* Adjust margin for smaller screens */
+  }
+
+  /* Styles for the paragraphs in the member and event stats sections in smaller screens */
+  #member-stats p, #event-stats p {
+    font-size: 3vw;
+  }
+}

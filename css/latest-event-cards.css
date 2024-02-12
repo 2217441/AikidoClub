@@ -1,0 +1,157 @@
+/* Styling for the container holding event cards */
+#card-container {
+  display: flex; 
+  align-items: center; /* Align items along the cross-axis */
+  justify-content: center;
+  flex-wrap: wrap; /* Wrap items to the next line if they overflow */
+  object-fit: fill;
+  flex-direction: row;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+/* Styling for the section label (header) */
+.section-label {
+  width: 100%;
+  height: 50px;
+  background-color: #808080; /* Gray background color */
+  text-align: center;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)); /* Apply a drop shadow effect */
+}
+
+/* Styling for the h2 element within the section label */
+.section-label h2 {
+  margin: 5px;
+  padding: 10px;
+}
+
+/* Styling for each event card layout */
+.cardLayout {
+  padding: 15px;
+  margin: 10px 40px; /* Adjusted margin */
+  width: 320px;
+  height: 620px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  background-color: hsla(19, 75%, 61%, 0.433);
+  border-radius: 10px;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3)); /*  Drop shadow effect */
+  display: flex;
+  flex-direction: column;/*  Flexbox property to set orientation of elements vertically*/
+  text-align: center;
+}
+
+/* Hover effect on the title of the event card */
+.cardLayout:hover .title-event {
+  background-color: #808080; /* Gray background on hover */
+}
+
+/* Styling for the event poster image */
+.event-poster {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Styling for the title of the event */
+.title-event {
+  text-align: center;
+  margin: 10px 4px 5px 4px;
+  padding: 5px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
+}
+
+/* Styling for the registration link button */
+.cardLayout > a {
+  border: solid 1px #5D576B;
+  border-radius: 5px;
+  padding: 8px;
+  text-decoration: none;/*  Remove underline from links */
+  background-color: #5D576B;
+  color: white;
+  align-self: center;
+  justify-self: center;
+  margin: 5px;
+}
+
+/* Styling for the description of the event */
+.desc-event {
+  height: 350px;
+  padding: 10px;
+  font-size: 0.9em;
+  transition: border 0.5s ease-in-out; /* Smooth border transition */
+}
+
+/* Border styling on hover for the event description */
+.cardLayout:hover .desc-event {
+  border-top: solid white;
+  border-bottom: solid white;
+}
+
+
+/* Media query for responsiveness at a maximum width of 830px */
+@media (max-width: 830px) {
+  /* Adjust styles for smaller screens */
+
+  /* Responsive styles for event card layout */
+  .cardLayout {
+      width: 280px;
+      height: 600px;
+      margin: 10px;
+  }
+
+  /* Responsive styles for event description */
+  .desc-event {
+      height: 400px;
+      font-size: 0.9em;
+      margin: 5px;
+      border-top: solid white;
+      border-bottom: solid white;
+  }
+
+  /* Responsive styles for event title */
+  .title-event {
+      height: 180px;
+      justify-self: center;
+      padding: 20px 0 0 0;
+  }
+
+  /* Responsive styles for event poster image */
+  .event-poster {
+      height: 70vh;
+  }
+
+  /* Media query for smaller screens (max-width: 500px) */
+  @media (max-width: 500px) {
+      /* Further adjustments for even smaller screens */
+
+      /* Responsive styles for event card layout */
+      .cardLayout {
+          width: 70vw;
+          max-height: 90vh;
+          margin: 10px;
+      }
+
+      /* Responsive styles for event description */
+      .cardLayout p {
+          height: 300px;
+          font-size: 0.8em;
+          margin: 5px;
+      }
+
+      /* Responsive styles for event title */
+      .cardLayout > h2 {
+          height: 150px;
+          justify-self: center;
+          padding: 15px 0 0 0;
+      }
+
+      /* Responsive styles for event poster image */
+      .event-poster {
+          height: 250px;
+      }
+  }
+}
