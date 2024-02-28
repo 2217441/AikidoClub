@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
               imgEl.className = 'img-el';
               imgEl.src = img.src;
               imgEl.alt = img.alt;
+              imgEl.loading = 'lazy'; // Enable lazy loading
               imgWrapper.appendChild(imgEl);
           }
 
