@@ -3,7 +3,7 @@
   {
     "eventTitle": "Aikido Induction 2.0",
     "eventDate": "09/11/2023",
-    "img": [
+    "images": [
       {
         "src": "img/event-images/Aikido Induction Training 2.0/img01.jpg",
         "alt": "Image 1 Alt Induction 2.0"
@@ -32,7 +32,7 @@
   }, {
     "eventTitle": "Aikido Talk 6.0",
     "eventDate": "11/11/2023",
-    "img": [
+    "images": [
       {
         "src": "img/event-images/Aikido Talk 6.0/img01.jpg",
         "alt": "Image 1 Alt Talk 6.0"
@@ -78,7 +78,7 @@
   {
     "eventTitle": "Aikido Design Contest",
     "eventDate": "06/11/2023 - 27/11/2023",
-    "img": [
+    "images": [
       {
         "src": "img/event-images/Aikido Design Contest/img01.jpg",
         "alt": "Image 1 Alt Design Contest"
