@@ -10,7 +10,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
   <!-- Page title -->
   <title>Home | IIUM Aikido Club</title>
   <!-- Load HTMX from CDN -->
@@ -41,15 +40,13 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon.png">
-
-  <link rel="manifest" href="site.webmanifest">
   <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
   <!-- Navigation bar structure -->
   <nav id="navbar">
-    <a href="/index.html"" class=" logo-club"> <!-- Add IIUM Aikido Club logo to navbar -->
+    <a href="/index.html" class="logo-club">IIUM Aikido Club</a> <!-- Add IIUM Aikido Club logo to navbar -->
       <img src="img/crop-iium-aikido-logo.png" alt="Logo">
     </a>
     <h2 id="club-name">IIUM AIKIDO CLUB</h2> <!-- Add club name to navbar -->
@@ -71,7 +68,7 @@
         <li><a href="#">Home</a></li>
         <li><a href="/eventgallery.html">Event & Activities</a></li>
         <li><a href="/about-us.html">About Us</a></li>
-        <li><img id="nav-image" src="img/nav-image.png" alt="navi image"></li>
+        <li><img id="nav-image" src="img/nav-image.png" alt="navi"></li>
         <!-- Add image to decorate the nav contaienr -->
       </ul>
     </div>
@@ -117,7 +114,7 @@
         at IIUM Aikido Club.
       </p>
       <!-- Add button link to About Us page -->
-      <button id="btn-aboutUs"><a href="about-us.html">Know more about us >></a></button>
+      <aa href="about-us.html"><button id="btn-aboutUs">Know more about us >></button></a>
     </div>
   </main>
 
@@ -148,13 +145,13 @@
         </a>
       </div>
       <div class="card"> <!-- Card link to facilities and training page -->
-        <a href="faci.html" class="card-link"><!-- Link to the page -->
+        <a href="faci.html" class="card-link" title="Facilities and Training"><!-- Link to the page -->
           <div class="card-overlay"></div><!-- Overlay for darken effect on the card -->
           <div class="card-txt"><!-- Add text to the card -->
             Aikido Club Training Info
           </div>
           <!-- Add background image to the card -->
-          <div class="card-image" style="background-image: url('img/item-info3.jpeg')"></div>
+          <divdiv class="card-image" style="background-image: url('img/item-info3.jpeg')"></div>
         </a>
       </div>
     </div>
@@ -182,15 +179,15 @@
   <footer id="sub-info">
     <div id="follow-link"> <!-- Container for social media links -->
       <p>Follow us:</p>
-      <a href="https://instagram.com/iiumaikidoclub"
+      <a href="https://instagram.com/iiumaikidoclub" rel="noopener"
         target="_blank"><!-- Add club instagram link and icon (display in new tab)-->
         <img class="socmed-logo" src="img/instagram.png" alt="instagram icon">
       </a>
-      <a href="https://www.facebook.com/iiumaikidoclub/"
+      <a href="https://www.facebook.com/iiumaikidoclub/" rel="noopener"
         target="_blank"><!-- Add club facebook link and icon (display in new tab)-->
         <img class="socmed-logo" src="img/facebook.png" alt="fb icon">
       </a>
-      <a href="https://www.youtube.com/@aikidoiium9560"
+      <a href="https://www.youtube.com/@aikidoiium9560" rel="noopener"
         target="_blank"><!-- Add club youtube link and icon (display in new tab)-->
         <img class="socmed-logo" src="img/youtube.png" alt="youtube icon">
       </a>
@@ -231,7 +228,7 @@
     <!-- A form that triggers a GET request to /events with the input value and updates the events div
     <!-- Use hx-boost to send the request without waiting for the form submission
     <form id="search-form" hx-get="/events" hx-target="#events" hx-boost>
-        <input type="text" name="date" placeholder="Enter a date">
+        <input type="text" name="date" placeholder="Enter a date" aria-label="Date input">
         <button type="submit">Search</button>
     </form>
     <!-- A div that displays the events
