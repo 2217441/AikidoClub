@@ -1,0 +1,56 @@
+{
+
+    "23/24": {
+        "title": "Club Activities 23/24",
+        "content": [
+            {
+                "image-path": "img/event-images/past/2324/Aikido Kyoudou Kenshuu.jpg",
+                "act-name": "Aikido Kyoudou Kenshuu",
+                "act-date": "11-12 May 2024",
+                "act-desc": "",
+                "act-file": "https://t.me/+bnVAJ8VP5E00Nzll"
+            },
+            {
+                "image-path": "img/event-images/past/2324/Recruitment Booth 2024.jpg",
+                "act-name": "Recruitment Booth 2024",
+                "act-date": "27-28 May 2024",
+                "act-desc": "",
+                "act-file": ""
+            }
+        ]
+    },
+    "22/23": {
+        "title": "Club Activities 22/23",
+        "content": [
+            {
+                "image-path": "img/event-images/past/2223/Aikido Design Contest.jpg",
+                "act-name": "Aikido Design Contest",
+                "act-date": "6-22 November 2023",
+                "act-desc": "",
+                "act-file": "https://drive.google.com/drive/folders/1K4QhMXfhaAY_l-4KCQBXmL2pnGjbmUMI?usp=sharing"
+            },
+            {
+                "image-path": "img/event-images/past/2223/Aikido Induction Training 2.0.jpg",
+                "act-name": "Aikido Induction Training 2.0",
+                "act-date": "9 November 2023",
+                "act-desc": "",
+                "act-file": "https://drive.google.com/drive/folders/1EXGuQfyfav7IM818iHEWghQegEwaPb0O?usp=sharing"
+            },
+            {
+                "image-path": "img/event-images/past/2223/Aikido Talk 6.0.jpg",
+                "act-name": "Aikido Talk 6.0",
+                "act-date": "11 November 2023",
+                "act-desc": "",
+                "act-file": "https://drive.google.com/drive/folders/17lNt7bJ3qr5SLq8T6SMiDOJoiGRgsoxv?usp=sharing"
+            },
+            {
+                "image-path": "img/event-images/past/2223/AGM.jpg",
+                "act-name": "Aikido AGM",
+                "act-date": "18 December 2023",
+                "act-desc": "",
+                "act-file": ""
+            }
+
+        ]
+    }
+}

@@ -1,0 +1,65 @@
+/* 
+    Code for Mainboard page structure
+
+*/
+
+
+#downarrow {
+    cursor: pointer;
+}
+
+/* Chart Section Styling */
+.chartt {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+/* Chart Section Heading 1 Styling */
+.chartt h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+/* Chart Section Paragraph Styling */
+p {
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+
+/* Chart Column Styling */
+.chartt-col {
+    flex-basis: 30%;
+    border-radius: 10px;
+    margin-bottom: 13%;
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Chart Column Image Styling */
+.chartt-col img {
+    width: 100%;
+    border-radius: 10px;
+    height: 65%;
+}
+
+/* Responsive layout adjustment for tablet */
+@media (max-width: 830px) {
+    /* Adjusting font size for Heading 1 in the Chart Section */
+    .chartt h1 {
+        font-size: 20px;
+    }
+
+    /* Adjusting font size for Heading 1 in the Chart Column */
+    .chartt-col h1 {
+        font-size: 20px;
+    }
+
+
+}

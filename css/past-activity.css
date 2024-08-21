@@ -1,0 +1,240 @@
+/* 
+    Code for Club Past Activities section
+
+*/
+
+.list-activity {
+    display: flex;
+    flex-direction: column;
+}
+
+.head-act {
+    display: flex;
+    
+}
+
+
+.activities {
+    display: flex;
+    width: 100%;
+}
+
+.acts-slide {
+    display: flex;
+    flex-direction: column;
+}
+
+.slide-head {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 5px;
+
+}
+
+.slide-title  {
+    font-style: italic;
+    font-size: 30px;
+    width: 90%;
+    text-align: center;
+    padding: 15px;
+    background-color: #93e7b6;
+
+    box-shadow: -5px 8px 2px rgba(0, 0, 0, 0.645);
+}
+
+
+
+.swiper.past-swiper {
+    width: 95vw;
+    height: 100%;
+    padding: 15px 15px;
+
+}
+
+/* Swiper slide styling */
+.swiper-slide.past-slide {
+    display: grid;
+    grid-template-rows: 1fr repeat(10);
+    align-items: center;
+    justify-content: center; 
+    justify-items: center;
+    background-color: #93e7b6;
+    align-content: start;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: -8px 8px 8px 2px rgba(0, 0, 0, 0.277);
+    height: 45vw;
+    width: 20vw;
+
+    border-left: solid 7px rgba(0, 0, 0, 0.789);
+    border-bottom: solid 7px rgba(0, 0, 0, 0.789);
+}
+
+/* Image container */
+.past-img-ctnr {
+    grid-row: 1/span 4;
+    width: 25vw;
+    height: 25vw;
+    background-color: #e0e0e0; /* Placeholder background color */
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;  /* Flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    object-fit: contain;
+}
+
+/* Image styling */
+.past-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;  /* Ensure the image fits within the container */
+}
+
+
+
+.act-name {
+    grid-row: 5/span 1;
+    margin: 8px 1px 2px;
+    font-size: 1.4vw;
+    color: white;
+    background-color:  rgb(177, 112, 112);
+    padding: 5px;
+    line-height: 1.2em;
+}
+
+.act-date {
+    grid-row: 6/span 1;
+    margin: 1px 15px 2px;
+    font-style: italic;
+    font-size: 0.8vw;
+    color: rgba(0, 0, 0, 0.614);
+}
+
+.act-details {
+    grid-row: 7/span 3;
+    padding-top: 10px;
+    text-align: left;
+    font-size: 1vw;
+    height: 7vw;
+    color: rgba(0, 0, 0, 0.695);
+    width: 90%;
+
+}
+
+.act-file{
+    grid-row: 10;
+    margin-top: 2vw;
+    padding: 10px 20px; /* Add some padding for the button */
+    background-color: #ff4b4b; /* Initial button color */
+    border: none; /* Remove border */
+    color: white; /* Text color */
+    cursor: pointer; /* Change cursor on hover */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for effects */
+}
+
+.act-file:active {
+    transform: scale(0.95); /* Slightly reduce the size when clicked */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow for a pressed effect */
+    background-color: #e64343; /* Darken the button color on click */
+}
+
+.past-next {
+    background-color: transparent;
+}
+
+.past-prev {
+    background-color: transparent;
+}
+
+@media only screen and (max-width: 1080px) {
+    .head-act {
+        margin-bottom: 30px;
+    }
+    
+    .swiper.past-swiper {
+        width: 100vw;
+        height: 100%;
+    }
+    .swiper-slide.past-slide{
+        height: 80vw;
+
+        box-shadow: -5px 5px 5px 2px rgba(0, 0, 0, 0.277);
+    }
+
+    .past-img-ctnr {
+        width: 37vw;
+        height: 37vw;
+    }
+
+    .act-name {
+        font-size: 2.7vw;
+    }
+
+    .act-date {
+        font-size: 1.8vw;
+    }
+
+    .act-details {
+        font-size: 1.9vw;
+        height: 19vw;
+        width: 34vw;
+    }
+    .act-file{
+        font-size: 1.9vw;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .slide-title  {
+        font-size: 5vw;
+    }
+
+
+    .swiper.past-swiper {
+        width: 100vw;
+        height: 100%;
+    }
+
+
+    .swiper-slide.past-slide{
+        height: 120vw;
+        width: 10vw;
+    }
+
+    .past-img-ctnr {
+        width: 52vw;
+        height: 52vw;
+    }
+
+    .act-name {
+        font-size: 4.7vw;
+    }
+
+    .act-date {
+        font-size: 2.8vw;
+    }
+
+    .act-details {
+        font-size: 3.2vw;
+        height: 27vw;
+    }
+    .act-file{
+        font-size: 2.9vw;
+        margin-top: 0;
+    }
+    .bullet-container{
+        margin-top: 5vw;
+    }
+}
+
+
+
+

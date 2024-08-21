@@ -1,0 +1,342 @@
+/* 
+    Code for the Home page structure 
+
+*/
+
+.page-wrapper {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-wrapper {
+    grid-row: 1;
+}
+
+.headline {
+    grid-row: 2;
+}
+
+#downarrow {
+  cursor: pointer;
+}
+
+
+.intro {
+    grid-row: 3;
+    margin-top: 4px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#head-intro {
+    color: rgb(25, 4, 4);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 18px;
+    align-items: center;
+    align-content: center;
+    row-gap: 7px;
+
+}
+
+/* Styling for the down arrow */
+#downarrow {
+  position: relative;
+  top: 10px; /* Space between the text and the arrow */
+  animation: moveDownUp 2s infinite ease-in-out;
+  font-size: 32px; /* Font size for the arrow (adjust as needed) */
+  display: block; /* Ensure the arrow is on a new line */
+  margin: 10px auto 0 auto; /* Center horizontally and add margin at the top */
+  background-image: url('../img/downarrow.png');
+  width: 50px;
+  height: 50px;
+  background-color: transparent; /* Ensure background color doesn't cover the image */
+  background-repeat: no-repeat;   /* Prevent repeating if the image is smaller than the element */
+  background-position: center;    /* Position the background image at the center of the element */
+  background-size: cover;
+  
+}
+
+@keyframes moveDownUp {
+    0% {
+        top: 0; /* Start at original position */
+    }
+    50% {
+        top: 17px; /* Move down 100px */
+    }
+    100% {
+        top: 0; /* Move back to original position */
+    }
+}
+
+.deco-line {
+    display: block;
+    margin: 0px;
+    padding: 1px;
+    background-color: #010505;
+    height: 1px;
+    align-self: center;
+    width: 305px;
+    animation: shorten 8s infinite; /* Add animation here */
+}
+
+#head-intro .deco-line{
+    width: 500px;
+}
+
+@keyframes shorten {
+    0%, 100% {
+      /* Default length */
+    }
+    50% {
+      width: 32em; /* Shortened length */
+    }
+}
+
+#greet-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+
+}
+
+
+
+.image-deco {
+    grid-column: 1/span 2;
+}
+
+.intro-text {
+    display: flex;
+    flex-direction: column;
+    grid-column: 3/span 3;
+    justify-content: center;
+    row-gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.subhead {
+    background-color: rgb(177, 112, 112);
+    padding: 6px 10px;
+    color: white;
+}
+
+.detail-txt {
+    color: rgba(0, 0, 0, 0.501);
+    margin-top: 5px;
+    margin-left: 10px
+}
+
+/* Styles for the aside section */
+#add-info {
+    display: flex;
+    grid-row: 4;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    margin: 20px;
+    padding: 10px;
+
+  }
+  
+  /* Styles for the additional information heading container */
+  #add-info-head-container {
+    color: rgb(25, 4, 4);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+    padding-left: 40px;
+    font-size: 18px;
+    align-items: center;
+    align-content: center;
+    row-gap: 9px;
+  }
+  
+
+  
+  /* Styles for the card container */
+  #card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    column-gap: 2vw;
+    margin-top: 5px;
+  }
+  
+  /* Styles for the individual card */
+  .card {
+    position: relative;
+    width: 30%;
+    height: 0;
+    padding-bottom: 30%;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 10px;
+    z-index: 2;
+    transition: transform 0.3s ease, height 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+  }
+  
+  /* Hover styles for the individual card */
+  .card:hover {
+    transform: scale(1.1);/*Make it bigger when hover*/
+  }
+  
+  
+  /* Styles for the card image(cover whole card) */
+  .card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 3;/*Stacking lowest order in card layout*/
+  }
+  
+  /* Styles for the card overlay(on top of card-image) */
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;/*Stacking above card image*/
+  }
+  
+  /* Styles for the card text(on top of card overlay) */
+  .card-txt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    z-index: 5;/*Stacking above card overlay*/
+    font-family: Tahoma;
+  }
+  
+  /* Styles for the card link/card container with hyperlink */
+  .card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .join-us {
+    grid-row: 5;
+    width: 100%;
+    height: 500px; /* Adjust height as needed */
+    position: relative;
+    overflow: hidden; /* Ensures any part of the image that extends outside the container will be hidden */
+}
+
+  #sub-info{
+    grid-row: 6;
+  }
+@media only screen and (max-width: 720px) { 
+
+
+    #head-intro {
+        font-size: 12px;
+        width: 310px;
+    }
+
+    #head-intro .deco-line{
+        width: 230px;
+    }
+
+    .deco-line {
+        width: 200px;
+        animation: shorten 8s infinite;
+    }
+
+    @keyframes shorten {
+        0%, 100% {
+          /* Default length */
+        }
+        50% {
+          width: 290px; /* Shortened length */
+        }
+
+    }
+
+    #greet-content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    .subhead {
+        font-size: 17px;
+    }
+
+    .detail-txt {
+        font-size: 14px;
+    }
+
+    #add-info-head-container {
+        font-size: 12px;
+    }
+
+      /* Styles for the additional information section in smaller screens */
+  #add-info {
+    flex-direction: column;
+  }
+
+  /* Styles for the additional information heading container in smaller screens */
+  #add-info-head-container {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+
+  /* Styles for the additional information heading in smaller screens */
+  #add-info-head {
+    width: 60vw;
+  }
+
+  /* Styles for the card container in smaller screens */
+  #card-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Styles for the individual cards in smaller screens */
+  .card {
+    width: 50vw;
+    height: 5vh;
+    padding-bottom: 45%;
+  }
+
+  /* Styles for the card text in smaller screens */
+  .card-txt {
+    font-size: 1.1rem;
+  }
+    
+
+}

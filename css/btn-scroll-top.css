@@ -4,7 +4,7 @@
   position: fixed;/*  Fixed/sticky position */
   bottom: 20px;/*  Position it at bottom and right of page*/
   right: 20px;
-  background-color: #b3843ae0;
+  background-color: #5a3803a7;
   color: #fff;
   border: none;
   font-size: 30px;
@@ -16,8 +16,15 @@
   opacity: 0;/*  Hidden by default */
   z-index: 100;
   transition: opacity 0.3s ease;
+  object-fit: contain;
 }
 /* Smooth transition when hover the button */
 #scrollToTop:hover {
   background-color: #986f2d;
+}
+
+#scrollToTop img {
+
+  width: 30px;
+  height: 30px;
 }

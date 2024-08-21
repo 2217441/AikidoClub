@@ -1,6 +1,6 @@
 /* Style for the footer for the whole website pages*/
 #sub-info {
-    background-color: #b17070;
+    background-color: #342b2b;
     width: 100%;
     display: flex;/* Children  will be displayed in a row */
     flex-wrap: wrap;/*  If there is not enough space, they go to next line */

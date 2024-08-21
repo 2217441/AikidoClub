@@ -1,0 +1,73 @@
+/* 
+    Code for Club objective section in About Us
+
+*/
+
+/* General styling for the parallax section */
+.parallax-section {
+    position: relative; /* Ensure content is positioned relative to this section */
+    height: 70vh; /* Adjust height as needed */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/about-us/objective-ls.jpg'); /* Overlay a dark gradient */
+    background-size: cover; /* Cover the entire section */
+    background-position: right; /* Position the image to the right */
+    background-attachment: fixed; /* Fix the background image in place */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-blend-mode: darken; /* Blend the overlay with the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Text color, adjust based on your background image */
+    text-align: center; /* Center text */
+    z-index: 1; /* Ensure it's behind the content */
+    margin: 5px 0;
+}
+
+
+/* Content wrapper for the text */
+.content-wrapper {
+    position: relative; /* Position relative to allow scrolling */
+    z-index: 2; /* Ensure it's above the background */
+    padding: 20px; /* Add some padding for spacing */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background for readability */
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper h1 {
+    font-size: 40px;
+
+}
+
+.list-obj {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    margin-top: 40px;
+}
+.content-wrapper p {
+    text-align: left;
+    
+    
+}
+
+/* Normal section below */
+.normal-section {
+    padding: 50px 20px; /* Some padding for content */
+    background-color: #f4f4f4; /* Background color for contrast */
+    color: #333; /* Text color */
+}
+
+
+@media only screen and (max-width: 720px) { 
+
+    .parallax-section {
+        background-image: url('../img/about-us/objective-pt.jpg');
+    }
+
+}

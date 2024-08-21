@@ -1,0 +1,185 @@
+.image-deco {
+    position: relative;
+    width: 300px;  /* Parent div width */
+    height: 300px; /* Parent div height */
+
+}
+
+
+
+.image-container {
+    height: 100%;
+    width: auto;
+    padding: 45px;
+    
+}
+
+.image-container.about-us .fade-in {
+    width: 100%; /* Make the image width 100% of the container */
+    height: 100%; /* Make the image height 100% of the container */
+    object-fit: contain; /* Ensure the image covers the container without distortion */
+}
+
+.image-container.about-us {
+    padding: 10px;
+}
+
+.square {
+    position: absolute;
+    width: 180px;  /* Width of the squares */
+    height: 180px; /* Height of the squares */
+    border-radius: 10px;
+}
+
+/* Bottom z-index square: black */
+.square.bottom {
+    /* background-color: rgba(107, 117, 44, 0.696); */
+    top: 0;
+    right: 0;
+    z-index: 1;
+    /* box-shadow: 10px -5px 6px 0px rgba(0, 0, 0, 0.5); */
+    background: url('../img/deco/top-right-sq.png');
+    background-size: cover;
+}
+
+/* Middle z-index square: blue */
+.square.middle {
+    /* background-color: rgb(12, 123, 95); */
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    background: url('../img/deco/bottom-left-sq.png');
+    background-size: cover;
+}
+
+/* Top z-index square: green */
+.square.top {
+    background-color: rgb(255, 255, 255);
+    top: 50%;
+    left: 50%;
+    width: 250px;  /* Width of the squares */
+    height: 250px; 
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    border: none;
+}
+
+
+.image-deco.about-us {
+    width: 500px;
+    height: 500px;
+}
+
+.fade-in {
+    height: 100%;
+    width: auto;
+}
+.square.top.about-us {
+    width: 450px;
+    height: 400px;
+}
+
+.square.bottom.about-us {
+    top: 30px;
+    right: -20px;
+}
+
+.square.middle.about-us {
+    bottom: 27px;
+    left: -25px;
+}
+
+/* Styling for testimonial images */
+.image-deco.testi {
+    width: 300px;
+    height: 300px;
+}
+
+.img-testi {
+    object-fit: cover;
+    width: 100%;
+}
+/* 
+    Code for for handling image frame in some pages
+
+*/
+
+
+.image-container.testi {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.square.top.testi {
+    background: url('../img/back-testi.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 720px) { 
+
+
+    .image-deco {
+        width: 240px;
+        height: 240px;
+    }
+
+    .image-container {
+        padding: 15px;
+    }
+
+    .square {
+        width: 140px;  /* Width of the squares */
+        height: 140px; /* Height of the squares */
+    }
+
+    .square.top {
+        width: 180px;
+        height: 180px;
+    }
+
+
+    .image-deco.about-us {
+        width: 310px;
+        height: 310px;
+    }
+    
+    .fade-in {
+        height: 100%;
+        width: auto;
+    }
+    .square.top.about-us {
+        width: 300px;
+        height: 240px;
+    }
+    
+    .square.bottom.about-us {
+        top: 18px;
+        right: -25px;
+    }
+    
+    .square.middle.about-us {
+        bottom: 10px;
+        left: -27px;
+    }
+
+
+    .image-deco.testi {
+        width: 240px;
+        height: 240px;
+    }
+
+    .image-container.testi {
+        height: 240px;
+        object-fit: contain;
+    }
+    .img-testi {
+        object-fit: cover;
+        width: 70%;
+    }
+}

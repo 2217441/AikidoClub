@@ -1,0 +1,146 @@
+/* 
+    Code for the Activities page structure 
+
+*/
+  
+.page-wrapper {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+
+}
+
+.nav-wrapper {
+    grid-row: 1;
+}
+
+.head-page {
+    grid-row: 2;
+}
+
+#downarrow {
+    cursor: pointer;
+}
+
+#downarrow {
+    position: relative;
+    animation: moveDownUp 2s infinite ease-in-out;
+}
+
+@keyframes moveDownUp {
+    0% {
+        top: 0; /* Start at original position */
+    }
+    50% {
+        top: 17px; /* Move down 100px */
+    }
+    100% {
+        top: 0; /* Move back to original position */
+    }
+}
+
+#latest-activity {
+    grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    height: auto;
+    align-items: center;
+    position: relative;
+    margin-bottom: 3vw;
+}
+
+.noContent-txt {
+    color: rgba(0, 0, 0, 0.408);
+    text-align: center;
+}
+
+.section-title h1{
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.section-title.past h1{
+    margin: 0;
+    font-size: 20px;
+    width: 180px;
+    text-align: center;
+    
+}
+
+
+#past-activities {
+    grid-row: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.head-act {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 2vw;
+    align-content: center;
+    justify-items: center;
+    justify-content: start;
+    column-gap: 10px;
+}
+
+.line-title {
+    background-color: black;
+    width:58vw;
+    height: 2px;
+
+}
+
+#year-choice {
+    font-style: italic;
+    margin-right: 3px;
+    font-size: 20px;
+}
+
+#dropdown-part {
+    display: flex;
+    align-items: center;
+}
+
+#dropdown-menu {
+
+    background-color: white;
+    padding: 10px;
+    border: solid 2px black;
+    font-size: 18px;
+    cursor: pointer;
+
+}
+
+
+
+
+#sub-info{
+    grid-row: 7;
+}
+
+
+@media only screen and (max-width: 1080px) {
+    .head-act{
+        flex-direction: column;
+        row-gap: 15px;
+    }
+
+    .line-title {
+        width:70vw;
+    
+    }
+    
+}
+

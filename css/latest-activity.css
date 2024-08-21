@@ -1,0 +1,196 @@
+/* 
+    Code for Club Latest Activities section
+
+*/
+
+
+.late-swiper-container {
+    width: 100%;
+    align-items: center;
+}
+
+/* Swiper container styling */
+.swiper.late-swiper {
+    width: 95vw;
+    height: 100%;
+    padding: 15px 15px;
+}
+
+/* Swiper slide styling */
+.swiper-slide.late-slide {
+    display: grid;
+    grid-template-rows: 1fr repeat(10);
+    align-items: center;
+    justify-content: center; 
+    justify-items: center;
+    background-color: #f4f4f4;
+    align-content: start;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: -8px 8px 8px 2px rgba(0, 0, 0, 0.277);
+    height: 45vw;
+    width: 20vw;
+
+    border-left: solid 7px rgba(0, 0, 0, 0.789);
+    border-bottom: solid 7px rgba(0, 0, 0, 0.789);
+
+
+}
+
+
+/* Image container */
+.late-img-ctnr {
+    grid-row: 1/span 4;
+    width: 22vw;
+    height: 22vw;
+    background-color: #e0e0e0; /* Placeholder background color */
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;  /* Flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+/* Image styling */
+.late-img {
+    width: 20vw;
+    height: 20vw;
+    align-self: center;
+    object-fit: contain;  /* Ensure the image fits within the container */
+}
+
+/* Card title */
+.late-txt {
+    grid-row: 5/span 2;
+    font-size: 1.5vw;
+    margin: 15px 0;
+    text-align: center;
+    font-style: italic;
+
+}
+
+/* Card description text */
+.late-desc {
+    grid-row: 7/span 3;
+    font-size: 1vw;
+    margin: 5px 0;
+    text-align: left;
+    color: #666;
+    height: 10vw;
+    padding: 0 5px;
+}
+
+/* Button styling */
+.late-btn {
+    grid-row: 10;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    align-self: center;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1vw; 
+}
+
+/* Swiper navigation buttons */
+.swiper-button-next, .swiper-button-prev {
+    color: #007bff;
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.late-next {
+    background-color: transparent;
+}
+
+.late-prev {
+    background-color: transparent;
+}
+
+.bullet-container{
+    margin-top: 3vw;
+}
+
+
+
+
+@media only screen and (max-width: 1080px) {
+    .swiper.late-swiper {
+        width: 100vw;
+        height: 100%;
+    }
+    .swiper-slide.late-slide{
+        height: 80vw;
+
+        box-shadow: -5px 5px 5px 2px rgba(0, 0, 0, 0.277);
+    }
+
+    .late-img-ctnr {
+        width: 37vw;
+        height: 37vw;
+    }
+    .late-img {
+        width: 35vw;
+        height: 35vw;
+    }
+
+    .late-txt {
+        font-size: 2.7vw;
+    }
+
+    .late-desc {
+        font-size: 1.9vw;
+        height: 19vw;
+    }
+    .late-btn {
+        font-size: 1.9vw;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    
+    .swiper.late-swiper {
+        width: 100vw;
+        height: 100%;
+    }
+
+
+    .swiper-slide.late-slide{
+        height: 120vw;
+        width: 10vw;
+    }
+
+    .late-img-ctnr {
+        width: 49vw;
+        height: 49vw;
+    }
+    .late-img {
+        width: 46vw;
+        height: 46vw;
+    }
+
+    .late-txt {
+        font-size: 4.7vw;
+    }
+
+    .late-desc {
+        font-size: 2.9vw;
+        height: 36vw;
+    }
+    .late-btn {
+        font-size: 2.9vw;
+    }
+    .bullet-container{
+        margin-top: 5vw;
+    }
+}

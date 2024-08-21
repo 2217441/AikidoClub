@@ -4,7 +4,7 @@
 $(document).ready(function () {
     // Select the 'scrollToTop' button and the 'main' section
     var scrollToTopButton = $("#scrollToTop");
-    var scrBtnSection = $("main");
+    var scrBtnSection = $(".page-wrapper");
 
     // Function to check the scroll position and adjust the button's opacity accordingly
     function checkScroll() {

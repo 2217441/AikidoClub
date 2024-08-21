@@ -1,510 +1,191 @@
-/* Style for the whole about us page*/
-body {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-  align-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-family: Helvetica, sans-serif;
-  background-color: rgba(46, 191, 164, 0.451); /* Setting a background color with alpha transparency */
+/* 
+    Code for the About Us page structure 
+
+*/
+  
+.page-wrapper {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
 }
 
-/* Styling for the navigation bar */
-#navbar {
-  grid-row: 1;
-  grid-column: 1/span 4;
+.nav-wrapper {
+    grid-row: 1;
 }
 
-/* Styling for the header image container */
-#head-pic {
-  grid-row: 2;
-  grid-column: 1/span 4;
+.head-page {
+    grid-row: 2;
 }
 
-/* Styling for the main content container */
-#club-info {
-  grid-row: 3;
-  grid-column: 1/span 4;
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-  align-items: center;
-  align-content: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-content: center;
+.info-club {
+    grid-row: 3;
+    margin-top: 4px;
+    padding: 30px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
 }
 
-/* Styling for the club nature section */
-#club-nature {
-  margin: 20px;
-  grid-column: 1/span 4;
-  display: flex;
-  border-radius: 10px;
-  justify-content: center;
-  background: linear-gradient(to right, #ffffff, #7edda5b6);
+#downarrow {
+    cursor: pointer;
 }
 
-/* Styling for the image container within the club nature section */
-.image-container {
-  margin: 40px;
-  margin-left: 60px;
-  width: 90vw;
-  height: 30vw;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+
+.image-deco {
+    grid-column: 1/span 3;
 }
 
-/* Styling for images within the image container */
-.image-container img {
-  object-fit: contain;
-  width: 100%;
+.about-txt {
+    grid-column: 4/span 2;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.7);
 }
 
-/* Styling for the paragraph within the club nature section */
-#club-nature > p {
-  margin: 20px;
-  margin-right: 40px;
-  font-size: 0.9em;
-  text-align: center;
-  align-self: center;
+.about-txt strong {
+    font-size: 20px;
+    background-color: rgb(177, 112, 112);
+    color: white;
+    padding: 3px 5px;
 }
 
-/* Styling for the vision and mission section */
-#vision-mission {
-  grid-column: 1/span 4;
-  grid-row: 2;
-  display: flex;
-  justify-content: center;
-}
-
-/* Styling for the mission container */
-#mission {
-  margin: 20px 30px 20px 20px;
-  padding: 50px;
-  background: linear-gradient(to bottom, #7fc0fa, #ffffff);
-  border-radius: 10px;
-  width: 35%;
-}
-
-/* Styling for the header image within the mission container */
-.head-img {
-  display: flex;
-  font-size: 25px;
-  text-align: center;
-  align-items: center;
-}
-
-/* Styling for italicized text within the mission and vision sections */
-.txt-mv {
-  font-style: italic;
-  text-align: center;
-}
-
-/* Styling for the vision container */
-#vision {
-  margin: 20px 20px 20px 30px;
-  background: linear-gradient(to top, #7fc0fa, #ffffff);
-  border-radius: 10px;
-  padding: 50px;
-  width: 35%;
-}
-
-/* Styling for the paragraph within the vision container */
-#vision > p {
-  padding: 20px;
+.parallex-section {
+    grid-row: 4;
 }
 
 /* Styling for the testimonials section */
 #testimonials {
-  grid-column: 1/span 4;
-  display: flex;
-  grid-row: 3;
-  margin: 40px;
+    grid-row: 5;
+    display: flex;
+    padding: 40px 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+
+}
+
+#testi-title h1{
+    font-style: italic;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
 
 /* Styling for individual testimonial cards */
 .testi-cards {
-  display: flex;
-  padding: 50px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  border-left: solid 7px rgba(0, 128, 0, 0.566);
-}
-
-/* Styling for testimonial images */
-.testi-cards > img {
-  width: 40%;
-  border: solid 1px grey;
-  border-radius: 10px;
-  margin: 20px;
-  background-color: cyan;
-}
-
-/* Styling for the more info aside section */
-#more-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  grid-column: 1/span 4;
-  grid-row: 4;
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
-}
-
-/* Styling for the header in the more info section */
-#head-more-info {
-  background-color: rgba(0, 128, 0, 0.566);
-  margin: 20px;
-  width: 90%;
-  color: white;
-  grid-column: 1/span 4;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  font-size: 25px;
-}
-
-/* Styling for information cards within the more info section */
-#cards-info {
-  display: flex;
-  margin: 15px;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-}
-/* Styling for hyperlink for each card */
-#cards-info a{
-  text-decoration: none;
-  width: auto;
-  align-items: center;
-}
-
-/* Styling for individual card links */
-.card-link {
-  margin: 10px;
-  padding: 25px;
-  text-align: center;
-  color: white;
-  transition: transform 0.2s ease-out;
-}
-
-/* Styling for card links on hover to enlarge them */
-.card-link:hover {
-  transform: scale(1.1);
-}
-
-/* Styling for the first information card */
-#item-one {
-  background: url('/img/item-info1.jpg') center/cover no-repeat;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  position: relative;
-  border-radius: 10px;
-}
-
-/* Styling for the second information card */
-#item-two {
-  background: url('/img/item-info2.jpg') center/cover no-repeat;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  position: relative;
-  border-radius: 10px;
-}
-
-/* Styling for the third information card */
-#item-three {
-  background: url('/img/item-info3.jpeg') center/cover no-repeat;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  position: relative;
-  border-radius: 10px;
-}
-
-/* Styling for card overlays */
-.card-overlay {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  z-index: 4;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-}
-
-/* Styling for text within information cards */
-.txt-info {
-  z-index: 5;
-}
-
-/* Styling for the sub-info section */
-#sub-info {
-  grid-row: 5;
-  grid-column: 1/span 4;
-}
-
-
-/* Media query for screens with a maximum width of 830px */
-@media (max-width: 830px) {
-  /* Responsive styling for the club nature section */
-  #club-nature {
-      grid-column: 1/span 4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      background: linear-gradient(to bottom, #ffffff, #7edda5b6);
-  }
-
-  /* Responsive styling for the image container */
-  .image-container {
-      grid-column: 1/span 2;
-      padding: 10px;
-      margin: 0;
-      width: 40vw;
-  }
-
-  /* Responsive styling for the paragraph within the club nature section */
-  #club-nature > p {
-      grid-column: 1/span 4;
-      margin: 10px;
-  }
-
-  /* Responsive styling for the vision and mission section */
-  #vision-mission {
-      grid-column: 1/span 4;
-      grid-row: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-  }
-
-  /* Responsive styling for the mission container */
-  #mission {
-      background: linear-gradient(to right, #7fc0fa, #ffffff);
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      width: 70%;
-      align-self: flex-start;
-  }
-
-  /* Responsive styling for horizontal lines within mission and vision sections */
-  #mission hr,
-  #vision hr {
-      display: none;
-  }
-
-  /* Responsive styling for header image within the mission section */
-  .head-img {
-      display: flex;
-      font-size: 20px;
-  }
-
-  /* Responsive styling for the image within the header image section */
-  .head-img img {
-      width: 30%;
-  }
-
-  /* Responsive styling for italicized text within the mission and vision sections */
-  .txt-mv {
-      width: 40%;
-      padding: 20px;
-  }
-
-  /* Responsive styling for the text within the mission container */
-  #mission .txt-mv {
-      border-left: 1px solid black;
-  }
-
-  /* Responsive styling for the text within the vision container */
-  #vision .txt-mv {
-      border-right: 1px solid black;
-      margin-right: 20px;
-  }
-
-  /* Responsive styling for the vision container */
-  #vision {
-      background-color: rgba(176, 176, 176, 0.36);
-      padding-right: 20px;
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      width: 70%;
-      align-self: self-end;
-      background: linear-gradient(to left, #7fc0fa, #ffffff);
-  }
-
-
-  /* Responsive styling for testimonial images */
-  .testi-cards > img {
-      width: 100px;
-  }
-
-    /* Responsive styling for card with hyperlink */
-  #cards-info a{
-    width: 100%;
-    justify-content: center;
-    justify-self: center;
     display: flex;
-    justify-content: center;
-  }
-  
-    /* Responsive styling for individual card */
-  .card-link{
+    padding: 10px 40px;
     width: 100%;
-  }
-
-  /* Responsive styling for the first information card */
-  #item-one {
-      width: 40%;
-      height: 120px;
-  }
-
-  /* Responsive styling for the second information card */
-  #item-two {
-      width: 40%;
-      height: 120px;
-  }
-
-  /* Responsive styling for the third information card */
-  #item-three {
-      width: 40%;
-      height: 120px;
-  }
-}
-
-/* Media query for screens with a maximum width of 500px */
-@media (max-width: 500px) {
-  /* Responsive styling for images within the image container */
-  .image-container img {
-      width: 100%;
-  }
-
-  /* Responsive styling for the image container */
-  .image-container {
-      width: 60vw;
-      margin-bottom: 20px;
-      margin-top: 20px;
-  }
-
-  /* Responsive styling to hide horizontal lines within mission and vision sections */
-  #mission hr,
-  #vision hr {
-      display: none;
-  }
-
-  /* Responsive styling for the club nature section */
-  #club-nature {
-      height: 50vh;
-  }
-
-  /* Responsive styling for the mission and vision containers */
-  #mission,
-  #vision {
-      align-items: center;
-      align-self: center;
-      width: 85%;
-  }
-
-  /* Responsive styling for the header image section */
-  .head-img {
-      display: flex;
-      flex-direction: column;
-  }
-
-  /* Responsive styling for the mission and vision containers */
-  #mission,
-  #vision {
-      padding: 10px;
-      margin: 10px;
-  }
-
-  /* Responsive styling for the testimonials section */
-  #testimonials {
-      display: flex;
-      grid-row: 3;
-      margin: 40px;
-  }
-
-  /* Responsive styling for individual testimonial cards */
-  .testi-cards {
-      display: flex;
-      padding: 50px;
-      flex-direction: column-reverse;
-      border-radius: 10px;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-  }
-
-  /* Responsive styling for testimonial images */
-  .testi-cards > img {
-      width: 60%;
-  }
-
-  /* Responsive styling for the information cards container */
-  #cards-info {
-      display: flex;
-      flex-direction: column;
-      margin: 15px;
-      overflow: hidden;
-  }
-
-  /* Responsive styling for individual card links */
-  .card-link {
-      margin: 10px;
-      padding: 25px;
-      text-align: center;
-      color: white;
-      transition: transform 0.2s ease-out;
-  }
-
-  /* Responsive styling for card links on hover to enlarge them */
-  .card-link:hover {
-      transform: scale(1.1);
-  }
-
-  /* Responsive styling for the first information card */
-  #item-one,
-  #item-two,
-  #item-three {
-      height: 100px;
-      width: 50%;
-  }
-
-  /* Responsive styling for card overlays */
-  .card-overlay {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      z-index: 4;
-      background-color: rgba(0, 0, 0, 0.5);
-      position: absolute;
-  }
-
-  /* Adjust the cards to center of screen */
-  #cards-info{
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
     align-items: center;
-  }
+    justify-content: center;
+    border: solid 1px;
+    border-left: solid 7px black;
+
 }
+
+.testi-txt {
+    display: flex;
+    flex-direction: column;
+}
+
+.testi-cards  p {
+    font-style: italic;
+    width: 50vw;
+    text-align: left;
+
+}
+
+.person-info {
+    color: rgba(0, 0, 0, 0.653);
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.join-us {
+    grid-row: 6;
+    width: 100%;
+    height: 500px; /* Adjust height as needed */
+    position: relative;
+    overflow: hidden; /* Ensures any part of the image that extends outside the container will be hidden */
+}
+  
+
+
+#downarrow {
+    position: relative;
+    animation: moveDownUp 2s infinite ease-in-out;
+}
+
+@keyframes moveDownUp {
+    0% {
+        top: 0; /* Start at original position */
+    }
+    50% {
+        top: 17px; /* Move down 100px */
+    }
+    100% {
+        top: 0; /* Move back to original position */
+    }
+}
+
+  #sub-info{
+    grid-row: 7;
+  }
+
+
+@media only screen and (max-width: 720px) {
+    
+    .info-club {
+        display: flex;
+        flex-direction: column;
+        padding: 30px 0px;
+    }
+    
+    .about-txt {
+        row-gap: 50px;
+        line-height: 1.3;
+        font-size: 13px;
+        margin:2px 15px 2px 15px;
+    }
+    
+    .about-txt strong {
+        font-size: 17px;
+        padding: 3px 5px;
+    }
+    
+    
+    .testi-cards {
+        flex-direction: column-reverse;
+        border: solid 1px;
+        padding: 20px 20px;
+    }
+
+    .testi-cards  p {
+        font-style: italic;
+        width: 75vw;
+        text-align: left;
+    
+    }
+
+
+
+    
+}
+
