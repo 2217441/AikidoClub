@@ -121,7 +121,7 @@
     padding-top: 10px;
     text-align: left;
     font-size: 1vw;
-    height: 7vw;
+    height: 6.5vw;
     color: rgba(0, 0, 0, 0.695);
     width: 90%;
 
@@ -129,7 +129,7 @@
 
 .act-file{
     grid-row: 10;
-    margin-top: 2vw;
+    margin-top: 1vw;
     padding: 10px 20px; /* Add some padding for the button */
     background-color: #ff4b4b; /* Initial button color */
     border: none; /* Remove border */
