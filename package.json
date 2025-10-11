@@ -1,15 +1,9 @@
 {
-  "name": " ",
-  "version": "0.0.1",
-  "description": "",
+  "name": "aikido-club",
+  "version": "1.0.0",
+  "description": "Aikido Club Website",
   "private": true,
-  "keywords": [
-    ""
-  ],
-  "license": "",
-  "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --config webpack.config.dev.js",
     "build": "webpack --config webpack.config.prod.js"
   },
