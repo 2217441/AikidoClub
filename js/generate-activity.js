@@ -83,21 +83,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 actDate.className = 'act-date';
                 actDate.textContent = "Date: " + item["act-date"];
 
+                const actFileButton = document.createElement('a');
+                const actFile = document.createElement('button');
+                actFile.className = 'act-file';
+                if (item["act-file"].length == 0) {
+                    actFileButton.setAttribute('href', 'javascript:void(0)');
+                } else {
+                    actFileButton.href = item["act-file"];
+                    actFile.textContent = 'Browse Taken Pictures';
+                    actFile.className = 'act-file';
+                    actFileButton.setAttribute('target', '_blank');
+                    actFileButton.appendChild(actFile);
+                }
+
+
+
                 swiperSlide.appendChild(pastImgCtnr);
                 swiperSlide.appendChild(actName);
                 swiperSlide.appendChild(actDate);
                 swiperSlide.appendChild(actDetails);
-
-                if (item["act-file"].length !== 0) {
-                    const actFileButton = document.createElement('a');
-                    const actFile = document.createElement('button');
-                    actFile.className = 'act-file';
-                    actFileButton.href = item["act-file"];
-                    actFile.textContent = 'Browse Taken Pictures';
-                    actFileButton.setAttribute('target', '_blank');
-                    actFileButton.appendChild(actFile);
-                    swiperSlide.appendChild(actFileButton);
-                }
+                swiperSlide.appendChild(actFileButton);
 
                 swiperWrapper.appendChild(swiperSlide);
             });
