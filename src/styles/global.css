@@ -5,6 +5,8 @@
     --color-primary-dark: #342b2b;
     --color-accent-cyan: #23d5c0;
     --color-accent-pink: #ee7752;
+    --color-accent: #23d5c0;
+    --color-accent-dark: #1ba89a;
     --color-bg-dark: #2e2a2a;
 
     --breakpoint-sm: 720px;
