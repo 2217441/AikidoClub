@@ -5,6 +5,8 @@ import ActivityCard from '../components/ActivityCard.astro';
 import LatestCard from '../components/LatestCard.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 // Get latest/featured activities from content collection
 const activitiesCollection = await getCollection('activities');
 const latestActivities = activitiesCollection
@@ -12,7 +14,7 @@ const latestActivities = activitiesCollection
   .map(item => ({
     lateTxt: item.data.title,
     lateDesc: item.data.description,
-    src: item.data.image,
+    src: item.data.image.startsWith('/') ? `${base}${item.data.image.slice(1)}` : item.data.image,
     linkButton: item.data.link || '#'
   }));
 
@@ -77,7 +79,7 @@ const years = yearKeys.map(formatYear);
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
       <img 
-        src="/img/head-pics.webp" 
+        src={`${base}img/head-pics.webp`}
         alt="Aikido club members practicing" 
         class="w-full h-full object-cover"
       />

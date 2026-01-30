@@ -3,12 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageFadeCarousel from '../components/ImageFadeCarousel.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 // About section fade images
 const aboutImages = [
-  '/img/about-us/img01.jpg',
-  '/img/about-us/img02.jpg',
-  '/img/about-us/img03.jpg',
-  '/img/about-us/img04.jpg',
+  `${base}img/about-us/img01.jpg`,
+  `${base}img/about-us/img02.jpg`,
+  `${base}img/about-us/img03.jpg`,
+  `${base}img/about-us/img04.jpg`,
 ];
 
 // Get FAQ from content collection
@@ -25,12 +27,18 @@ const faqItems = faqCollection
 const testimonialsCollection = await getCollection('testimonials');
 const testimonials = testimonialsCollection
   .sort((a, b) => a.data.order - b.data.order)
-  .map(item => ({
-    author: item.data.author,
-    role: item.data.role,
-    image: item.data.image,
-    content: item.body
-  }));
+  .map(item => {
+    // Prefix image paths with base URL
+    const imagePath = item.data.image?.startsWith('/') 
+      ? `${base}${item.data.image.slice(1)}` 
+      : item.data.image;
+    return {
+      author: item.data.author,
+      role: item.data.role,
+      image: imagePath,
+      content: item.body
+    };
+  });
 
 // Belt progression data
 const beltProgression = [
@@ -78,7 +86,7 @@ const beltProgression = [
     <!-- Background image -->
     <div class="absolute inset-0">
       <img 
-        src="/img/image1.png" 
+        src={`${base}img/image1.png`}
         alt="Aikido club members practicing" 
         class="w-full h-full object-cover"
         loading="eager"
@@ -153,7 +161,7 @@ const beltProgression = [
   <section class="parallax-section relative min-h-[400px] flex items-center justify-center overflow-hidden">
     <!-- Background with parallax effect -->
     <div class="absolute inset-0 bg-fixed bg-cover bg-center" 
-         style="background-image: url('/img/join-us.jpg');">
+         style={`background-image: url('${base}img/join-us.jpg');`}>
     </div>
     <div class="absolute inset-0 bg-black/60"></div>
     
@@ -334,7 +342,7 @@ const beltProgression = [
     <!-- Background Image -->
     <div class="absolute inset-0">
       <img 
-        src="/img/join-us.jpg" 
+        src={`${base}img/join-us.jpg`}
         alt="Aikido practice session"
         class="w-full h-full object-cover"
         loading="lazy"

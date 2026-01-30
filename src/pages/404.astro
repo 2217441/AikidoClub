@@ -1,5 +1,6 @@
 ---
 // 404 page doesn't use the full layout for a cleaner error experience
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -8,10 +9,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Not Found | IIUM Aikido Club</title>
-  <link rel="icon" href="/favicons/favicon.ico" sizes="any">
-  <link rel="icon" href="/favicons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href={`${base}favicons/favicon.ico`} sizes="any">
+  <link rel="icon" href={`${base}favicons/icon.svg`} type="image/svg+xml">
+  <link rel="apple-touch-icon" href={`${base}favicons/apple-touch-icon.png`}>
+  <link rel="manifest" href={`${base}site.webmanifest`}>
   <meta name="theme-color" content="#fafafa">
   <style>
     * {
@@ -151,19 +152,19 @@
   <div class="yin-yang" aria-hidden="true">☯</div>
   
   <div class="container">
-    <img src="/img/aikido-logo.png" alt="IIUM Aikido Club" class="logo" width="120" height="122">
+    <img src={`${base}img/aikido-logo.png`} alt="IIUM Aikido Club" class="logo" width="120" height="122">
     <div class="error-code">404</div>
     <h1>Oops! Page Not Found</h1>
     <p>
       The page you're looking for doesn't exist or has been moved. 
       Don't worry, even the best Aikidoka sometimes lose their way!
     </p>
-    <a href="/" class="btn">Return to Home</a>
+    <a href={base} class="btn">Return to Home</a>
     <nav class="links" aria-label="Quick navigation">
-      <a href="/activities">Activities</a>
-      <a href="/about-us">About Us</a>
-      <a href="/news">News</a>
-      <a href="/mainboard">Mainboard</a>
+      <a href={`${base}activities`}>Activities</a>
+      <a href={`${base}about-us`}>About Us</a>
+      <a href={`${base}news`}>News</a>
+      <a href={`${base}mainboard`}>Mainboard</a>
     </nav>
   </div>
 </body>

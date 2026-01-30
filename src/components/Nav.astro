@@ -3,13 +3,14 @@ interface Props {
   currentPath?: string;
 }
 
-const { currentPath = '/' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const { currentPath = base } = Astro.props;
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/activities', label: 'Activities' },
-  { href: '/about-us', label: 'About Us' },
-  { href: '/news', label: 'News' },
+  { href: base, label: 'Home' },
+  { href: `${base}activities`, label: 'Activities' },
+  { href: `${base}about-us`, label: 'About Us' },
+  { href: `${base}news`, label: 'News' },
 ];
 ---
 
@@ -28,7 +29,7 @@ const navItems = [
   <nav class="grid grid-cols-[1fr_3fr] items-center h-[85px] overflow-hidden max-md:h-[75px]">
     <!-- Logo -->
     <img
-      src="/img/aikido-logo.png"
+      src={`${base}img/aikido-logo.png`}
       alt="Aikido Club Logo"
       class="h-20 w-auto justify-self-start ml-5 max-md:h-[55px]"
     />

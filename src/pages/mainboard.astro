@@ -2,18 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 // Get mainboard data from YAML content collection
 const mainboardCollection = await getCollection('mainboard');
 
 // Sort by order field (ascending - most recent first based on order)
 const orgCharts = mainboardCollection
   .sort((a, b) => a.data.order - b.data.order)
-  .map(item => ({
-    tenure: item.data.tenure,
-    title: item.data.title,
-    image: item.data.image,
-    alt: item.data.alt
-  }));
+  .map(item => {
+    // Prefix image paths with base URL
+    const imagePath = item.data.image.startsWith('/') 
+      ? `${base}${item.data.image.slice(1)}` 
+      : item.data.image;
+    return {
+      tenure: item.data.tenure,
+      title: item.data.title,
+      image: imagePath,
+      alt: item.data.alt
+    };
+  });
 ---
 
 <BaseLayout 
@@ -25,7 +33,7 @@ const orgCharts = mainboardCollection
     <!-- Background image -->
     <div class="absolute inset-0">
       <img 
-        src="/img/image1.png" 
+        src={`${base}img/image1.png`}
         alt="Aikido club members practicing" 
         class="w-full h-full object-cover"
         loading="eager"
@@ -116,7 +124,7 @@ const orgCharts = mainboardCollection
         Active members are encouraged to participate and contribute to the club's leadership.
       </p>
       <a 
-        href="/about-us#faq" 
+        href={`${base}about-us#faq`}
         class="inline-block bg-accent-pink hover:bg-red-600 text-white 
                px-6 py-3 rounded-lg font-medium text-base
                transition-all duration-200 hover:scale-105 hover:shadow-lg"

@@ -5,6 +5,8 @@ import Carousel from '../components/Carousel.astro';
 import LatestCard from '../components/LatestCard.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
+
 // Get latest/featured activities from content collection
 const activitiesCollection = await getCollection('activities');
 const latestActivities = activitiesCollection
@@ -12,22 +14,22 @@ const latestActivities = activitiesCollection
   .map(item => ({
     lateTxt: item.data.title,
     lateDesc: item.data.description,
-    src: item.data.image,
+    src: item.data.image.startsWith('/') ? `${base}${item.data.image.slice(1)}` : item.data.image,
     linkButton: item.data.link || '#'
   }));
 
 // Hero images for the carousel
 const heroImages = [
-  '/img/head-pics.webp',
-  '/img/gallery-card.jpeg',
-  '/img/item-info1.jpg',
+  `${base}img/head-pics.webp`,
+  `${base}img/gallery-card.jpeg`,
+  `${base}img/item-info1.jpg`,
 ];
 
 // Image fade carousel images for intro section  
 const introImages = [
-  '/img/aikido-logo.png',
-  '/img/web-greeting-image.png',
-  '/img/home-info-greeting.png',
+  `${base}img/aikido-logo.png`,
+  `${base}img/web-greeting-image.png`,
+  `${base}img/home-info-greeting.png`,
 ];
 ---
 
@@ -65,7 +67,7 @@ const introImages = [
       aria-label="Scroll to main content"
     >
       <img 
-        src="/img/downarrow.png" 
+        src={`${base}img/downarrow.png`}
         alt="Scroll down"
         class="w-12 h-12 object-contain filter invert opacity-80 hover:opacity-100 transition-opacity"
       />
@@ -94,17 +96,17 @@ const introImages = [
             <!-- Fade-in images -->
             <div class="fade-image-container relative w-full h-full flex items-center justify-center">
               <img 
-                src="/img/aikido-logo.png" 
+                src={`${base}img/aikido-logo.png`}
                 alt="Aikido Logo" 
                 class="fade-image max-w-[60%] max-h-full object-contain"
               />
               <img 
-                src="/img/web-greeting-image.png" 
+                src={`${base}img/web-greeting-image.png`}
                 alt="Aikido Kanji" 
                 class="fade-image max-w-[70%] max-h-full object-contain"
               />
               <img 
-                src="/img/home-info-greeting.png" 
+                src={`${base}img/home-info-greeting.png`}
                 alt="Kanji Meaning" 
                 class="fade-image max-w-[70%] max-h-full object-contain"
               />
@@ -161,12 +163,12 @@ const introImages = [
     <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-6">
       <!-- Activities Card -->
       <a 
-        href="/activities" 
+        href={`${base}activities`}
         class="explore-card group relative w-64 h-64 sm:w-[30%] sm:pb-[30%] sm:h-0 
                overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
       >
         <div class="absolute inset-0 bg-cover bg-center" 
-             style="background-image: url('/img/gallery-card.jpeg');">
+             style={`background-image: url('${base}img/gallery-card.jpeg');`}>
         </div>
         <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
         <span class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold 
@@ -177,12 +179,12 @@ const introImages = [
 
       <!-- Mainboard Card -->
       <a 
-        href="/mainboard" 
+        href={`${base}mainboard`}
         class="explore-card group relative w-64 h-64 sm:w-[30%] sm:pb-[30%] sm:h-0 
                overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
       >
         <div class="absolute inset-0 bg-cover bg-center" 
-             style="background-image: url('/img/item-info1.jpg');">
+             style={`background-image: url('${base}img/item-info1.jpg');`}>
         </div>
         <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
         <span class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold 
@@ -193,12 +195,12 @@ const introImages = [
 
       <!-- About Us Card -->
       <a 
-        href="/about-us" 
+        href={`${base}about-us`}
         class="explore-card group relative w-64 h-64 sm:w-[30%] sm:pb-[30%] sm:h-0 
                overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
       >
         <div class="absolute inset-0 bg-cover bg-center" 
-             style="background-image: url('/img/item-info3.jpeg');">
+             style={`background-image: url('${base}img/item-info3.jpeg');`}>
         </div>
         <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
         <span class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold 
@@ -257,7 +259,7 @@ const introImages = [
   <section class="join-us-section relative w-full min-h-[500px] overflow-hidden">
     <!-- Parallax Background Image -->
     <div class="absolute inset-0 bg-fixed bg-cover bg-center" 
-         style="background-image: url('/img/join-us.jpg');">
+         style={`background-image: url('${base}img/join-us.jpg');`}>
     </div>
     
     <!-- Top Left Text -->

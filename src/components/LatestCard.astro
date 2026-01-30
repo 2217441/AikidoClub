@@ -8,7 +8,7 @@ interface Props {
   title: string;
   /** Card description text */
   description: string;
-  /** Image source path */
+  /** Image source path (should include base URL if needed) */
   imageSrc: string;
   /** Link URL (optional - if empty, no button shown) */
   linkUrl?: string;
@@ -23,6 +23,16 @@ const {
   linkUrl = '',
   linkText = 'Learn More',
 } = Astro.props;
+
+// Get base URL for path resolution
+const base = import.meta.env.BASE_URL;
+
+// Handle both absolute URLs (http/https) and relative paths
+const resolvedImageSrc = imageSrc.startsWith('http') || imageSrc.startsWith(base)
+  ? imageSrc 
+  : imageSrc.startsWith('/') 
+    ? `${base}${imageSrc.slice(1)}`
+    : `${base}${imageSrc}`;
 ---
 
 <article class="latest-card group w-72 sm:w-80 flex-shrink-0 snap-center
@@ -31,7 +41,7 @@ const {
   <!-- Image Container -->
   <div class="relative aspect-video overflow-hidden bg-gradient-to-br from-accent/20 to-accent/5">
     <img
-      src={imageSrc}
+      src={resolvedImageSrc}
       alt={title}
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       loading="lazy"
