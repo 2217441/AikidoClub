@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get mainboard data from YAML content collection
+const mainboardCollection = await getCollection('mainboard');
+
+// Sort by order field (ascending - most recent first based on order)
+const orgCharts = mainboardCollection
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(item => ({
+    tenure: item.data.tenure,
+    title: item.data.title,
+    image: item.data.image,
+    alt: item.data.alt
+  }));
+---
+
+<BaseLayout 
+  title="Mainboard | IIUM Aikido Club" 
+  description="Meet the IIUM Aikido Club mainboard - View our organizational charts and leadership team across different tenures."
+>
+  <!-- Hero Section -->
+  <section class="head-page relative w-full h-[60vh] min-h-[400px] overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img 
+        src="/img/image1.png" 
+        alt="Aikido club members practicing" 
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    
+    <!-- Title -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
+      <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold drop-shadow-[4px_8px_4px_rgba(0,0,0,0.5)]">
+        Mainboard
+      </h1>
+      
+      <!-- Down Arrow -->
+      <a 
+        href="#main-content" 
+        class="absolute bottom-10 cursor-pointer animate-bounce-slow"
+        aria-label="Scroll to content"
+      >
+        <svg class="w-10 h-10 text-white opacity-80 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Bottom curve decoration -->
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-[#f5f5f5] rounded-t-[50%]"></div>
+  </section>
+
+  <!-- Organizational Charts Section -->
+  <section id="main-content" class="bg-[#f5f5f5] py-16 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+          Organizational Chart
+        </h2>
+        <p class="text-gray-500 text-base sm:text-lg">
+          Aikido Club Organizational Chart
+        </p>
+        <div class="deco-line mx-auto mt-4"></div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {orgCharts.map((chart) => (
+          <div class="chart-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <!-- Chart Title -->
+            <div class="p-4 bg-gradient-to-r from-accent-pink to-red-400 text-white">
+              <h3 class="text-lg sm:text-xl font-bold text-center">
+                {chart.title}
+              </h3>
+            </div>
+            
+            <!-- Chart Image -->
+            <a 
+              href={chart.image} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label={`View ${chart.title} organizational chart`}
+              class="block overflow-hidden group"
+            >
+              <img 
+                src={chart.image} 
+                alt={chart.alt}
+                class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="p-3 text-center text-gray-500 text-sm group-hover:text-accent-pink transition-colors">
+                Click to view full image
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Leadership CTA Section -->
+  <section class="bg-white py-12 px-4 sm:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+        Interested in Joining the Mainboard?
+      </h2>
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+        Elections for the mainboard are held at the beginning of each academic year. 
+        Active members are encouraged to participate and contribute to the club's leadership.
+      </p>
+      <a 
+        href="/about-us#faq" 
+        class="inline-block bg-accent-pink hover:bg-red-600 text-white 
+               px-6 py-3 rounded-lg font-medium text-base
+               transition-all duration-200 hover:scale-105 hover:shadow-lg"
+      >
+        Learn More About Joining
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Bounce animation for scroll arrow */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Decorative line */
+  .deco-line {
+    display: block;
+    height: 3px;
+    background-color: rgb(177, 112, 112);
+    width: 100px;
+  }
+</style>

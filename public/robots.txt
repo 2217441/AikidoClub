@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/
+
+# Allow crawling of all content
+User-agent: *
+Disallow:
+
+# Sitemap location
+Sitemap: https://2217441.github.io/AikidoClub/sitemap.xml

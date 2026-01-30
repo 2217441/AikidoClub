@@ -1,92 +1,43 @@
-# IIUM Aikido Club Website
+# Astro Starter Kit: Minimal
 
-Official website for the International Islamic University Malaysia (IIUM) Aikido Club.
-
-🌐 **Live Site:** [Coming Soon - GitHub Pages]
-
-## Features
-
-- 🏠 **Home** - Club introduction with animated hero section
-- 📅 **Activities** - Past and upcoming club events gallery
-- 📖 **About Us** - Club info, FAQ, training schedule, belt progression
-- 📰 **News** - Announcements and updates
-- 📱 **Responsive** - Mobile-friendly design
-- ⚡ **Optimized** - WebP images, fast loading
-
-## Tech Stack
-
-- HTML5, CSS3, JavaScript
-- Webpack 5 (bundling & dev server)
-- HTML5 Boilerplate v9.0.1 base
-- jQuery 3.7.1 (via CDN)
-- Swiper.js (carousels)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+ and npm
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/2217441/AikidoClub.git
-cd AikidoClub
-
-# Install dependencies
-npm install
+```sh
+npm create astro@latest -- --template minimal
 ```
 
-### Development
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-```bash
-# Start dev server with hot reload
-npm start
+## 🚀 Project Structure
+
+Inside of your Astro project, you'll see the following folders and files:
+
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
 ```
 
-Opens at `http://localhost:8080`
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-### Production Build
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-```bash
-# Build for production
-npm run build
-```
+Any static assets, like images, can be placed in the `public/` directory.
 
-Output goes to `dist/` folder.
+## 🧞 Commands
 
-## Project Structure
+All commands are run from the root of the project, from a terminal:
 
-```
-├── css/                 # Stylesheets
-├── img/                 # Images (WebP optimized)
-├── js/                  # JavaScript modules
-├── dist/                # Production build output
-├── index.html           # Home page
-├── about-us.html        # About page
-├── activities.html      # Activities gallery
-├── news.html            # News/announcements
-├── 404.html             # Custom error page
-└── webpack.*.js         # Webpack configs
-```
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## Deployment
+## 👀 Want to learn more?
 
-The site is configured for GitHub Pages deployment. Push to `master` branch and GitHub Actions will automatically build and deploy to the `gh-pages` branch.
-
-## Contributing
-
-This is a club website maintained by IIUM Aikido Club members. For suggestions or issues, please open an issue or contact us at <aikidoclubiium@gmail.com>.
-
-## License
-
-MIT License - see [LICENSE.txt](LICENSE.txt)
-
----
-
-**Follow us:**
-
-- Instagram: [@iiumaikidoclub](https://instagram.com/iiumaikidoclub)
-- Facebook: [IIUM Aikido Club](https://facebook.com/iiumaikidoclub)
-- YouTube: [Aikido IIUM](https://youtube.com/@aikidoiium9560)
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

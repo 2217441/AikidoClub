@@ -1,0 +1,127 @@
+---
+/**
+ * CSS-only crossfade image carousel for hero sections
+ * No JavaScript required - uses pure CSS animations with staggered delays
+ */
+interface Props {
+  /** Array of image paths to cycle through */
+  images: string[];
+  /** Duration for each image to be visible (in seconds) */
+  displayDuration?: number;
+  /** Duration of the fade transition (in seconds) */
+  fadeDuration?: number;
+  /** Alt text prefix for accessibility */
+  altPrefix?: string;
+  /** Additional classes for the container */
+  class?: string;
+}
+
+const {
+  images,
+  displayDuration = 5,
+  fadeDuration = 1.5,
+  altPrefix = 'Hero image',
+  class: className = '',
+} = Astro.props;
+
+// Calculate total cycle time
+const totalCycleTime = images.length * displayDuration;
+
+// Calculate keyframe percentages
+const visiblePercent = (displayDuration / totalCycleTime) * 100;
+const fadePercent = (fadeDuration / totalCycleTime) * 100;
+---
+
+<div class={`image-fade-carousel relative w-full h-full overflow-hidden ${className}`}>
+  {images.map((image, index) => (
+    <img
+      src={image}
+      alt={`${altPrefix} ${index + 1}`}
+      class="carousel-image absolute inset-0 w-full h-full object-cover"
+      style={`animation-delay: ${index * displayDuration}s;`}
+      loading={index === 0 ? 'eager' : 'lazy'}
+    />
+  ))}
+  
+  <!-- Optional gradient overlay for text readability -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50 pointer-events-none" />
+</div>
+
+<style define:vars={{ 
+  totalCycleTime: `${totalCycleTime}s`,
+  visiblePercent: visiblePercent,
+  fadePercent: fadePercent,
+  imageCount: images.length
+}}>
+  .carousel-image {
+    opacity: 0;
+    animation: imageFade var(--totalCycleTime) infinite;
+  }
+  
+  /* Only first image visible initially before animation starts */
+  .carousel-image:first-child {
+    opacity: 1;
+  }
+  
+  @keyframes imageFade {
+    0% {
+      opacity: 0;
+    }
+    /* Fade in */
+    calc(var(--fadePercent) * 0.5 * 1%) {
+      opacity: 1;
+    }
+    /* Stay visible */
+    calc((var(--visiblePercent) - var(--fadePercent) * 0.5) * 1%) {
+      opacity: 1;
+    }
+    /* Fade out */
+    calc(var(--visiblePercent) * 1%) {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script define:vars={{ images, displayDuration, fadeDuration }}>
+  // Fallback: Use JavaScript for browsers with CSS variable calc issues
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.image-fade-carousel');
+    if (!container) return;
+    
+    const carouselImages = container.querySelectorAll('.carousel-image');
+    if (carouselImages.length <= 1) return;
+    
+    const totalCycleTime = images.length * displayDuration;
+    const visiblePercent = (displayDuration / totalCycleTime) * 100;
+    const fadePercent = (fadeDuration / totalCycleTime) * 100;
+    
+    // Generate keyframes dynamically for better browser support
+    const keyframes = `
+      @keyframes imageFadeJS {
+        0% { opacity: 0; }
+        ${fadePercent * 0.5}% { opacity: 1; }
+        ${visiblePercent - fadePercent * 0.5}% { opacity: 1; }
+        ${visiblePercent}% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+    `;
+    
+    // Create style element if it doesn't exist
+    let styleEl = document.getElementById('image-fade-keyframes');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'image-fade-keyframes';
+      document.head.appendChild(styleEl);
+    }
+    styleEl.textContent = keyframes;
+    
+    // Apply animation to each image
+    carouselImages.forEach((img, index) => {
+      (img as HTMLElement).style.animation = `imageFadeJS ${totalCycleTime}s infinite`;
+      (img as HTMLElement).style.animationDelay = `${index * displayDuration}s`;
+    });
+  });
+</script>

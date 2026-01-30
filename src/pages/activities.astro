@@ -1,0 +1,317 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Carousel from '../components/Carousel.astro';
+import ActivityCard from '../components/ActivityCard.astro';
+import LatestCard from '../components/LatestCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get latest/featured activities from content collection
+const activitiesCollection = await getCollection('activities');
+const latestActivities = activitiesCollection
+  .filter(a => a.data.featured)
+  .map(item => ({
+    lateTxt: item.data.title,
+    lateDesc: item.data.description,
+    src: item.data.image,
+    linkButton: item.data.link || '#'
+  }));
+
+// Get past activities from content collection
+const pastActivitiesCollection = await getCollection('pastActivities');
+
+// Group past activities by year
+const pastActivitiesByYear: Record<string, { title: string; content: any[] }> = {};
+pastActivitiesCollection.forEach(item => {
+  const year = item.data.year;
+  if (!pastActivitiesByYear[year]) {
+    pastActivitiesByYear[year] = {
+      title: `Club Activities ${year}`,
+      content: []
+    };
+  }
+  pastActivitiesByYear[year].content.push({
+    'image-path': item.data.image,
+    'act-name': item.data.name,
+    'act-date': item.data.date,
+    'act-desc': item.body || '',
+    'act-file': item.data.file || '',
+    order: item.data.order
+  });
+});
+
+// Sort activities within each year by order
+Object.keys(pastActivitiesByYear).forEach(year => {
+  pastActivitiesByYear[year].content.sort((a, b) => a.order - b.order);
+});
+
+const pastActivities = pastActivitiesByYear;
+
+// Get year keys and sort them in descending order (most recent first)
+// Keys are like "23/24", "22/23" - parse to sort properly
+const yearKeys = Object.keys(pastActivities).sort((a, b) => {
+  const [startA] = a.split('/').map(Number);
+  const [startB] = b.split('/').map(Number);
+  return startB - startA; // Descending order
+});
+
+// Convert year key to display format and ID format
+// "23/24" -> "2023/2024" for display, "year-2324" for ID
+const formatYear = (key: string) => {
+  const [start, end] = key.split('/');
+  return {
+    display: `20${start}/20${end}`,
+    id: `year-${start}${end}`,
+    key,
+  };
+};
+
+const years = yearKeys.map(formatYear);
+---
+
+<BaseLayout 
+  title="Activities | IIUM Aikido Club" 
+  description="Explore IIUM Aikido Club activities - View our latest events, past activities, and upcoming martial arts training sessions."
+>
+  <!-- Hero Section -->
+  <section class="head-page relative w-full h-[50vh] min-h-[300px] flex items-center justify-center">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/img/head-pics.webp" 
+        alt="Aikido club members practicing" 
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    
+    <!-- Page Title -->
+    <div class="relative z-10 text-center">
+      <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold 
+                 drop-shadow-[4px_8px_4px_rgba(0,0,0,0.5)]">
+        Activities
+      </h1>
+      
+      <!-- Down Arrow -->
+      <a 
+        href="#latest-activities" 
+        class="inline-block mt-8 animate-bounce-slow"
+        aria-label="Scroll to activities"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white opacity-80 hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Latest Activities Section -->
+  <section id="latest-activities" class="bg-[#f5f5f5] py-12 px-6 sm:px-8">
+    <div class="text-center mb-10">
+      <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4 italic">
+        ☰ Latest Activities ☰
+      </h2>
+      <div class="deco-line mx-auto"></div>
+    </div>
+
+    <div class="max-w-6xl mx-auto">
+      {latestActivities.length === 0 ? (
+        <p class="text-center text-gray-500 italic">No latest activities.</p>
+      ) : latestActivities.length === 1 ? (
+        <div class="flex justify-center">
+          <LatestCard
+            title={latestActivities[0].lateTxt}
+            description={latestActivities[0].lateDesc}
+            imageSrc={latestActivities[0].src}
+            linkUrl={latestActivities[0].linkButton}
+            linkText="Learn More"
+          />
+        </div>
+      ) : (
+        <div class="group">
+          <Carousel showArrows={true} showDots={true} slideCount={latestActivities.length}>
+            {latestActivities.map((activity) => (
+              <LatestCard
+                title={activity.lateTxt}
+                description={activity.lateDesc}
+                imageSrc={activity.src}
+                linkUrl={activity.linkButton}
+                linkText="Learn More"
+              />
+            ))}
+          </Carousel>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Past Activities Section -->
+  <section id="past-activities" class="bg-white py-12 px-6 sm:px-8">
+    <!-- Section Header with Year Filter -->
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+        <div class="flex items-center gap-4">
+          <h2 class="text-primary-dark text-xl sm:text-2xl font-bold italic whitespace-nowrap">
+            Club Past Activities
+          </h2>
+          <div class="hidden md:block h-0.5 bg-black w-32 lg:w-64"></div>
+        </div>
+        
+        <!-- Year Dropdown Filter -->
+        <div class="flex items-center gap-3">
+          <label for="year-filter" class="text-gray-700 italic text-sm sm:text-base whitespace-nowrap">
+            Display from Year:
+          </label>
+          <select 
+            id="year-filter" 
+            class="bg-white border-2 border-black px-4 py-2 text-base cursor-pointer
+                   rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+                   transition-colors duration-200"
+            aria-label="Select activity year"
+          >
+            {years.map((year, index) => (
+              <option value={year.id} selected={index === 0}>
+                {year.display}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Year Sections - All rendered at build time, visibility controlled by JS -->
+      <div id="year-sections">
+        {years.map((year, index) => {
+          const yearData = pastActivities[year.key];
+          const activities = yearData.content;
+          
+          return (
+            <div 
+              id={year.id}
+              class={`year-section ${index === 0 ? '' : 'hidden'}`}
+              data-year={year.id}
+            >
+              <!-- Year Title -->
+              <div class="text-center mb-6">
+                <h3 class="inline-block bg-accent text-white text-xl sm:text-2xl font-bold italic 
+                           px-8 py-3 shadow-[−5px_8px_2px_rgba(0,0,0,0.6)]">
+                  {yearData.title}
+                </h3>
+              </div>
+              
+              <!-- Activities Carousel -->
+              <div class="group">
+                {activities.length === 1 ? (
+                  <div class="flex justify-center">
+                    <ActivityCard
+                      name={activities[0]["act-name"]}
+                      date={activities[0]["act-date"]}
+                      description={activities[0]["act-desc"]}
+                      imagePath={activities[0]["image-path"]}
+                      filePath={activities[0]["act-file"]}
+                    />
+                  </div>
+                ) : (
+                  <Carousel 
+                    id={`carousel-${year.id}`}
+                    showArrows={true} 
+                    showDots={true} 
+                    slideCount={activities.length}
+                  >
+                    {activities.map((activity) => (
+                      <ActivityCard
+                        name={activity["act-name"]}
+                        date={activity["act-date"]}
+                        description={activity["act-desc"]}
+                        imagePath={activity["image-path"]}
+                        filePath={activity["act-file"]}
+                      />
+                    ))}
+                  </Carousel>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      <!-- Fallback message if no activities -->
+      {yearKeys.length === 0 && (
+        <p class="text-center text-gray-500 italic py-8">No past activities available.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Bounce animation for scroll arrow */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Decorative line animation */
+  .deco-line {
+    display: block;
+    height: 2px;
+    background-color: #342b2b;
+    width: 300px;
+    max-width: 80%;
+    animation: line-shorten 8s infinite ease-in-out;
+  }
+
+  @keyframes line-shorten {
+    0%, 100% {
+      width: 300px;
+    }
+    50% {
+      width: 180px;
+    }
+  }
+
+  /* Year section transitions */
+  .year-section {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .year-section.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Year filter functionality - client-side visibility toggle
+  function initYearFilter() {
+    const yearFilter = document.getElementById('year-filter') as HTMLSelectElement;
+    const yearSections = document.querySelectorAll('.year-section');
+    
+    if (!yearFilter || yearSections.length === 0) return;
+    
+    yearFilter.addEventListener('change', () => {
+      const selectedYear = yearFilter.value;
+      
+      // Hide all year sections
+      yearSections.forEach((section) => {
+        section.classList.add('hidden');
+      });
+      
+      // Show selected year section
+      const targetSection = document.getElementById(selectedYear);
+      if (targetSection) {
+        targetSection.classList.remove('hidden');
+      }
+    });
+  }
+  
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initYearFilter);
+  
+  // Also handle Astro page transitions
+  document.addEventListener('astro:page-load', initYearFilter);
+</script>

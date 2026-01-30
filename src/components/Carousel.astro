@@ -1,0 +1,211 @@
+---
+/**
+ * Generic CSS scroll-snap carousel component
+ * Uses native CSS scroll-snap for smooth, touch-friendly scrolling
+ */
+interface Props {
+  /** Unique ID for this carousel instance */
+  id?: string;
+  /** Whether to show navigation arrows */
+  showArrows?: boolean;
+  /** Whether to show dot indicators */
+  showDots?: boolean;
+  /** Number of slides (required for dots) */
+  slideCount?: number;
+  /** Additional classes for the container */
+  class?: string;
+}
+
+const {
+  id = `carousel-${Math.random().toString(36).slice(2, 9)}`,
+  showArrows = true,
+  showDots = false,
+  slideCount = 0,
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`carousel-wrapper relative ${className}`} data-carousel-id={id}>
+  <!-- Previous Arrow -->
+  {showArrows && (
+    <button
+      type="button"
+      class="carousel-arrow carousel-prev absolute left-0 top-1/2 -translate-y-1/2 z-10 
+             bg-accent/80 hover:bg-accent text-white rounded-full p-2 
+             opacity-0 group-hover:opacity-100 transition-opacity duration-300
+             hidden md:flex items-center justify-center
+             disabled:opacity-30 disabled:cursor-not-allowed
+             shadow-lg hover:shadow-xl -ml-4"
+      aria-label="Previous slide"
+      data-carousel-prev={id}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+  )}
+
+  <!-- Carousel Track -->
+  <div
+    class="carousel-track flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory
+           scrollbar-hide pb-4 -mb-4"
+    id={id}
+    role="region"
+    aria-label="Carousel"
+  >
+    <slot />
+  </div>
+
+  <!-- Next Arrow -->
+  {showArrows && (
+    <button
+      type="button"
+      class="carousel-arrow carousel-next absolute right-0 top-1/2 -translate-y-1/2 z-10 
+             bg-accent/80 hover:bg-accent text-white rounded-full p-2 
+             opacity-0 group-hover:opacity-100 transition-opacity duration-300
+             hidden md:flex items-center justify-center
+             disabled:opacity-30 disabled:cursor-not-allowed
+             shadow-lg hover:shadow-xl -mr-4"
+      aria-label="Next slide"
+      data-carousel-next={id}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  )}
+
+  <!-- Dot Indicators -->
+  {showDots && slideCount > 0 && (
+    <div class="carousel-dots flex justify-center gap-2 mt-4" data-carousel-dots={id}>
+      {Array.from({ length: slideCount }).map((_, i) => (
+        <button
+          type="button"
+          class={`carousel-dot w-3 h-3 rounded-full transition-colors duration-300 
+                  ${i === 0 ? 'bg-accent' : 'bg-gray-300 hover:bg-gray-400'}`}
+          aria-label={`Go to slide ${i + 1}`}
+          data-slide-index={i}
+        />
+      ))}
+    </div>
+  )}
+</div>
+
+<style>
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Show arrows on hover of wrapper */
+  .carousel-wrapper:hover .carousel-arrow {
+    opacity: 1;
+  }
+
+  /* Carousel item base styles (applied to slotted children) */
+  .carousel-track > :global(*) {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+</style>
+
+<script>
+  // Initialize all carousels on the page
+  function initCarousels() {
+    const carousels = document.querySelectorAll('[data-carousel-id]');
+    
+    carousels.forEach((wrapper) => {
+      const id = wrapper.getAttribute('data-carousel-id');
+      const track = document.getElementById(id);
+      const prevBtn = wrapper.querySelector(`[data-carousel-prev="${id}"]`);
+      const nextBtn = wrapper.querySelector(`[data-carousel-next="${id}"]`);
+      const dotsContainer = wrapper.querySelector(`[data-carousel-dots="${id}"]`);
+      
+      if (!track) return;
+
+      const getSlideWidth = () => {
+        const firstChild = track.firstElementChild as HTMLElement;
+        if (!firstChild) return 0;
+        const style = getComputedStyle(track);
+        const gap = parseFloat(style.gap) || 16;
+        return firstChild.offsetWidth + gap;
+      };
+
+      const updateButtons = () => {
+        if (prevBtn) {
+          (prevBtn as HTMLButtonElement).disabled = track.scrollLeft <= 0;
+        }
+        if (nextBtn) {
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          (nextBtn as HTMLButtonElement).disabled = track.scrollLeft >= maxScroll - 1;
+        }
+      };
+
+      const updateDots = () => {
+        if (!dotsContainer) return;
+        const slideWidth = getSlideWidth();
+        if (slideWidth === 0) return;
+        
+        const currentIndex = Math.round(track.scrollLeft / slideWidth);
+        const dots = dotsContainer.querySelectorAll('.carousel-dot');
+        
+        dots.forEach((dot, i) => {
+          if (i === currentIndex) {
+            dot.classList.remove('bg-gray-300', 'hover:bg-gray-400');
+            dot.classList.add('bg-accent');
+          } else {
+            dot.classList.remove('bg-accent');
+            dot.classList.add('bg-gray-300', 'hover:bg-gray-400');
+          }
+        });
+      };
+
+      // Previous button click
+      prevBtn?.addEventListener('click', () => {
+        const slideWidth = getSlideWidth();
+        track.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+      });
+
+      // Next button click
+      nextBtn?.addEventListener('click', () => {
+        const slideWidth = getSlideWidth();
+        track.scrollBy({ left: slideWidth, behavior: 'smooth' });
+      });
+
+      // Dot clicks
+      dotsContainer?.querySelectorAll('.carousel-dot').forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const index = parseInt(dot.getAttribute('data-slide-index') || '0');
+          const slideWidth = getSlideWidth();
+          track.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
+        });
+      });
+
+      // Update on scroll
+      track.addEventListener('scroll', () => {
+        updateButtons();
+        updateDots();
+      });
+
+      // Initial state
+      updateButtons();
+      updateDots();
+
+      // Update on resize
+      window.addEventListener('resize', () => {
+        updateButtons();
+        updateDots();
+      });
+    });
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initCarousels);
+  
+  // Also run on Astro page transitions
+  document.addEventListener('astro:page-load', initCarousels);
+</script>

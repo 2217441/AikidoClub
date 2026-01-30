@@ -1,0 +1,106 @@
+---
+/**
+ * Card component for past activities
+ * Displays activity with square image, name, date, description, and optional file link
+ */
+interface Props {
+  /** Activity name */
+  name: string;
+  /** Activity date */
+  date: string;
+  /** Activity description (optional) */
+  description?: string;
+  /** Path to the activity image */
+  imagePath: string;
+  /** Link to photos/files (optional) */
+  filePath?: string;
+}
+
+const {
+  name,
+  date,
+  description = '',
+  imagePath,
+  filePath = '',
+} = Astro.props;
+
+// Show fallback text if no description
+const displayDescription = description || 'No extra details...';
+---
+
+<article class="activity-card group w-72 sm:w-80 flex-shrink-0 snap-center
+               bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden
+               transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+  <!-- Square Image Container -->
+  <div class="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
+    <img
+      src={`/${imagePath}`}
+      alt={name}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+    <!-- Date badge overlay -->
+    <div class="absolute top-3 right-3 px-3 py-1 bg-accent/90 text-white 
+                text-xs font-medium rounded-full shadow-md backdrop-blur-sm">
+      {date}
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-5 flex flex-col gap-3">
+    <!-- Activity Name -->
+    <h3 class="text-lg font-bold text-gray-900 dark:text-white 
+               line-clamp-2 group-hover:text-accent transition-colors duration-300">
+      {name}
+    </h3>
+
+    <!-- Date (visible below title as well for accessibility) -->
+    <p class="text-xs text-accent font-medium flex items-center gap-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      {date}
+    </p>
+
+    <!-- Description -->
+    <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+      {displayDescription}
+    </p>
+
+    <!-- Browse Pictures Button -->
+    {filePath && (
+      <a
+        href={filePath}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-auto inline-flex items-center justify-center gap-2 
+               px-4 py-2 bg-accent hover:bg-accent-dark text-white 
+               rounded-lg font-medium text-sm
+               transition-all duration-300 hover:shadow-md
+               focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        Browse Pictures
+      </a>
+    )}
+  </div>
+</article>
+
+<style>
+  /* Line clamp utilities for text truncation */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

@@ -1,0 +1,141 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/activities', label: 'Activities' },
+  { href: '/about-us', label: 'About Us' },
+  { href: '/news', label: 'News' },
+];
+---
+
+<!-- Skip link for accessibility -->
+<a
+  href="#main-content"
+  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-accent-cyan focus:text-primary-dark focus:px-4 focus:py-2 focus:rounded focus:font-semibold"
+>
+  Skip to main content
+</a>
+
+<div class="w-full sticky top-0 bg-primary-dark z-[100]">
+  <!-- Animated gradient bar -->
+  <div class="w-full h-[5px] bg-gradient-to-r from-primary-dark via-[#3b0419] via-accent-cyan to-primary-dark bg-[length:400%_400%] animate-gradbar"></div>
+  
+  <nav class="grid grid-cols-[1fr_3fr] items-center h-[85px] overflow-hidden max-md:h-[75px]">
+    <!-- Logo -->
+    <img
+      src="/img/aikido-logo.png"
+      alt="Aikido Club Logo"
+      class="h-20 w-auto justify-self-start ml-5 max-md:h-[55px]"
+    />
+    
+    <!-- Mobile menu toggle -->
+    <button
+      id="mobile-menu"
+      class="hidden max-md:block justify-self-end mr-6 cursor-pointer"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <span class="bar block w-[25px] h-[3px] bg-white my-[5px] transition-all duration-300 ease-in-out"></span>
+      <span class="bar block w-[25px] h-[3px] bg-white my-[5px] transition-all duration-300 ease-in-out"></span>
+      <span class="bar block w-[25px] h-[3px] bg-white my-[5px] transition-all duration-300 ease-in-out"></span>
+    </button>
+    
+    <!-- Navigation links -->
+    <ul
+      id="nav-menu"
+      class="list-none grid grid-cols-4 justify-self-end max-md:flex max-md:flex-col max-md:fixed max-md:justify-start max-md:top-[80px] max-md:bg-primary-dark max-md:w-full max-md:h-[calc(100vh-80px)] max-md:transition-transform max-md:duration-700 max-md:ease-out max-md:translate-x-[-101%] max-md:text-center max-md:overflow-hidden"
+    >
+      {navItems.map((item, index) => (
+        <>
+          <li class={`flex items-center justify-end ml-10 max-md:p-4 max-md:justify-center max-md:ml-0 ${index === 0 ? 'max-md:mt-[50px]' : ''}`}>
+            <a
+              href={item.href}
+              class={`text-white text-xl font-normal no-underline transition-colors duration-300 hover:text-[#3498db] max-md:text-base ${currentPath === item.href ? 'text-accent-cyan' : ''}`}
+            >
+              {item.label}
+            </a>
+          </li>
+          {index < navItems.length - 1 && (
+            <li class="mob-line hidden max-md:block m-0 p-0 bg-accent-cyan h-px self-center w-[305px] animate-shorten"></li>
+          )}
+        </>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<style>
+  /* Gradient bar animation */
+  @keyframes gradbar {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .animate-gradbar {
+    animation: gradbar 15s ease infinite;
+  }
+  
+  /* Mobile line shortening animation */
+  @keyframes shorten {
+    0%, 100% { width: 305px; }
+    50% { width: 250px; }
+  }
+  
+  .animate-shorten {
+    animation: shorten 5s infinite;
+  }
+  
+  /* Mobile menu active states */
+  #mobile-menu.is-active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  
+  #mobile-menu.is-active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  
+  #mobile-menu.is-active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  
+  /* Mobile nav visible state */
+  #nav-menu.mobile-nav {
+    transform: translateX(0) !important;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (mobileMenu && navMenu) {
+      mobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-active');
+        navMenu.classList.toggle('mobile-nav');
+        document.body.classList.toggle('overflow-hidden');
+        
+        // Update aria-expanded
+        const isExpanded = mobileMenu.classList.contains('is-active');
+        mobileMenu.setAttribute('aria-expanded', isExpanded.toString());
+      });
+      
+      // Close menu when clicking on a link
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('is-active');
+          navMenu.classList.remove('mobile-nav');
+          document.body.classList.remove('overflow-hidden');
+          mobileMenu.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  });
+</script>

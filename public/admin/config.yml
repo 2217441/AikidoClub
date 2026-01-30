@@ -1,0 +1,91 @@
+backend:
+  name: github
+  repo: 2217441/AikidoClub
+  branch: master
+  auth_type: pkce
+  app_id: 2762520
+
+media_folder: public/img
+public_folder: /img
+
+collections:
+  - name: news
+    label: News
+    folder: src/content/news
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Pinned, name: pinned, widget: boolean, default: false }
+      - { label: CTA Text, name: ctaText, widget: string, required: false }
+      - { label: CTA Link, name: ctaLink, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: activities
+    label: Activities
+    folder: src/content/activities
+    create: true
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Image, name: image, widget: image }
+      - { label: Link, name: link, widget: string, required: false }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Order, name: order, widget: number }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: past-activities
+    label: Past Activities
+    folder: src/content/pastActivities
+    create: true
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Date, name: date, widget: string }
+      - label: Year
+        name: year
+        widget: select
+        options:
+          - "24/25"
+          - "23/24"
+          - "22/23"
+          - "21/22"
+          - "20/21"
+      - { label: Image, name: image, widget: image }
+      - { label: File, name: file, widget: string, required: false }
+      - { label: Order, name: order, widget: number }
+      - { label: Body, name: body, widget: markdown, required: false }
+
+  - name: mainboard
+    label: Mainboard
+    folder: src/content/mainboard
+    create: true
+    format: yaml
+    fields:
+      - label: Items
+        name: items
+        widget: list
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Image, name: image, widget: image }
+          - { label: Alt Text, name: alt, widget: string }
+          - { label: Order, name: order, widget: number }
+
+  - name: faq
+    label: FAQ
+    folder: src/content/faq
+    create: true
+    fields:
+      - { label: Question, name: question, widget: string }
+      - { label: Order, name: order, widget: number }
+      - { label: Answer, name: body, widget: markdown }
+
+  - name: testimonials
+    label: Testimonials
+    folder: src/content/testimonials
+    create: true
+    fields:
+      - { label: Author, name: author, widget: string }
+      - { label: Role, name: role, widget: string }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Quote, name: body, widget: markdown }

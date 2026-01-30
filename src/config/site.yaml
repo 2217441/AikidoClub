@@ -1,0 +1,22 @@
+# Site-wide configuration
+registration_url: "https://forms.gle/hRwYhA1K96wzq28f6"
+
+contact:
+  email: "iiumaikidoclub@gmail.com"
+
+social_links:
+  - name: "Instagram"
+    handle: "@iiumaikidoclub"
+    url: "https://instagram.com/iiumaikidoclub"
+    icon: "instagram"
+  - name: "Facebook"
+    handle: "Facebook Page"
+    url: "https://www.facebook.com/iiumaikidoclub/"
+    icon: "facebook"
+
+training:
+  schedule: "Every Monday & Thursday"
+  time: "9:00 PM - 11:00 PM"
+  venue: "IIUM Female Sport Center"
+  campus: "Gombak Campus"
+  map_embed: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3382.013842578987!2d101.73455153762131!3d3.2550022553442135!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc38c41ce1820f%3A0x949e2db0f1bae4f!2sFemale%20Sports%20Complex%2C%20IIUM%20Gombak!5e0!3m2!1sen!2smy!4v1702563385524!5m2!1sen!2smy"

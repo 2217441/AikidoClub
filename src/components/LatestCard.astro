@@ -1,0 +1,93 @@
+---
+/**
+ * Card component for "Latest Activities" section
+ * Displays a featured activity with image, title, description, and optional link
+ */
+interface Props {
+  /** Card title */
+  title: string;
+  /** Card description text */
+  description: string;
+  /** Image source path */
+  imageSrc: string;
+  /** Link URL (optional - if empty, no button shown) */
+  linkUrl?: string;
+  /** Link text (defaults to "Learn More") */
+  linkText?: string;
+}
+
+const {
+  title,
+  description,
+  imageSrc,
+  linkUrl = '',
+  linkText = 'Learn More',
+} = Astro.props;
+---
+
+<article class="latest-card group w-72 sm:w-80 flex-shrink-0 snap-center
+               bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden
+               transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+  <!-- Image Container -->
+  <div class="relative aspect-video overflow-hidden bg-gradient-to-br from-accent/20 to-accent/5">
+    <img
+      src={imageSrc}
+      alt={title}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+    <!-- Gradient overlay on hover -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent 
+                opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  </div>
+
+  <!-- Content -->
+  <div class="p-5 flex flex-col gap-3">
+    <!-- Title -->
+    <h3 class="text-lg font-bold text-gray-900 dark:text-white 
+               line-clamp-2 group-hover:text-accent transition-colors duration-300">
+      {title}
+    </h3>
+
+    <!-- Description -->
+    <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed">
+      {description}
+    </p>
+
+    <!-- Link Button -->
+    {linkUrl && (
+      <a
+        href={linkUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-auto inline-flex items-center justify-center gap-2 
+               px-4 py-2 bg-accent hover:bg-accent-dark text-white 
+               rounded-lg font-medium text-sm
+               transition-all duration-300 hover:shadow-md
+               focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+      >
+        {linkText}
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    )}
+  </div>
+</article>
+
+<style>
+  /* Line clamp utilities for text truncation */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

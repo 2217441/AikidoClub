@@ -1,0 +1,387 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageFadeCarousel from '../components/ImageFadeCarousel.astro';
+import Carousel from '../components/Carousel.astro';
+import LatestCard from '../components/LatestCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get latest/featured activities from content collection
+const activitiesCollection = await getCollection('activities');
+const latestActivities = activitiesCollection
+  .filter(a => a.data.featured)
+  .map(item => ({
+    lateTxt: item.data.title,
+    lateDesc: item.data.description,
+    src: item.data.image,
+    linkButton: item.data.link || '#'
+  }));
+
+// Hero images for the carousel
+const heroImages = [
+  '/img/head-pics.webp',
+  '/img/gallery-card.jpeg',
+  '/img/item-info1.jpg',
+];
+
+// Image fade carousel images for intro section  
+const introImages = [
+  '/img/aikido-logo.png',
+  '/img/web-greeting-image.png',
+  '/img/home-info-greeting.png',
+];
+---
+
+<BaseLayout 
+  title="Home | IIUM Aikido Club" 
+  description="IIUM Aikido Club - Join our martial arts community at International Islamic University Malaysia. Learn Aikido, build friendships, and develop discipline."
+>
+  <!-- Hero Section with Image Carousel Background -->
+  <section class="headline relative w-full min-h-screen flex flex-col justify-center items-center">
+    <!-- Background Image Carousel -->
+    <div class="absolute inset-0 z-0">
+      <ImageFadeCarousel 
+        images={heroImages}
+        displayDuration={6}
+        fadeDuration={1.5}
+        altPrefix="IIUM Aikido Club"
+      />
+    </div>
+    
+    <!-- Dark overlay for text readability -->
+    <div class="absolute inset-0 bg-black/40 z-10"></div>
+    
+    <!-- Hero Content -->
+    <div class="relative z-20 text-center px-4">
+      <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight 
+                 drop-shadow-[4px_8px_4px_rgba(0,0,0,0.5)] mb-8">
+        IIUM Aikido Club
+      </h1>
+    </div>
+    
+    <!-- Down Arrow - Scroll Indicator -->
+    <a 
+      href="#intro-section" 
+      class="down-arrow absolute bottom-10 z-20 cursor-pointer animate-bounce-slow"
+      aria-label="Scroll to main content"
+    >
+      <img 
+        src="/img/downarrow.png" 
+        alt="Scroll down"
+        class="w-12 h-12 object-contain filter invert opacity-80 hover:opacity-100 transition-opacity"
+      />
+    </a>
+  </section>
+
+  <!-- Intro Section -->
+  <section id="intro-section" class="intro bg-[#f5f5f5] py-12 px-6 sm:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-10">
+      <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+        Welcome to IIUM Aikido Club website
+      </h2>
+      <div class="deco-line mx-auto"></div>
+    </div>
+
+    <!-- Greeting Content -->
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+      <!-- Decorative Image Box -->
+      <div class="lg:col-span-2 flex justify-center">
+        <div class="image-deco-container relative w-64 h-64 sm:w-80 sm:h-80">
+          <!-- Stacked squares decoration -->
+          <div class="absolute inset-0 bg-accent-pink/30 rounded-lg transform translate-x-4 translate-y-4"></div>
+          <div class="absolute inset-0 bg-accent-cyan/50 rounded-lg transform translate-x-2 translate-y-2"></div>
+          <div class="absolute inset-0 bg-white rounded-lg shadow-lg flex items-center justify-center p-4 overflow-hidden">
+            <!-- Fade-in images -->
+            <div class="fade-image-container relative w-full h-full flex items-center justify-center">
+              <img 
+                src="/img/aikido-logo.png" 
+                alt="Aikido Logo" 
+                class="fade-image max-w-[60%] max-h-full object-contain"
+              />
+              <img 
+                src="/img/web-greeting-image.png" 
+                alt="Aikido Kanji" 
+                class="fade-image max-w-[70%] max-h-full object-contain"
+              />
+              <img 
+                src="/img/home-info-greeting.png" 
+                alt="Kanji Meaning" 
+                class="fade-image max-w-[70%] max-h-full object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Boxes -->
+      <div class="lg:col-span-3 flex flex-col gap-6">
+        <div class="txt-box">
+          <h3 class="inline-block bg-accent-pink text-white px-4 py-2 text-lg font-semibold">
+            Greetings
+          </h3>
+          <p class="text-gray-600 mt-3 ml-2 leading-relaxed">
+            Welcome to our website! Whether you're an experienced practitioner, a curious
+            beginner, or just interested in Aikido, we're glad you're here.
+          </p>
+        </div>
+        
+        <div class="txt-box">
+          <h3 class="inline-block bg-accent-pink text-white px-4 py-2 text-lg font-semibold">
+            Explore
+          </h3>
+          <p class="text-gray-600 mt-3 ml-2 leading-relaxed">
+            Learn more about our club and the latest events and activities we've hosted.
+          </p>
+        </div>
+        
+        <div class="txt-box">
+          <h3 class="inline-block bg-accent-pink text-white px-4 py-2 text-lg font-semibold">
+            Join Us
+          </h3>
+          <p class="text-gray-600 mt-3 ml-2 leading-relaxed">
+            Whether you're starting a new martial arts journey or looking to enhance your skills,
+            you'll find a supportive environment at our club.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explore Website Section -->
+  <aside id="explore-section" class="bg-white py-12 px-6 sm:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-10">
+      <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+        Explore our website
+      </h2>
+      <div class="deco-line mx-auto"></div>
+    </div>
+
+    <!-- Card Container -->
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-6">
+      <!-- Activities Card -->
+      <a 
+        href="/activities" 
+        class="explore-card group relative w-64 h-64 sm:w-[30%] sm:pb-[30%] sm:h-0 
+               overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
+      >
+        <div class="absolute inset-0 bg-cover bg-center" 
+             style="background-image: url('/img/gallery-card.jpeg');">
+        </div>
+        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
+        <span class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold 
+                     text-center px-4 drop-shadow-lg">
+          Club Activities
+        </span>
+      </a>
+
+      <!-- Mainboard Card -->
+      <a 
+        href="/mainboard" 
+        class="explore-card group relative w-64 h-64 sm:w-[30%] sm:pb-[30%] sm:h-0 
+               overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
+      >
+        <div class="absolute inset-0 bg-cover bg-center" 
+             style="background-image: url('/img/item-info1.jpg');">
+        </div>
+        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
+        <span class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold 
+                     text-center px-4 drop-shadow-lg">
+          Club Mainboard
+        </span>
+      </a>
+
+      <!-- About Us Card -->
+      <a 
+        href="/about-us" 
+        class="explore-card group relative w-64 h-64 sm:w-[30%] sm:pb-[30%] sm:h-0 
+               overflow-hidden rounded-xl shadow-lg transition-transform duration-300 hover:scale-105"
+      >
+        <div class="absolute inset-0 bg-cover bg-center" 
+             style="background-image: url('/img/item-info3.jpeg');">
+        </div>
+        <div class="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300"></div>
+        <span class="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold 
+                     text-center px-4 drop-shadow-lg">
+          About IIUM Aikido Club
+        </span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Latest Activities Section -->
+  {latestActivities.length > 0 && (
+    <section id="latest-section" class="bg-[#f5f5f5] py-12 px-6 sm:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-10">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+          Latest Activities
+        </h2>
+        <div class="deco-line mx-auto"></div>
+      </div>
+
+      <!-- Carousel or Cards -->
+      <div class="max-w-6xl mx-auto">
+        {latestActivities.length === 1 ? (
+          <!-- Single card centered -->
+          <div class="flex justify-center">
+            <LatestCard
+              title={latestActivities[0].lateTxt}
+              description={latestActivities[0].lateDesc}
+              imageSrc={latestActivities[0].src}
+              linkUrl={latestActivities[0].linkButton}
+              linkText="View Details"
+            />
+          </div>
+        ) : (
+          <!-- Multiple cards in carousel -->
+          <div class="group">
+            <Carousel showArrows={true} showDots={true} slideCount={latestActivities.length}>
+              {latestActivities.map((activity) => (
+                <LatestCard
+                  title={activity.lateTxt}
+                  description={activity.lateDesc}
+                  imageSrc={activity.src}
+                  linkUrl={activity.linkButton}
+                  linkText="View Details"
+                />
+              ))}
+            </Carousel>
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Join Us CTA Section with Parallax Background -->
+  <section class="join-us-section relative w-full min-h-[500px] overflow-hidden">
+    <!-- Parallax Background Image -->
+    <div class="absolute inset-0 bg-fixed bg-cover bg-center" 
+         style="background-image: url('/img/join-us.jpg');">
+    </div>
+    
+    <!-- Top Left Text -->
+    <div class="absolute top-[15%] left-[10%] sm:left-[15%] z-10 p-4">
+      <h2 class="text-primary-dark text-2xl sm:text-4xl font-bold drop-shadow-lg">
+        Become our member!
+      </h2>
+    </div>
+
+    <!-- Bottom Right CTA -->
+    <div class="absolute bottom-[10%] right-[5%] sm:right-[10%] z-10 p-4 text-center">
+      <!-- Free Trial Badge -->
+      <span class="inline-block bg-gradient-to-r from-accent-pink to-red-500 text-white 
+                   px-5 py-2 rounded-full text-sm sm:text-base font-bold uppercase tracking-wider
+                   shadow-lg animate-pulse-slow mb-4">
+        🥋 First Class FREE!
+      </span>
+      
+      <h3 class="text-white text-3xl sm:text-5xl font-bold mb-3 drop-shadow-lg">
+        Join Us Now!
+      </h3>
+      
+      <p class="text-white/90 text-sm sm:text-base italic mb-6">
+        No experience needed. Just show up!
+      </p>
+      
+      <a 
+        href="https://forms.gle/hRwYhA1K96wzq28f6" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-block bg-accent-pink hover:bg-red-600 text-white 
+               px-6 py-3 rounded-lg font-medium text-base
+               transition-all duration-200 hover:scale-95 hover:shadow-xl
+               active:scale-95"
+      >
+        Fill in Registration Form
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Bounce animation for scroll arrow */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Decorative line animation */
+  .deco-line {
+    display: block;
+    height: 2px;
+    background-color: #342b2b;
+    width: 300px;
+    max-width: 80%;
+    animation: line-shorten 8s infinite ease-in-out;
+  }
+
+  @keyframes line-shorten {
+    0%, 100% {
+      width: 300px;
+    }
+    50% {
+      width: 180px;
+    }
+  }
+
+  /* Fade image animation for intro section */
+  .fade-image-container {
+    position: relative;
+  }
+
+  .fade-image {
+    position: absolute;
+    opacity: 0;
+    animation: imageFade 15s infinite;
+  }
+
+  .fade-image:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .fade-image:nth-child(2) {
+    animation-delay: 5s;
+  }
+
+  .fade-image:nth-child(3) {
+    animation-delay: 10s;
+  }
+
+  @keyframes imageFade {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    28% { opacity: 1; }
+    33% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* Pulse animation for badge */
+  @keyframes pulse-slow {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2s infinite;
+  }
+
+  /* Responsive adjustments for explore cards */
+  @media (min-width: 720px) {
+    .explore-card {
+      height: 0;
+    }
+  }
+</style>

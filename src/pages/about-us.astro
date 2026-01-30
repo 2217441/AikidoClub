@@ -1,0 +1,451 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageFadeCarousel from '../components/ImageFadeCarousel.astro';
+import { getCollection } from 'astro:content';
+
+// About section fade images
+const aboutImages = [
+  '/img/about-us/img01.jpg',
+  '/img/about-us/img02.jpg',
+  '/img/about-us/img03.jpg',
+  '/img/about-us/img04.jpg',
+];
+
+// Get FAQ from content collection
+const faqCollection = await getCollection('faq');
+const faqItems = faqCollection
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(item => ({
+    question: item.data.question,
+    answer: item.body,
+    open: item.data.defaultOpen
+  }));
+
+// Get testimonials from content collection
+const testimonialsCollection = await getCollection('testimonials');
+const testimonials = testimonialsCollection
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(item => ({
+    author: item.data.author,
+    role: item.data.role,
+    image: item.data.image,
+    content: item.body
+  }));
+
+// Belt progression data
+const beltProgression = [
+  {
+    level: "6th & 5th Kyu",
+    name: "White Belt",
+    color: "white",
+    gradient: "from-gray-100 to-gray-300",
+    description: "Basic stances (kamae), falling techniques (ukemi), and fundamental movements (tai sabaki). Introduction to basic techniques like ikkyo and shiho-nage.",
+    duration: "~3-6 months training"
+  },
+  {
+    level: "4th & 3rd Kyu",
+    name: "Yellow/Green Belt",
+    color: "yellow",
+    gradient: "from-yellow-400 to-teal-500",
+    description: "Expanded technique repertoire including nikyo, sankyo, kote-gaeshi. Multiple attack variations (katate-dori, ryote-dori, shomen-uchi).",
+    duration: "~1-2 years training"
+  },
+  {
+    level: "2nd & 1st Kyu",
+    name: "Brown Belt",
+    color: "brown",
+    gradient: "from-amber-800 to-amber-600",
+    description: "Advanced techniques, weapons training (jo, bokken), and multiple attacker scenarios. Preparation for dan examination.",
+    duration: "~2-4 years training"
+  },
+  {
+    level: "Shodan & Above",
+    name: "Black Belt",
+    color: "black",
+    gradient: "from-gray-900 to-gray-700",
+    description: "Mastery of all fundamental techniques. Focus on refinement, teaching ability, and developing personal expression of Aikido principles.",
+    duration: "4+ years dedicated training"
+  }
+];
+---
+
+<BaseLayout 
+  title="About Us | IIUM Aikido Club" 
+  description="Learn about IIUM Aikido Club - Our community, objectives, and testimonials from members. Join our supportive martial arts family."
+>
+  <!-- Hero Section -->
+  <section class="head-page relative w-full h-[60vh] min-h-[400px] overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img 
+        src="/img/image1.png" 
+        alt="Aikido club members practicing" 
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    
+    <!-- Title -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
+      <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold drop-shadow-[4px_8px_4px_rgba(0,0,0,0.5)]">
+        About Us
+      </h1>
+      
+      <!-- Down Arrow -->
+      <a 
+        href="#info-club" 
+        class="absolute bottom-10 cursor-pointer animate-bounce-slow"
+        aria-label="Scroll to content"
+      >
+        <svg class="w-10 h-10 text-white opacity-80 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Bottom curve decoration -->
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-[#f5f5f5] rounded-t-[50%]"></div>
+  </section>
+
+  <!-- Club Info Section -->
+  <section id="info-club" class="bg-[#f5f5f5] py-12 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+      <!-- Decorative Image Box with Fade Carousel -->
+      <div class="lg:col-span-3 flex justify-center">
+        <div class="image-deco-container relative w-72 h-72 sm:w-96 sm:h-96">
+          <!-- Stacked squares decoration -->
+          <div class="absolute inset-0 bg-accent-pink/30 rounded-lg transform translate-x-6 translate-y-6"></div>
+          <div class="absolute inset-0 bg-accent-cyan/50 rounded-lg transform translate-x-3 translate-y-3"></div>
+          <div class="absolute inset-0 bg-white rounded-lg shadow-lg overflow-hidden">
+            <!-- Fade-in images -->
+            <div class="fade-image-container relative w-full h-full">
+              {aboutImages.map((img, index) => (
+                <img 
+                  src={img} 
+                  alt={`IIUM Aikido Club ${index + 1}`}
+                  class="fade-image absolute inset-0 w-full h-full object-cover"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  style={`animation-delay: ${index * 5}s;`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Text -->
+      <div class="lg:col-span-2 flex flex-col gap-8 text-base sm:text-lg leading-relaxed text-gray-700">
+        <p>
+          <strong class="bg-accent-pink text-white px-2 py-1 text-lg sm:text-xl">More than just a martial arts club,</strong>
+          {' '}we are a tight-knit community of students brought together by a shared passion for Aikido. Our nature is defined by the principles of respect, discipline, and continuous learning.
+        </p>
+        <p>
+          <strong class="bg-accent-pink text-white px-2 py-1 text-lg sm:text-xl">Whether you're a beginner or an advanced practitioner honing your skills,</strong>
+          {' '}the IIUM Aikido Club provides a welcoming space for growth and camaraderie.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Objectives Parallax Section -->
+  <section class="parallax-section relative min-h-[400px] flex items-center justify-center overflow-hidden">
+    <!-- Background with parallax effect -->
+    <div class="absolute inset-0 bg-fixed bg-cover bg-center" 
+         style="background-image: url('/img/join-us.jpg');">
+    </div>
+    <div class="absolute inset-0 bg-black/60"></div>
+    
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6 py-16 max-w-4xl mx-auto">
+      <h2 class="text-white text-3xl sm:text-4xl font-bold mb-8 drop-shadow-lg">Our Objectives</h2>
+      <div class="space-y-6 text-white/90 text-lg sm:text-xl leading-relaxed">
+        <p>To create networking among students and staff of all universities in Malaysia and international that possess similar interest in Aikido</p>
+        <p>To bring along people of different culture and nationalities to do activities and bind them in Islamic brotherhood.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="bg-white py-12 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Title -->
+      <div class="text-center mb-10">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold italic mb-2">
+          ☵ Testimonials ☷
+        </h2>
+      </div>
+      
+      <!-- Testimonial Cards -->
+      {testimonials.map((testimonial) => (
+        <div class="flex flex-col lg:flex-row items-center gap-6 p-6 sm:p-10 bg-white rounded-lg border border-gray-200 border-l-[7px] border-l-gray-900 shadow-sm mb-6 last:mb-0">
+          <!-- Testimonial Text -->
+          <div class="flex-1">
+            <p class="italic text-gray-700 text-base sm:text-lg leading-relaxed mb-4">
+              "{testimonial.content}"
+            </p>
+            <p class="text-gray-500 text-sm sm:text-base">
+              {testimonial.author}, {testimonial.role}
+            </p>
+          </div>
+          
+          <!-- Testimonial Image -->
+          {testimonial.image && (
+            <div class="flex-shrink-0">
+              <div class="relative w-40 h-40 sm:w-48 sm:h-48">
+                <div class="absolute inset-0 bg-accent-pink/20 rounded-lg transform translate-x-2 translate-y-2"></div>
+                <div class="absolute inset-0 bg-white rounded-lg shadow-md overflow-hidden">
+                  <img 
+                    src={testimonial.image} 
+                    alt={`${testimonial.author} - ${testimonial.role}`}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="bg-[#f5f5f5] py-12 px-4 sm:px-8">
+    <div class="max-w-3xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-10">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+          Frequently Asked Questions
+        </h2>
+        <div class="deco-line mx-auto"></div>
+      </div>
+      
+      <!-- FAQ Items -->
+      <div class="space-y-4">
+        {faqItems.map((item) => (
+          <details 
+            class="faq-item group bg-white rounded-lg border-l-4 border-l-accent-pink overflow-hidden shadow-sm"
+            open={item.open}
+          >
+            <summary class="flex justify-between items-center p-5 cursor-pointer font-semibold text-gray-800 hover:bg-gray-50 transition-colors">
+              <span class="pr-4">{item.question}</span>
+              <span class="faq-icon text-accent-pink text-2xl font-light flex-shrink-0 transition-transform">+</span>
+            </summary>
+            <p class="px-5 pb-5 text-gray-600 leading-relaxed" set:html={item.answer}></p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Schedule Section -->
+  <section id="training-info" class="bg-white py-12 px-4 sm:px-8">
+    <div class="max-w-5xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-10">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+          Training Schedule
+        </h2>
+        <div class="deco-line mx-auto"></div>
+      </div>
+      
+      <!-- Training Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <!-- Training Details -->
+        <div class="flex flex-col gap-6">
+          <!-- Schedule Card -->
+          <div class="bg-[#f8f8f8] p-6 rounded-lg border-l-4 border-l-accent-pink shadow-sm">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">📅 Schedule</h3>
+            <p class="text-gray-600 text-lg">Every Monday &amp; Thursday</p>
+            <p class="text-gray-600 text-lg">9:00 PM - 11:00 PM</p>
+          </div>
+          
+          <!-- Venue Card -->
+          <div class="bg-[#f8f8f8] p-6 rounded-lg border-l-4 border-l-accent-pink shadow-sm">
+            <h3 class="text-xl font-bold text-gray-800 mb-3">📍 Venue</h3>
+            <p class="text-gray-600 text-lg">IIUM Female Sport Center</p>
+            <p class="text-gray-600 text-lg">Gombak Campus</p>
+          </div>
+        </div>
+        
+        <!-- Google Maps Embed -->
+        <div class="w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3382.013842578987!2d101.73455153762131!3d3.2550022553442135!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc38c41ce1820f%3A0x949e2db0f1bae4f!2sFemale%20Sports%20Complex%2C%20IIUM%20Gombak!5e0!3m2!1sen!2smy!4v1702563385524!5m2!1sen!2smy"
+            class="w-full h-[300px] rounded-lg border-0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title="IIUM Female Sport Center Location">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Belt Progression Section -->
+  <section id="grading-syllabus" class="bg-[#f5f5f5] py-12 px-4 sm:px-8">
+    <div class="max-w-5xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-10">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+          Belt Progression
+        </h2>
+        <div class="deco-line mx-auto mb-5"></div>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+          Aikido uses a kyu (student) and dan (black belt) ranking system. Here's what to expect at each level:
+        </p>
+      </div>
+      
+      <!-- Belt Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {beltProgression.map((belt) => (
+          <div class="belt-card bg-white rounded-xl overflow-hidden shadow-md">
+            <!-- Belt Color Stripe -->
+            <div class={`h-2 w-full bg-gradient-to-r ${belt.gradient}`}></div>
+            
+            <!-- Belt Info -->
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-gray-800 mb-2">
+                {belt.level} <span class="font-normal text-gray-500 text-sm">({belt.name})</span>
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                {belt.description}
+              </p>
+              <span class="inline-block bg-accent-pink text-white text-xs font-medium px-3 py-1 rounded-full">
+                {belt.duration}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Note -->
+      <p class="text-center text-gray-500 text-sm italic mt-8">
+        * Belt colors and requirements may vary. Gradings are conducted by certified instructors.
+      </p>
+    </div>
+  </section>
+
+  <!-- Join Us CTA Section -->
+  <section class="join-us-section relative w-full min-h-[500px] overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img 
+        src="/img/join-us.jpg" 
+        alt="Aikido practice session"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    
+    <!-- Top Left Text -->
+    <div class="absolute top-[15%] left-[5%] sm:left-[10%] z-10 p-4">
+      <h2 class="text-primary-dark text-2xl sm:text-4xl font-bold drop-shadow-lg bg-white/80 px-4 py-2 rounded">
+        Interested in Aikido? ...
+      </h2>
+    </div>
+
+    <!-- Bottom Right CTA -->
+    <div class="absolute bottom-[10%] right-[5%] sm:right-[10%] z-10 p-4 text-center">
+      <!-- Free Trial Badge -->
+      <span class="inline-block bg-gradient-to-r from-accent-pink to-red-500 text-white 
+                   px-5 py-2 rounded-full text-sm sm:text-base font-bold uppercase tracking-wider
+                   shadow-lg animate-pulse-slow mb-4">
+        🥋 First Class FREE!
+      </span>
+      
+      <h3 class="text-white text-3xl sm:text-5xl font-bold mb-3 drop-shadow-lg">
+        Join Us Now!
+      </h3>
+      
+      <p class="text-white/90 text-sm sm:text-base italic mb-6">
+        No experience needed. Just show up!
+      </p>
+      
+      <a 
+        href="https://forms.gle/hRwYhA1K96wzq28f6" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-block bg-accent-pink hover:bg-red-600 text-white 
+               px-6 py-3 rounded-lg font-medium text-base
+               transition-all duration-200 hover:scale-105 hover:shadow-xl
+               active:scale-95"
+      >
+        Fill in Registration Form
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Bounce animation for scroll arrow */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Decorative line */
+  .deco-line {
+    display: block;
+    height: 3px;
+    background-color: rgb(177, 112, 112);
+    width: 100px;
+  }
+
+  /* Fade image animation for about section */
+  .fade-image-container {
+    position: relative;
+  }
+
+  .fade-image {
+    opacity: 0;
+    animation: imageFade 20s infinite;
+  }
+
+  .fade-image:first-child {
+    opacity: 1;
+  }
+
+  @keyframes imageFade {
+    0% { opacity: 0; }
+    5% { opacity: 1; }
+    20% { opacity: 1; }
+    25% { opacity: 0; }
+    100% { opacity: 0; }
+  }
+
+  /* FAQ icon rotation */
+  details[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Pulse animation for badge */
+  @keyframes pulse-slow {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2s infinite;
+  }
+</style>
