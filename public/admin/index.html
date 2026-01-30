@@ -7,10 +7,85 @@
     <meta name="robots" content="noindex" />
     <title>Content Manager | IIUM Aikido Club</title>
     <link rel="stylesheet" href="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.css" />
+    <style>
+        .login-help {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 9999;
+        }
+        .login-help h3 {
+            margin: 0 0 12px;
+            color: #4ade80;
+            font-size: 16px;
+        }
+        .login-help ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .login-help a {
+            color: #60a5fa;
+        }
+        .login-help code {
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .login-help .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .login-help .close-btn:hover {
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    
+    <div class="login-help" id="loginHelp">
+        <button class="close-btn" onclick="document.getElementById('loginHelp').style.display='none'">&times;</button>
+        <h3>📝 How to Login</h3>
+        <ol>
+            <li>Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Token Settings</a></li>
+            <li>Click <strong>"Generate new token"</strong></li>
+            <li>Name it <code>Aikido CMS</code>, set expiry (90 days recommended)</li>
+            <li>Under <strong>Repository access</strong>, select <strong>"Only select repositories"</strong> → choose <strong>AikidoClub</strong></li>
+            <li>Under <strong>Permissions</strong> → <strong>Repository permissions</strong>:
+                <br>• <strong>Contents</strong>: Read and write
+                <br>• <strong>Metadata</strong>: Read-only
+            </li>
+            <li>Click <strong>"Generate token"</strong> and copy it</li>
+            <li>Paste the token above and click <strong>"Sign in"</strong></li>
+        </ol>
+    </div>
+
+    <script>
+        // Hide help box once logged in
+        setTimeout(() => {
+            if (document.querySelector('[data-testid="user-info"]')) {
+                document.getElementById('loginHelp').style.display = 'none';
+            }
+        }, 2000);
+    </script>
 </body>
 
 </html>
