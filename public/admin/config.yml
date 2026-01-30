@@ -3,7 +3,9 @@ backend:
   repo: 2217441/AikidoClub
   branch: master
   auth_type: pkce
-  app_id: 2762520
+  app_id:  Ov23liblhThHkvXp8Y0E # Replace with your GitHub OAuth App Client ID
+  base_url: https://2217441.github.io
+  auth_endpoint: /AikidoClub/admin/
 
 media_folder: public/img
 public_folder: /AikidoClub/img
