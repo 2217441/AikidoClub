@@ -5,6 +5,7 @@ This guide explains how to migrate the IIUM Aikido Club website from GitHub Page
 ## Why Migrate?
 
 Currently using GitHub Pages + Sveltia CMS requires editors to manually enter a GitHub Personal Access Token. Netlify provides:
+
 - One-click "Login with GitHub" authentication
 - Same Git-based workflow
 - Free tier with generous limits
@@ -13,11 +14,11 @@ Currently using GitHub Pages + Sveltia CMS requires editors to manually enter a 
 ## Prerequisites
 
 - GitHub account with access to the repository
-- Netlify account (sign up at https://netlify.com with GitHub)
+- Netlify account (sign up at <https://netlify.com> with GitHub)
 
 ## Step 1: Create Netlify Site
 
-1. Go to https://app.netlify.com
+1. Go to <https://app.netlify.com>
 2. Click **"Add new site"** → **"Import an existing project"**
 3. Select **GitHub** and authorize Netlify
 4. Choose the **2217441/AikidoClub** repository
@@ -122,12 +123,14 @@ If you need to go back to GitHub Pages:
 
 1. Restore `astro.config.mjs` with `base: '/AikidoClub/'`
 2. Update config.yml backend to:
+
    ```yaml
    backend:
      name: github
      repo: 2217441/AikidoClub
      branch: master
    ```
+
 3. Re-enable GitHub Pages in repository settings
 4. Delete the Netlify site
 
