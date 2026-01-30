@@ -1,7 +1,9 @@
 .image-deco {
     position: relative;
-    width: 300px;  /* Parent div width */
-    height: 300px; /* Parent div height */
+    width: 300px;
+    /* Parent div width */
+    height: 300px;
+    /* Parent div height */
 
 }
 
@@ -11,13 +13,16 @@
     height: 100%;
     width: auto;
     padding: 45px;
-    
+
 }
 
 .image-container.about-us .fade-in {
-    width: 100%; /* Make the image width 100% of the container */
-    height: 100%; /* Make the image height 100% of the container */
-    object-fit: contain; /* Ensure the image covers the container without distortion */
+    width: 100%;
+    /* Make the image width 100% of the container */
+    height: 100%;
+    /* Make the image height 100% of the container */
+    object-fit: contain;
+    /* Ensure the image covers the container without distortion */
 }
 
 .image-container.about-us {
@@ -26,25 +31,24 @@
 
 .square {
     position: absolute;
-    width: 180px;  /* Width of the squares */
-    height: 180px; /* Height of the squares */
+    width: 180px;
+    /* Width of the squares */
+    height: 180px;
+    /* Height of the squares */
     border-radius: 10px;
 }
 
 /* Bottom z-index square: black */
 .square.bottom {
-    /* background-color: rgba(107, 117, 44, 0.696); */
     top: 0;
     right: 0;
     z-index: 1;
-    /* box-shadow: 10px -5px 6px 0px rgba(0, 0, 0, 0.5); */
     background: url('../img/deco/top-right-sq.png');
     background-size: cover;
 }
 
 /* Middle z-index square: blue */
 .square.middle {
-    /* background-color: rgb(12, 123, 95); */
     bottom: 0;
     left: 0;
     z-index: 2;
@@ -57,8 +61,9 @@
     background-color: rgb(255, 255, 255);
     top: 50%;
     left: 50%;
-    width: 250px;  /* Width of the squares */
-    height: 250px; 
+    width: 250px;
+    /* Width of the squares */
+    height: 250px;
     transform: translate(-50%, -50%);
     z-index: 3;
     border: none;
@@ -74,6 +79,11 @@
     height: 100%;
     width: auto;
 }
+
+.fade-hidden {
+    display: none;
+}
+
 .square.top.about-us {
     width: 450px;
     height: 400px;
@@ -99,6 +109,7 @@
     object-fit: cover;
     width: 100%;
 }
+
 /* 
     Code for for handling image frame in some pages
 
@@ -121,7 +132,7 @@
 }
 
 
-@media only screen and (max-width: 720px) { 
+@media only screen and (max-width: 720px) {
 
 
     .image-deco {
@@ -134,8 +145,10 @@
     }
 
     .square {
-        width: 140px;  /* Width of the squares */
-        height: 140px; /* Height of the squares */
+        width: 140px;
+        /* Width of the squares */
+        height: 140px;
+        /* Height of the squares */
     }
 
     .square.top {
@@ -148,21 +161,22 @@
         width: 310px;
         height: 310px;
     }
-    
+
     .fade-in {
         height: 100%;
         width: auto;
     }
+
     .square.top.about-us {
         width: 300px;
         height: 240px;
     }
-    
+
     .square.bottom.about-us {
         top: 18px;
         right: -25px;
     }
-    
+
     .square.middle.about-us {
         bottom: 10px;
         left: -27px;
@@ -178,6 +192,7 @@
         height: 240px;
         object-fit: contain;
     }
+
     .img-testi {
         object-fit: cover;
         width: 70%;
