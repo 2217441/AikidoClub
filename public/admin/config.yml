@@ -2,8 +2,6 @@ backend:
   name: github
   repo: 2217441/AikidoClub
   branch: master
-  auth_type: pkce
-  app_id: Ov23liblhThHkvXp8Y0E
 
 media_folder: public/img
 public_folder: /AikidoClub/img
