@@ -2,20 +2,24 @@
 #sub-info {
     background-color: #342b2b;
     width: 100%;
-    display: flex;/* Children  will be displayed in a row */
-    flex-wrap: wrap;/*  If there is not enough space, they go to next line */
+    display: flex;
+    /* Children  will be displayed in a row */
+    flex-wrap: wrap;
+    /*  If there is not enough space, they go to next line */
     align-items: center;
     padding: 10px;
     margin: 0;
     color: white;
-    box-sizing: border-box; /* Added to include padding in the total width */
+    box-sizing: border-box;
+    /* Added to include padding in the total width */
 }
 
 /*  Styles for the left part of the footer (contains icons with link) */
 #follow-link {
     display: flex;
     align-items: center;
-    margin-left: 10vw; /*  Use vw as it takes into account the viewport size */
+    margin-left: 10vw;
+    /*  Use vw as it takes into account the viewport size */
 }
 
 /* Style for each icon in follow section */
@@ -25,7 +29,20 @@
     margin: 10px;
 }
 
+/* Style for WhatsApp SVG icon */
+.whatsapp-icon {
+    width: 50px;
+    height: 50px;
+    color: #25D366;
+    transition: color 0.3s ease;
+}
+
+.whatsapp-icon:hover {
+    color: #128C7E;
+}
+
 /* Style for contact-us/email section */
 #contact {
-    margin-left: 10vw; /*  Same as above but for text content */
+    margin-left: 10vw;
+    /*  Same as above but for text content */
 }

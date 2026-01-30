@@ -1,11 +1,13 @@
 {
-  "short_name": "",
-  "name": "Aikido Club",
-  "icons": [{
-    "src": "icon.png",
-    "type": "image/png",
-    "sizes": "192x192"
-  }],
+  "short_name": "IIUM Aikido",
+  "name": "IIUM Aikido Club",
+  "icons": [
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
   "start_url": "/?utm_source=homescreen",
   "background_color": "#fafafa",
   "theme_color": "#fafafa"

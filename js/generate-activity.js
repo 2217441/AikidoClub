@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const dropdownMenu = document.getElementById('dropdown-menu');
     const activitiesContainer = document.querySelector('.activities');
 
-
+    // Only run on pages with these elements
+    if (!dropdownMenu || !activitiesContainer) return;
     
     // Fetch JSON data
     fetch('past-club-activities.json') // Replace with the correct path to your JSON file

@@ -9,18 +9,23 @@
   <meta property="og:title" content="News | IIUM Aikido Club">
   <meta property="og:type" content="website">
   <meta property="og:image" content="img/aikido-logo.png">
+  <meta property="og:image:alt" content="IIUM Aikido Club Logo">
   <title>News | IIUM Aikido Club</title>
 
   <!-- Add favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
-  <link rel="manifest" href="img/favicon_io/site.webmanifest">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
 
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/nav.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/head-page.css">
   <link rel="stylesheet" href="css/btn-scroll-top.css">
+  <link rel="stylesheet" href="css/news.css">
 </head>
 
 <body>
@@ -68,10 +73,62 @@
     </div>
 
     <!-- Section for news content -->
-    <div class="news-content">
-      <h1>Latest News</h1>
-      <p>Coming soon...</p>
-    </div>
+    <section class="news-section">
+      <div class="news-header">
+        <h1>Latest News & Announcements</h1>
+        <div class="deco-line"></div>
+      </div>
+
+      <div class="news-grid">
+        <!-- Pinned Announcement -->
+        <article class="news-card pinned">
+          <div class="news-badge">📌 Pinned</div>
+          <div class="news-date">January 2026</div>
+          <h2>Semester 2 Registration Now Open!</h2>
+          <p>New semester, new beginnings! Whether you're a returning member or completely new to Aikido, registration
+            for Semester 2 2025/2026 is now open. First class is FREE for newcomers!</p>
+          <a href="https://forms.gle/hRwYhA1K96wzq28f6" target="_blank" rel="noopener noreferrer"
+            class="news-cta">Register Now →</a>
+        </article>
+
+        <!-- Regular News Items -->
+        <article class="news-card">
+          <div class="news-date">December 2025</div>
+          <h2>End of Semester Gathering</h2>
+          <p>Thank you to everyone who joined our end-of-semester gathering! It was a great way to wrap up a fantastic
+            semester of training together.</p>
+        </article>
+
+        <article class="news-card">
+          <div class="news-date">November 2025</div>
+          <h2>Aikido Kyoudou Kenshuu Success</h2>
+          <p>Our joint training session with other university clubs was a huge success! Members had the opportunity to
+            train with practitioners from different backgrounds and styles.</p>
+        </article>
+
+        <article class="news-card">
+          <div class="news-date">October 2025</div>
+          <h2>Welcome New Members!</h2>
+          <p>A warm welcome to all our new members who joined during the recruitment booth. We're excited to have you on
+            this Aikido journey with us!</p>
+        </article>
+      </div>
+
+      <!-- Social Media Feed CTA -->
+      <div class="news-social">
+        <p>Follow us on social media for real-time updates:</p>
+        <div class="social-links">
+          <a href="https://instagram.com/iiumaikidoclub" target="_blank" rel="noopener noreferrer"
+            class="social-btn instagram">
+            <img src="img/instagram.png" alt=""> @iiumaikidoclub
+          </a>
+          <a href="https://www.facebook.com/iiumaikidoclub/" target="_blank" rel="noopener noreferrer"
+            class="social-btn facebook">
+            <img src="img/facebook.png" alt=""> Facebook Page
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer section with social media links and contact info -->
     <footer id="sub-info">
@@ -88,6 +145,12 @@
         <a href="https://www.youtube.com/@aikidoiium9560" target="_blank"
           rel="noopener noreferrer"><!-- Add club youtube link and icon (display in new tab)-->
           <img class="socmed-logo" src="img/youtube.png" alt="youtube icon">
+        </a>
+        <a href="#whatsapp-link" target="_blank" rel="noopener noreferrer" aria-label="Join our WhatsApp group">
+          <svg class="socmed-logo whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+          </svg>
         </a>
       </div>
       <div id="contact"><!-- Add club contact email-->

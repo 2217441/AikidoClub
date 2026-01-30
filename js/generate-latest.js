@@ -2,12 +2,14 @@
 // Function : Auto generate the latest activities based on data in latest-club-activities.json
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Only run on pages with the container
+    const parentContainer = document.querySelector('.late-swiper-container');
+    if (!parentContainer) return;
+
     // Fetch the JSON data
     fetch('latest-club-activities.json')
         .then(response => response.json())
         .then(data => {
-            // Get the swiper wrapper where slides will be inserted
-            const parentContainer = document.querySelector('.late-swiper-container');
             
             if (data.length != 0) {
                 const swiperWrapper = document.createElement('div');
@@ -136,7 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => { 
             console.error('Error fetching JSON data:', error)
-            const parentContainer = document.querySelector('.late-swiper-container');
         
             const noContent = document.createElement('h3');
             noContent.className = 'noContent-txt';
