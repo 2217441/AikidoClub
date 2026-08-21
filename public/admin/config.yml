@@ -60,14 +60,11 @@ collections:
     create: true
     format: yaml
     fields:
-      - label: Items
-        name: items
-        widget: list
-        fields:
-          - { label: Title, name: title, widget: string }
-          - { label: Image, name: image, widget: image }
-          - { label: Alt Text, name: alt, widget: string }
-          - { label: Order, name: order, widget: number }
+      - { label: Title, name: title, widget: string }
+      - { label: Image, name: image, widget: image }
+      - { label: Alt Text, name: alt, widget: string }
+      - { label: Tenure, name: tenure, widget: string, hint: "e.g. 23/24" }
+      - { label: Order, name: order, widget: number }
 
   - name: faq
     label: FAQ
@@ -76,6 +73,7 @@ collections:
     fields:
       - { label: Question, name: question, widget: string }
       - { label: Order, name: order, widget: number }
+      - { label: Open by default, name: defaultOpen, widget: boolean, default: false }
       - { label: Answer, name: body, widget: markdown }
 
   - name: testimonials
@@ -86,4 +84,5 @@ collections:
       - { label: Author, name: author, widget: string }
       - { label: Role, name: role, widget: string }
       - { label: Image, name: image, widget: image, required: false }
+      - { label: Order, name: order, widget: number, default: 0 }
       - { label: Quote, name: body, widget: markdown }
