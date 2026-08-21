@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Static marketing site for the IIUM Aikido Club. Astro 5 (fully static, no adapter/SSR) + Tailwind v4, content authored as Markdown/YAML content collections, edited either by hand or through Sveltia CMS, deployed to GitHub Pages by CI.
+Static marketing site for the IIUM Aikido Club. Astro 7 (fully static, no adapter/SSR) + Tailwind v4, content authored as Markdown/YAML content collections, edited either by hand or through Sveltia CMS, deployed to GitHub Pages by CI.
 
 ## Commands
 
@@ -20,7 +20,7 @@ There is no test suite and no linter configured. `npm run build` is the verifica
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds on every push to `master` (Node 20, `npm ci`) and publishes `./dist` via `actions/deploy-pages`. Production URL is `https://2217441.github.io/AikidoClub/`.
+`.github/workflows/deploy.yml` builds on every push to `master` (Node 22, `npm ci` — Astro requires >=22.12) and publishes `./dist` via `actions/deploy-pages`. Production URL is `https://2217441.github.io/AikidoClub/`.
 
 Netlify was evaluated for CMS auth and **rejected** — a Cloudflare Worker gives Sveltia the same one-click GitHub login without moving hosts. Do not reopen it without reading `docs/CMS-SETUP.md`; any host change means rewriting every `${base}` path.
 
@@ -37,16 +37,16 @@ When adding a component that takes an image path, replicate the `http` / leading
 
 ## Content architecture
 
-`src/content.config.ts` defines six collections; the Zod schemas there are the source of truth for frontmatter:
+`src/content.config.ts` defines six collections; the Zod schemas there are the source of truth for frontmatter. Astro 6 removed the legacy `type: 'content'`/`type: 'data'` API, so every collection declares a `glob` loader — including the YAML data ones. Entries still expose `.data` and, for markdown, `.body` (raw, unrendered):
 
-| Collection | Type | Location | Notable fields |
+| Collection | Loader | Location | Notable fields |
 |---|---|---|---|
-| `news` | content (md) | `src/content/news/` | `pinned`, optional `ctaText`/`ctaLink` |
-| `activities` | content (md) | `src/content/activities/` | `featured` — drives the "Latest" carousel on `index.astro` and `activities.astro` |
-| `pastActivities` | content (md) | `src/content/pastActivities/` | `year` ("23/24") groups the archive; `order` sorts within a year |
-| `mainboard` | data (yaml) | `src/content/mainboard/` | flat object with `tenure` + `order` |
-| `faq` | content (md) | `src/content/faq/` | `order`, `defaultOpen` |
-| `testimonials` | content (md) | `src/content/testimonials/` | `order` |
+| `news` | `glob` \*\*/\*.md | `src/content/news/` | `pinned`, optional `ctaText`/`ctaLink` |
+| `activities` | `glob` \*\*/\*.md | `src/content/activities/` | `featured` — drives the "Latest" carousel on `index.astro` and `activities.astro` |
+| `pastActivities` | `glob` \*\*/\*.md | `src/content/pastActivities/` | `year` ("23/24") groups the archive; `order` sorts within a year |
+| `mainboard` | `glob` \*\*/\*.yaml | `src/content/mainboard/` | flat object with `tenure` + `order` |
+| `faq` | `glob` \*\*/\*.md | `src/content/faq/` | `order`, `defaultOpen` |
+| `testimonials` | `glob` \*\*/\*.md | `src/content/testimonials/` | `order` |
 
 Pages call `getCollection(...)` in frontmatter, then sort/group/reshape into plain objects before passing to components — components never touch `astro:content`. Sorting rules live in the pages (e.g. `news.astro` puts `pinned` first then `date.localeCompare` descending; `date` is a free-form string like "January 2026", not a Date).
 
