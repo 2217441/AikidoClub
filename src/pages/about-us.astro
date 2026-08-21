@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageFadeCarousel from '../components/ImageFadeCarousel.astro';
 import { getCollection } from 'astro:content';
+import { registrationUrl, training } from '../config/site';
 
 const base = import.meta.env.BASE_URL;
 
@@ -266,27 +267,27 @@ const beltProgression = [
           <!-- Schedule Card -->
           <div class="bg-[#f8f8f8] p-6 rounded-lg border-l-4 border-l-accent-pink shadow-sm">
             <h3 class="text-xl font-bold text-gray-800 mb-3">📅 Schedule</h3>
-            <p class="text-gray-600 text-lg">Every Monday &amp; Thursday</p>
-            <p class="text-gray-600 text-lg">9:00 PM - 11:00 PM</p>
+            <p class="text-gray-600 text-lg">{training.schedule}</p>
+            <p class="text-gray-600 text-lg">{training.time}</p>
           </div>
           
           <!-- Venue Card -->
           <div class="bg-[#f8f8f8] p-6 rounded-lg border-l-4 border-l-accent-pink shadow-sm">
             <h3 class="text-xl font-bold text-gray-800 mb-3">📍 Venue</h3>
-            <p class="text-gray-600 text-lg">IIUM Female Sport Center</p>
-            <p class="text-gray-600 text-lg">Gombak Campus</p>
+            <p class="text-gray-600 text-lg">{training.venue}</p>
+            <p class="text-gray-600 text-lg">{training.campus}</p>
           </div>
         </div>
         
         <!-- Google Maps Embed -->
         <div class="w-full">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3382.013842578987!2d101.73455153762131!3d3.2550022553442135!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc38c41ce1820f%3A0x949e2db0f1bae4f!2sFemale%20Sports%20Complex%2C%20IIUM%20Gombak!5e0!3m2!1sen!2smy!4v1702563385524!5m2!1sen!2smy"
+            src={training.mapEmbed}
             class="w-full h-[300px] rounded-lg border-0"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
-            title="IIUM Female Sport Center Location">
+            title={`${training.venue} Location`}>
           </iframe>
         </div>
       </div>
@@ -375,7 +376,7 @@ const beltProgression = [
       </p>
       
       <a 
-        href="https://forms.gle/hRwYhA1K96wzq28f6" 
+        href={registrationUrl} 
         target="_blank" 
         rel="noopener noreferrer"
         class="inline-block bg-accent-pink hover:bg-red-600 text-white 
