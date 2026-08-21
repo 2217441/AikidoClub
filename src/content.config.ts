@@ -1,7 +1,12 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+// Astro 6 removed the legacy collection API (`type: 'content'` / `type: 'data'`).
+// Every collection now declares a loader; `glob` handles both the markdown
+// collections and the YAML data ones.
 
 const news = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/*.md', base: './src/content/news' }),
     schema: z.object({
         title: z.string(),
         date: z.string(),
@@ -12,7 +17,7 @@ const news = defineCollection({
 });
 
 const activities = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/*.md', base: './src/content/activities' }),
     schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -23,7 +28,7 @@ const activities = defineCollection({
 });
 
 const pastActivities = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/*.md', base: './src/content/pastActivities' }),
     schema: z.object({
         name: z.string(),
         date: z.string(),
@@ -35,7 +40,7 @@ const pastActivities = defineCollection({
 });
 
 const mainboard = defineCollection({
-    type: 'data',
+    loader: glob({ pattern: '**/*.yaml', base: './src/content/mainboard' }),
     schema: z.object({
         title: z.string(),
         image: z.string(),
@@ -46,7 +51,7 @@ const mainboard = defineCollection({
 });
 
 const faq = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/*.md', base: './src/content/faq' }),
     schema: z.object({
         question: z.string(),
         order: z.number(),
@@ -55,7 +60,7 @@ const faq = defineCollection({
 });
 
 const testimonials = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/*.md', base: './src/content/testimonials' }),
     schema: z.object({
         author: z.string(),
         role: z.string(),

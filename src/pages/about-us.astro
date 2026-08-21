@@ -189,7 +189,7 @@ const beltProgression = [
       <!-- Testimonial Cards -->
       {testimonials.map((testimonial) => (
         <div class="flex flex-col lg:flex-row items-center gap-6 p-6 sm:p-10 bg-white rounded-lg border border-gray-200 border-l-[7px] border-l-gray-900 shadow-sm mb-6 last:mb-0">
-          <!-- Testimonial Text -->
+          {/* Testimonial Text */}
           <div class="flex-1">
             <p class="italic text-gray-700 text-base sm:text-lg leading-relaxed mb-4">
               "{testimonial.content}"
@@ -199,7 +199,7 @@ const beltProgression = [
             </p>
           </div>
           
-          <!-- Testimonial Image -->
+          {/* Testimonial Image */}
           {testimonial.image && (
             <div class="flex-shrink-0">
               <div class="relative w-40 h-40 sm:w-48 sm:h-48">
@@ -312,10 +312,10 @@ const beltProgression = [
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {beltProgression.map((belt) => (
           <div class="belt-card bg-white rounded-xl overflow-hidden shadow-md">
-            <!-- Belt Color Stripe -->
+            {/* Belt Color Stripe */}
             <div class={`h-2 w-full bg-gradient-to-r ${belt.gradient}`}></div>
             
-            <!-- Belt Info -->
+            {/* Belt Info */}
             <div class="p-5">
               <h3 class="text-lg font-bold text-gray-800 mb-2">
                 {belt.level} <span class="font-normal text-gray-500 text-sm">({belt.name})</span>

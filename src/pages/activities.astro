@@ -191,7 +191,7 @@ const years = yearKeys.map(formatYear);
               class={`year-section ${index === 0 ? '' : 'hidden'}`}
               data-year={year.id}
             >
-              <!-- Year Title -->
+              {/* Year Title */}
               <div class="text-center mb-6">
                 <h3 class="inline-block bg-accent text-white text-xl sm:text-2xl font-bold italic 
                            px-8 py-3 shadow-[−5px_8px_2px_rgba(0,0,0,0.6)]">
@@ -199,7 +199,7 @@ const years = yearKeys.map(formatYear);
                 </h3>
               </div>
               
-              <!-- Activities Carousel -->
+              {/* Activities Carousel */}
               <div class="group">
                 {activities.length === 1 ? (
                   <div class="flex justify-center">
@@ -235,7 +235,7 @@ const years = yearKeys.map(formatYear);
         })}
       </div>
       
-      <!-- Fallback message if no activities -->
+      {/* Fallback message if no activities */}
       {yearKeys.length === 0 && (
         <p class="text-center text-gray-500 italic py-8">No past activities available.</p>
       )}
