@@ -69,11 +69,57 @@ const testimonials = defineCollection({
     }),
 });
 
+/**
+ * Futuwwah-to-practice material. Frontmatter is a deliberate superset of
+ * what Al-Mizan's ingest_wiki_concepts.py reads (name_en, name_ar,
+ * transliteration, description), so these files are ingestible into
+ * SurrealDB/TypeDB later with no transformation written.
+ *
+ * Every practice-to-virtue mapping is an interpretive act - Tier 2 in
+ * Al-Mizan's model - so attribution is required, never optional.
+ *
+ * Intentionally absent from public/admin/config.yml: author-owned, not
+ * club-editable. A CMS widget here would invite an unattributed mapping.
+ */
+const concepts = defineCollection({
+    loader: glob({ pattern: '**/*.md', base: './src/content/concepts' }),
+    schema: z.object({
+        name_en: z.string(),
+        name_ar: z.string().optional(),
+        transliteration: z.string().optional(),
+        description: z.string(),
+
+        practice: z.array(z.object({
+            art: z.string(),
+            element: z.string(),
+            claim: z.string(),
+        })).default([]),
+
+        grounding: z.array(z.object({
+            type: z.enum(['quran', 'hadith', 'scholar']),
+            ref: z.string(),
+            // 'verified' requires a canonical fetch on record. Anything else
+            // blocks publication - see scripts/assert-citations.ts.
+            status: z.enum(['verified', 'pending', 'unverified']),
+            via: z.string().optional(),
+        })).default([]),
+
+        attribution: z.object({
+            issued_by: z.string(),
+            epistemic_status: z.enum(['documented', 'interpretive']),
+        }),
+
+        order: z.number().default(0),
+        draft: z.boolean().default(true),
+    }),
+});
+
 export const collections = {
     news,
     activities,
     pastActivities,
     mainboard,
     faq,
-    testimonials
+    testimonials,
+    concepts,
 };
