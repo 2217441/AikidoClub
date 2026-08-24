@@ -120,8 +120,8 @@ const fadePercent = (fadeDuration / totalCycleTime) * 100;
     
     // Apply animation to each image
     carouselImages.forEach((img, index) => {
-      (img as HTMLElement).style.animation = `imageFadeJS ${totalCycleTime}s infinite`;
-      (img as HTMLElement).style.animationDelay = `${index * displayDuration}s`;
+      img.style.animation = `imageFadeJS ${totalCycleTime}s infinite`;
+      img.style.animationDelay = `${index * displayDuration}s`;
     });
   });
 </script>
