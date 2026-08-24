@@ -1,6 +1,6 @@
 /**
  * Site-wide values that appear in more than one page.
- * Edit here, not in the pages — `about-us.astro`, `index.astro`,
+ * Edit here, not in the pages — `train.astro`, `index.astro`,
  * `news.astro` and `Footer.astro` all read from this module.
  */
 export const registrationUrl = 'https://forms.gle/hRwYhA1K96wzq28f6';
