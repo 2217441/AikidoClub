@@ -5,7 +5,7 @@ import Carousel from '../components/Carousel.astro';
 import LatestCard from '../components/LatestCard.astro';
 import FaqList from '../components/FaqList.astro';
 import { getCollection } from 'astro:content';
-import { registrationUrl } from '../config/site';
+import { registrationUrl, training } from '../config/site';
 
 const base = import.meta.env.BASE_URL;
 
@@ -74,6 +74,38 @@ const introImages = [
         class="w-12 h-12 object-contain filter invert opacity-80 hover:opacity-100 transition-opacity"
       />
     </a>
+  </section>
+
+  <!-- Essentials Section -->
+  <section id="essentials" class="bg-white py-12 px-4 sm:px-8">
+    <div class="max-w-4xl mx-auto grid gap-6 md:grid-cols-3 text-center">
+      <div class="p-6 bg-[#f8f8f8] rounded-lg border-t-4 border-t-accent-cyan">
+        <h3 class="font-bold text-gray-800 mb-2">When</h3>
+        <p class="text-gray-600">{training.schedule}</p>
+        <p class="text-gray-600">{training.time}</p>
+      </div>
+      <div class="p-6 bg-[#f8f8f8] rounded-lg border-t-4 border-t-accent-cyan">
+        <h3 class="font-bold text-gray-800 mb-2">Where</h3>
+        <p class="text-gray-600">{training.venue}</p>
+        <p class="text-gray-600">{training.campus}</p>
+      </div>
+      <div class="p-6 bg-[#f8f8f8] rounded-lg border-t-4 border-t-accent-pink">
+        <h3 class="font-bold text-gray-800 mb-2">Cost</h3>
+        <p class="text-gray-600">First class is free.</p>
+        <p class="text-gray-600">No experience needed.</p>
+      </div>
+    </div>
+
+    <p class="text-center mt-8">
+      <a
+        href={registrationUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-block bg-accent-pink hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium"
+      >
+        Register
+      </a>
+    </p>
   </section>
 
   <!-- Intro Section -->
@@ -271,6 +303,21 @@ const introImages = [
         More questions, and how to find us
       </a>
     </p>
+  </section>
+
+  <!-- Adab Teaser Section -->
+  <section id="adab-teaser" class="bg-primary-dark text-white py-12 px-4 sm:px-8">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">More Than Technique</h2>
+      <p class="text-gray-200 leading-relaxed mb-6">
+        Aikido trains character before it trains the body. We keep a written
+        account of the virtues the practice cultivates, and say plainly where
+        each connection comes from.
+      </p>
+      <a href={`${base}adab`} class="text-accent-cyan font-semibold underline hover:text-white transition-colors">
+        Read the Adab pages
+      </a>
+    </div>
   </section>
 
   <!-- Join Us CTA Section with Parallax Background -->
