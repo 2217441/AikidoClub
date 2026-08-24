@@ -7,7 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test": "node --test \"src/**/*.test.ts\" \"scripts/**/*.test.ts\""
+    "test": "node --test \"src/**/*.test.ts\" \"scripts/**/*.test.ts\"",
+    "check:citations": "node scripts/assert-citations.ts",
+    "check": "npm run check:citations && npm run build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
