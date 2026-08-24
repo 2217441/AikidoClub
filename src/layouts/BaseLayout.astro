@@ -33,10 +33,11 @@ const {
     <link rel="apple-touch-icon" sizes="180x180" href={`${base}favicons/apple-touch-icon.png`} />
     <link rel="manifest" href={`${base}favicons/site.webmanifest`} />
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+    <!-- Fonts are self-hosted: see src/styles/fonts.css. No third-party
+         requests, no render-blocking stylesheet. Preloaded: body (400)
+         and heading (700) latin faces. -->
+    <link rel="preload" href={`${base}fonts/S6uyw4BMUTPHjx4wXg.woff2`} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={`${base}fonts/S6u9w4BMUTPHh6UVSwiPGQ.woff2`} as="font" type="font/woff2" crossorigin />
     
     <title>{title}</title>
   </head>
