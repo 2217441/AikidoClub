@@ -1,6 +1,6 @@
 ---
 title: "End of Semester Gathering"
-date: "December 2025"
+date: 2025-12-01
 pinned: false
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Aikido Kyoudou Kenshuu Success"
-date: "November 2025"
+date: 2025-11-01
 pinned: false
 ---
 

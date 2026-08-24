@@ -14,8 +14,8 @@ const newsItems = newsCollection
     // Pinned items first
     if (a.data.pinned && !b.data.pinned) return -1;
     if (!a.data.pinned && b.data.pinned) return 1;
-    // Then sort by date (assuming format like "January 2026")
-    return b.data.date.localeCompare(a.data.date);
+    // Then sort by date, newest first
+    return b.data.date.getTime() - a.data.date.getTime();
   })
   .map(item => ({
     date: item.data.date,

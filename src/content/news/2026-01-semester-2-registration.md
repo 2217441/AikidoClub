@@ -1,6 +1,6 @@
 ---
 title: "Semester 2 Registration Now Open!"
-date: "January 2026"
+date: 2026-01-01
 pinned: true
 ctaText: "Register Now →"
 ctaLink: "https://forms.gle/hRwYhA1K96wzq28f6"
