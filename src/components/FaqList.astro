@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  /** Render only the first N questions. Omit for all of them. */
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+
+const faqItems = (await getCollection('faq'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, limit ?? Infinity)
+  .map(item => ({
+    question: item.data.question,
+    answer: item.body,
+    open: item.data.defaultOpen,
+  }));
+---
+
+<div class="max-w-3xl mx-auto flex flex-col gap-4">
+  {faqItems.map((item) => (
+    <details
+      open={item.open}
+      class="faq-item group bg-white rounded-lg border-l-4 border-l-accent-pink overflow-hidden shadow-sm"
+    >
+      <summary class="flex items-center justify-between gap-4 cursor-pointer p-5 font-semibold text-gray-800">
+        {item.question}
+        <span class="faq-icon text-accent-pink text-2xl font-light flex-shrink-0 transition-transform">+</span>
+      </summary>
+      <p class="px-5 pb-5 text-gray-600 leading-relaxed">{item.answer}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+</style>

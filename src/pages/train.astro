@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageFadeCarousel from '../components/ImageFadeCarousel.astro';
+import FaqList from '../components/FaqList.astro';
 import { getCollection } from 'astro:content';
 import { registrationUrl, training } from '../config/site';
 
@@ -13,16 +14,6 @@ const aboutImages = [
   `${base}img/about-us/img03.jpg`,
   `${base}img/about-us/img04.jpg`,
 ];
-
-// Get FAQ from content collection
-const faqCollection = await getCollection('faq');
-const faqItems = faqCollection
-  .sort((a, b) => a.data.order - b.data.order)
-  .map(item => ({
-    question: item.data.question,
-    answer: item.body,
-    open: item.data.defaultOpen
-  }));
 
 // Get testimonials from content collection
 const testimonialsCollection = await getCollection('testimonials');
@@ -232,20 +223,7 @@ const beltProgression = [
       </div>
       
       <!-- FAQ Items -->
-      <div class="space-y-4">
-        {faqItems.map((item) => (
-          <details 
-            class="faq-item group bg-white rounded-lg border-l-4 border-l-accent-pink overflow-hidden shadow-sm"
-            open={item.open}
-          >
-            <summary class="flex justify-between items-center p-5 cursor-pointer font-semibold text-gray-800 hover:bg-gray-50 transition-colors">
-              <span class="pr-4">{item.question}</span>
-              <span class="faq-icon text-accent-pink text-2xl font-light flex-shrink-0 transition-transform">+</span>
-            </summary>
-            <p class="px-5 pb-5 text-gray-600 leading-relaxed" set:html={item.answer}></p>
-          </details>
-        ))}
-      </div>
+      <FaqList />
     </div>
   </section>
 
@@ -433,15 +411,6 @@ const beltProgression = [
     20% { opacity: 1; }
     25% { opacity: 0; }
     100% { opacity: 0; }
-  }
-
-  /* FAQ icon rotation */
-  details[open] .faq-icon {
-    transform: rotate(45deg);
-  }
-
-  details summary::-webkit-details-marker {
-    display: none;
   }
 
   /* Pulse animation for badge */
