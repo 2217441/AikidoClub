@@ -2,6 +2,7 @@ backend:
   name: github
   repo: 2217441/AikidoClub
   branch: master
+  base_url: https://aikidoclub-auth.ammar-q.workers.dev
 
 media_folder: public/img
 public_folder: /AikidoClub/img

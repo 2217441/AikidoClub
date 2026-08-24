@@ -42,6 +42,12 @@ secret cannot live in browser code, and Sveltia runs entirely in the browser,
 so a small server-side proxy is required. Sveltia publishes one for Cloudflare
 Workers; the free tier is far beyond what a login flow uses.
 
+**This is now live.** The worker is `https://aikidoclub-auth.ammar-q.workers.dev`
+(Cloudflare account of Ammar, worker `aikidoclub-auth`, source in the private
+repo `IIUMstudent/aikidoclub-auth`). The OAuth App `IIUM Aikido Club CMS`
+(client ID `Ov23liblhThHkvXp8Y0E`) is owned by the personal account `2217441`
+— transfer it to the IIUMstudent org so it outlives any one member.
+
 1. Deploy [sveltia-cms-auth](https://github.com/sveltia/sveltia-cms-auth) to
    Cloudflare Workers, and note the Worker URL
 2. Register a GitHub OAuth App with `<worker-url>/callback` as the
