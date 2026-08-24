@@ -1,0 +1,349 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Carousel from '../components/Carousel.astro';
+import ActivityCard from '../components/ActivityCard.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+
+// Get mainboard data from YAML content collection
+const mainboardCollection = await getCollection('mainboard');
+
+// Sort by order field (ascending - most recent first based on order)
+const orgCharts = mainboardCollection
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(item => {
+    // Prefix image paths with base URL
+    const imagePath = item.data.image.startsWith('/') 
+      ? `${base}${item.data.image.slice(1)}` 
+      : item.data.image;
+    return {
+      tenure: item.data.tenure,
+      title: item.data.title,
+      image: imagePath,
+      alt: item.data.alt
+    };
+  });
+
+// Get past activities from content collection
+const pastActivitiesCollection = await getCollection('pastActivities');
+
+// Group past activities by year
+const pastActivitiesByYear: Record<string, { title: string; content: any[] }> = {};
+pastActivitiesCollection.forEach(item => {
+  const year = item.data.year;
+  if (!pastActivitiesByYear[year]) {
+    pastActivitiesByYear[year] = {
+      title: `Club Activities ${year}`,
+      content: []
+    };
+  }
+  pastActivitiesByYear[year].content.push({
+    'image-path': item.data.image,
+    'act-name': item.data.name,
+    'act-date': item.data.date,
+    'act-desc': item.body || '',
+    'act-file': item.data.file || '',
+    order: item.data.order
+  });
+});
+
+// Sort activities within each year by order
+Object.keys(pastActivitiesByYear).forEach(year => {
+  pastActivitiesByYear[year].content.sort((a, b) => a.order - b.order);
+});
+
+const pastActivities = pastActivitiesByYear;
+
+// Get year keys and sort them in descending order (most recent first)
+// Keys are like "23/24", "22/23" - parse to sort properly
+const yearKeys = Object.keys(pastActivities).sort((a, b) => {
+  const [startA] = a.split('/').map(Number);
+  const [startB] = b.split('/').map(Number);
+  return startB - startA; // Descending order
+});
+
+// Convert year key to display format and ID format
+// "23/24" -> "2023/2024" for display, "year-2324" for ID
+const formatYear = (key: string) => {
+  const [start, end] = key.split('/');
+  return {
+    display: `20${start}/20${end}`,
+    id: `year-${start}${end}`,
+    key,
+  };
+};
+
+const years = yearKeys.map(formatYear);
+---
+
+<BaseLayout 
+  title="Club | IIUM Aikido Club" 
+  description="Meet the IIUM Aikido Club mainboard - View our organizational charts and leadership team across different tenures."
+>
+  <!-- Hero Section -->
+  <section class="head-page relative w-full h-[60vh] min-h-[400px] overflow-hidden">
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img 
+        src={`${base}img/image1.png`}
+        alt="Aikido club members practicing" 
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
+    
+    <!-- Title -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
+      <h1 class="text-white text-4xl sm:text-5xl lg:text-6xl font-bold drop-shadow-[4px_8px_4px_rgba(0,0,0,0.5)]">
+        Mainboard
+      </h1>
+      
+      <!-- Down Arrow -->
+      <a 
+        href="#main-content" 
+        class="absolute bottom-10 cursor-pointer animate-bounce-slow"
+        aria-label="Scroll to content"
+      >
+        <svg class="w-10 h-10 text-white opacity-80 hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Bottom curve decoration -->
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-[#f5f5f5] rounded-t-[50%]"></div>
+  </section>
+
+  <!-- Organizational Charts Section -->
+  <section id="main-content" class="bg-[#f5f5f5] py-16 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-primary-dark text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
+          Organizational Chart
+        </h2>
+        <p class="text-gray-500 text-base sm:text-lg">
+          Aikido Club Organizational Chart
+        </p>
+        <div class="deco-line mx-auto mt-4"></div>
+      </div>
+
+      <!-- Charts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {orgCharts.map((chart) => (
+          <div class="chart-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            {/* Chart Title */}
+            <div class="p-4 bg-gradient-to-r from-accent-pink to-red-400 text-white">
+              <h3 class="text-lg sm:text-xl font-bold text-center">
+                {chart.title}
+              </h3>
+            </div>
+            
+            {/* Chart Image */}
+            <a 
+              href={chart.image} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              aria-label={`View ${chart.title} organizational chart`}
+              class="block overflow-hidden group"
+            >
+              <img 
+                src={chart.image} 
+                alt={chart.alt}
+                class="w-full h-auto aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="p-3 text-center text-gray-500 text-sm group-hover:text-accent-pink transition-colors">
+                Click to view full image
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Past Activities Section -->
+  <section id="past-activities" class="bg-white py-12 px-6 sm:px-8">
+    <!-- Section Header with Year Filter -->
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+        <div class="flex items-center gap-4">
+          <h2 class="text-primary-dark text-xl sm:text-2xl font-bold italic whitespace-nowrap">
+            Club History
+          </h2>
+          <div class="hidden md:block h-0.5 bg-black w-32 lg:w-64"></div>
+        </div>
+        
+        <!-- Year Dropdown Filter -->
+        <div class="flex items-center gap-3">
+          <label for="year-filter" class="text-gray-700 italic text-sm sm:text-base whitespace-nowrap">
+            Display from Year:
+          </label>
+          <select 
+            id="year-filter" 
+            class="bg-white border-2 border-black px-4 py-2 text-base cursor-pointer
+                   rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent
+                   transition-colors duration-200"
+            aria-label="Select activity year"
+          >
+            {years.map((year, index) => (
+              <option value={year.id} selected={index === 0}>
+                {year.display}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <!-- Year Sections - All rendered at build time, visibility controlled by JS -->
+      <div id="year-sections">
+        {years.map((year, index) => {
+          const yearData = pastActivities[year.key];
+          const activities = yearData.content;
+          
+          return (
+            <div 
+              id={year.id}
+              class={`year-section ${index === 0 ? '' : 'hidden'}`}
+              data-year={year.id}
+            >
+              {/* Year Title */}
+              <div class="text-center mb-6">
+                <h3 class="inline-block bg-accent text-white text-xl sm:text-2xl font-bold italic 
+                           px-8 py-3 shadow-[−5px_8px_2px_rgba(0,0,0,0.6)]">
+                  {yearData.title}
+                </h3>
+              </div>
+              
+              {/* Activities Carousel */}
+              <div class="group">
+                {activities.length === 1 ? (
+                  <div class="flex justify-center">
+                    <ActivityCard
+                      name={activities[0]["act-name"]}
+                      date={activities[0]["act-date"]}
+                      description={activities[0]["act-desc"]}
+                      imagePath={activities[0]["image-path"]}
+                      filePath={activities[0]["act-file"]}
+                    />
+                  </div>
+                ) : (
+                  <Carousel 
+                    id={`carousel-${year.id}`}
+                    showArrows={true} 
+                    showDots={true} 
+                    slideCount={activities.length}
+                  >
+                    {activities.map((activity) => (
+                      <ActivityCard
+                        name={activity["act-name"]}
+                        date={activity["act-date"]}
+                        description={activity["act-desc"]}
+                        imagePath={activity["image-path"]}
+                        filePath={activity["act-file"]}
+                      />
+                    ))}
+                  </Carousel>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Fallback message if no activities */}
+      {yearKeys.length === 0 && (
+        <p class="text-center text-gray-500 italic py-8">No past activities available.</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Join Leadership CTA Section -->
+  <section class="bg-white py-12 px-4 sm:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">
+        Interested in Joining the Mainboard?
+      </h2>
+      <p class="text-gray-600 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
+        Elections for the mainboard are held at the beginning of each academic year. 
+        Active members are encouraged to participate and contribute to the club's leadership.
+      </p>
+      <a 
+        href={`${base}train#faq`}
+        class="inline-block bg-accent-pink hover:bg-red-600 text-white 
+               px-6 py-3 rounded-lg font-medium text-base
+               transition-all duration-200 hover:scale-105 hover:shadow-lg"
+      >
+        Learn More About Joining
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Bounce animation for scroll arrow */
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Decorative line */
+  .deco-line {
+    display: block;
+    height: 3px;
+    background-color: rgb(177, 112, 112);
+    width: 100px;
+  }
+
+  /* Year section transitions */
+  .year-section {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .year-section.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  // Year filter functionality - client-side visibility toggle
+  function initYearFilter() {
+    const yearFilter = document.getElementById('year-filter') as HTMLSelectElement;
+    const yearSections = document.querySelectorAll('.year-section');
+    
+    if (!yearFilter || yearSections.length === 0) return;
+    
+    yearFilter.addEventListener('change', () => {
+      const selectedYear = yearFilter.value;
+      
+      // Hide all year sections
+      yearSections.forEach((section) => {
+        section.classList.add('hidden');
+      });
+      
+      // Show selected year section
+      const targetSection = document.getElementById(selectedYear);
+      if (targetSection) {
+        targetSection.classList.remove('hidden');
+      }
+    });
+  }
+  
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initYearFilter);
+  
+  // Also handle Astro page transitions
+  document.addEventListener('astro:page-load', initYearFilter);
+</script>
