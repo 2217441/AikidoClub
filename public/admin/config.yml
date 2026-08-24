@@ -4,6 +4,9 @@ backend:
   branch: master
   base_url: https://aikidoclub-auth.ammar-q.workers.dev
 
+logo_url: https://2217441.github.io/AikidoClub/img/aikido-logo.png
+locale: en
+
 media_folder: public/img
 public_folder: /AikidoClub/img
 

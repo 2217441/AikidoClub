@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>Content Manager | IIUM Aikido Club</title>
-    <link rel="stylesheet" href="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.css" />
     <style>
         .login-help {
             position: fixed;
@@ -69,9 +68,12 @@
 
     <div class="login-help" id="loginHelp">
         <button class="close-btn" onclick="document.getElementById('loginHelp').style.display='none'">&times;</button>
-        <h3>📝 How to Login</h3>
+        <h3>🔑 How to Login</h3>
         <ol>
-            <li>Go to <a href="https://github.com/settings/tokens?type=beta" target="_blank"
+            <li>Click <strong>"Sign In with GitHub"</strong> above — that's it. You need a
+                GitHub account that has been added as a collaborator first.</li>
+            <li>If the button fails, use the token fallback: go to
+                <a href="https://github.com/settings/tokens?type=beta" target="_blank"
                     rel="noopener noreferrer">GitHub Token Settings</a>
             </li>
             <li>Click <strong>"Generate new token"</strong></li>
@@ -84,7 +86,7 @@
                 <br>• <strong>Metadata</strong>: Read-only
             </li>
             <li>Click <strong>"Generate token"</strong> and copy it</li>
-            <li>Paste the token above and click <strong>"Sign in"</strong></li>
+            <li>Click <strong>"Sign In Using Access Token"</strong> and paste it</li>
         </ol>
     </div>
 
