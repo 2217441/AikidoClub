@@ -65,12 +65,12 @@ The `news.date` field is currently `z.string()` holding values like `"January 20
 - Consumes: nothing.
 - Produces: `news` entries whose `data.date` is a JavaScript `Date`.
 
-- [ ] **Step 1: Verify the current build passes before changing anything**
+- [x] **Step 1: Verify the current build passes before changing anything**
 
 Run: `npm run build`
 Expected: `6 page(s) built`, no errors. If this fails, stop — the tree is not clean.
 
-- [ ] **Step 2: Change the news schema to coerce dates**
+- [x] **Step 2: Change the news schema to coerce dates**
 
 In `src/content.config.ts`, inside the `news` collection schema, replace:
 
@@ -84,12 +84,12 @@ with:
         date: z.coerce.date(),
 ```
 
-- [ ] **Step 3: Run the build to verify it now fails**
+- [x] **Step 3: Run the build to verify it now fails**
 
 Run: `npm run build`
 Expected: FAIL. The error names `src/content/news/...` and reports an invalid date, because `"October 2025"` is not parseable. This confirms the schema is actually enforcing.
 
-- [ ] **Step 4: Migrate the four news files to ISO dates**
+- [x] **Step 4: Migrate the four news files to ISO dates**
 
 Set the `date` frontmatter field in each file to the first of its month, matching the date already encoded in each filename. Write them unquoted, so the whole line becomes e.g. `date: 2025-10-01`.
 
@@ -100,7 +100,7 @@ Set the `date` frontmatter field in each file to the first of its month, matchin
 | `2025-12-end-of-semester-gathering.md` | `date: 2025-12-01` |
 | `2026-01-semester-2-registration.md` | `date: 2026-01-01` |
 
-- [ ] **Step 5: Fix the sort, which currently compares strings**
+- [x] **Step 5: Fix the sort, which currently compares strings**
 
 In `src/pages/news.astro`, replace:
 
@@ -116,17 +116,17 @@ with:
     return b.data.date.getTime() - a.data.date.getTime();
 ```
 
-- [ ] **Step 6: Run the build to verify it passes**
+- [x] **Step 6: Run the build to verify it passes**
 
 Run: `npm run build`
 Expected: PASS, `6 page(s) built`.
 
-- [ ] **Step 7: Note the temporary display regression**
+- [x] **Step 7: Note the temporary display regression**
 
 Run: `grep -o 'uppercase tracking-wide">[^<]*' dist/news/index.html | head -4`
 Expected: dates now render as full `Date` strings such as `Wed Oct 01 2025 ...`, because the template still prints `{item.date}` directly. This is expected and is fixed in Task 2. Do not fix it here.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add src/content.config.ts src/content/news src/pages/news.astro
@@ -154,7 +154,7 @@ ordered 'January 2026' before 'October 2025' alphabetically."
   - `isFresh(date: Date, now: Date, shelfLifeMonths?: number): boolean`
   - `formatNewsDate(date: Date): string` — returns e.g. `"October 2025"`
 
-- [ ] **Step 1: Add the test script to `package.json`**
+- [x] **Step 1: Add the test script to `package.json`**
 
 In the `scripts` block, add:
 
@@ -164,7 +164,7 @@ In the `scripts` block, add:
 
 Node 22 strips TypeScript types natively, so no test framework or transpiler is needed.
 
-- [ ] **Step 2: Write the failing test**
+- [x] **Step 2: Write the failing test**
 
 Create `src/lib/news.test.ts`:
 
@@ -208,12 +208,12 @@ test('dates format as month and year', () => {
 });
 ```
 
-- [ ] **Step 3: Run the test to verify it fails**
+- [x] **Step 3: Run the test to verify it fails**
 
 Run: `npm test`
 Expected: FAIL — cannot find module `./news.ts`.
 
-- [ ] **Step 4: Write the implementation**
+- [x] **Step 4: Write the implementation**
 
 Create `src/lib/news.ts`:
 
@@ -247,12 +247,12 @@ export function formatNewsDate(date: Date): string {
 }
 ```
 
-- [ ] **Step 5: Run the test to verify it passes**
+- [x] **Step 5: Run the test to verify it passes**
 
 Run: `npm test`
 Expected: `# pass 8`, `# fail 0`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add package.json src/lib/news.ts src/lib/news.test.ts
@@ -277,7 +277,7 @@ Expiry is computed at build time, so without a periodic rebuild an expired post 
 - Consumes: `isFresh`, `formatNewsDate` from `src/lib/news.ts`.
 - Produces: a `News` nav entry that is absent when nothing is fresh.
 
-- [ ] **Step 1: Filter and format in `news.astro`**
+- [x] **Step 1: Filter and format in `news.astro`**
 
 In `src/pages/news.astro`, add to the frontmatter imports:
 
@@ -312,7 +312,7 @@ In the `.map()` that follows, replace `date: item.data.date,` with:
     date: formatNewsDate(item.data.date),
 ```
 
-- [ ] **Step 2: Add an empty state**
+- [x] **Step 2: Add an empty state**
 
 In `src/pages/news.astro`, locate the element that wraps `{newsItems.map(...)}`. Wrap that whole expression so it only renders when there is something to show, and add a sibling empty state. The result should read:
 
@@ -334,13 +334,13 @@ In `src/pages/news.astro`, locate the element that wraps `{newsItems.map(...)}`.
 
 Note: `base` is already defined in this file's frontmatter.
 
-- [ ] **Step 3: Run the build and confirm the expired post is gone**
+- [x] **Step 3: Run the build and confirm the expired post is gone**
 
 Run: `npm run build`
 Then: `grep -c "Semester 2 Registration" dist/news/index.html || echo "0 - correctly expired"`
 Expected: `0 - correctly expired`. That post is dated January 2026, past the four-month shelf life.
 
-- [ ] **Step 4: Hide the News nav item when nothing is fresh**
+- [x] **Step 4: Hide the News nav item when nothing is fresh**
 
 In `src/components/Nav.astro`, add to the frontmatter:
 
@@ -366,12 +366,12 @@ const navItems = [
 
 `train`, `adab` and `club` do not exist yet — `train` and `club` arrive in Task 4, `adab` in Task 8. The build still passes, because Astro does not validate that internal `href` strings resolve. The links are dead until those tasks land.
 
-- [ ] **Step 5: Verify the nav no longer offers News**
+- [x] **Step 5: Verify the nav no longer offers News**
 
 Run: `npm run build && grep -c ">News<" dist/index.html || echo "0 - nav item hidden"`
 Expected: `0 - nav item hidden`.
 
-- [ ] **Step 6: Add a weekly scheduled rebuild**
+- [x] **Step 6: Add a weekly scheduled rebuild**
 
 In `.github/workflows/deploy.yml`, change:
 
@@ -395,7 +395,7 @@ on:
     - cron: '0 0 * * 1'
 ```
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/pages/news.astro src/components/Nav.astro .github/workflows/deploy.yml
@@ -423,26 +423,26 @@ without anyone needing to push."
 - Consumes: the nav hrefs defined in Task 3.
 - Produces: routes `/train/`, `/club/`, and `/activities/` as a redirect.
 
-- [ ] **Step 1: Rename the two pages with git so history follows**
+- [x] **Step 1: Rename the two pages with git so history follows**
 
 ```bash
 git mv src/pages/about-us.astro src/pages/train.astro
 git mv src/pages/mainboard.astro src/pages/club.astro
 ```
 
-- [ ] **Step 2: Update their titles**
+- [x] **Step 2: Update their titles**
 
 In `src/pages/train.astro`, replace `title="About Us | IIUM Aikido Club"` with `title="Train | IIUM Aikido Club"`.
 
 In `src/pages/club.astro`, replace `title="Mainboard | IIUM Aikido Club"` with `title="Club | IIUM Aikido Club"`.
 
-- [ ] **Step 3: Find and fix every internal link to the old routes**
+- [x] **Step 3: Find and fix every internal link to the old routes**
 
 Run: `grep -rn "about-us\|mainboard" src/ public/admin/config.yml`
 
 Update every `${base}about-us` to `${base}train` and every `${base}mainboard` to `${base}club`. Leave `src/content/mainboard/` paths and the CMS `folder: src/content/mainboard` alone — the collection name is unchanged, only the page route moved.
 
-- [ ] **Step 4: Move the past-activities archive into `club.astro`**
+- [x] **Step 4: Move the past-activities archive into `club.astro`**
 
 From `src/pages/activities.astro`, copy into `src/pages/club.astro`:
 
@@ -459,7 +459,7 @@ Then change the archive heading so its age reads as intent rather than neglect:
 </h2>
 ```
 
-- [ ] **Step 5: Replace `activities.astro` with a redirect stub**
+- [x] **Step 5: Replace `activities.astro` with a redirect stub**
 
 Overwrite `src/pages/activities.astro` entirely with:
 
@@ -487,7 +487,7 @@ const target = `${base}club`;
 </html>
 ```
 
-- [ ] **Step 6: Add the mainboard placeholder**
+- [x] **Step 6: Add the mainboard placeholder**
 
 Create `src/content/mainboard/2526.yaml`:
 
@@ -501,12 +501,12 @@ order: 0
 
 `order: 0` sorts it above the existing charts, which use 1 to 3. Replace the image and alt text once the club supplies the real chart.
 
-- [ ] **Step 7: Run the build**
+- [x] **Step 7: Run the build**
 
 Run: `npm run build`
 Expected: PASS, `6 page(s) built` — `/`, `/404`, `/train/`, `/club/`, `/activities/` (stub), `/news/`.
 
-- [ ] **Step 8: Verify the routes and that no dead internal links remain**
+- [x] **Step 8: Verify the routes and that no dead internal links remain**
 
 ```bash
 ls dist/train/index.html dist/club/index.html dist/activities/index.html
@@ -515,7 +515,7 @@ grep -l "about-us\|/mainboard" dist/index.html dist/*/index.html || echo "no sta
 ```
 Expected: all three files exist; the hrefs list shows `train` and `club`; `no stale routes`.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add -A src/pages src/content/mainboard
@@ -547,7 +547,7 @@ The six FAQ entries answer exactly the hesitations of someone who just received 
 - Consumes: the `faq` collection.
 - Produces: `FaqList` with props `{ limit?: number }`.
 
-- [ ] **Step 1: Extract the FAQ markup into a component**
+- [x] **Step 1: Extract the FAQ markup into a component**
 
 Create `src/components/FaqList.astro`:
 
@@ -594,7 +594,7 @@ const faqItems = (await getCollection('faq'))
 </style>
 ```
 
-- [ ] **Step 2: Use the component in `train.astro`**
+- [x] **Step 2: Use the component in `train.astro`**
 
 In `src/pages/train.astro`, delete the `faqCollection`/`faqItems` frontmatter block — it now lives in the component — and add to the imports:
 
@@ -608,13 +608,13 @@ Inside `<section id="faq">`, replace the block that maps over `faqItems` with:
 <FaqList />
 ```
 
-- [ ] **Step 3: Verify the Train page is unchanged**
+- [x] **Step 3: Verify the Train page is unchanged**
 
 Run: `npm run build`
 Then: `grep -c "faq-item" dist/train/index.html`
 Expected: `6` — all six questions still render.
 
-- [ ] **Step 4: Add the top three questions to the home page**
+- [x] **Step 4: Add the top three questions to the home page**
 
 In `src/pages/index.astro`, add to the imports:
 
@@ -643,13 +643,13 @@ Insert this section immediately before the final call-to-action section:
 </section>
 ```
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run: `npm run build`
 Then: `grep -c "faq-item" dist/index.html`
 Expected: `3`.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/FaqList.astro src/pages/train.astro src/pages/index.astro
@@ -673,7 +673,7 @@ page while News held top-level navigation."
 - Consumes: nothing.
 - Produces: a `concepts` collection whose entries expose `data.name_en`, `data.name_ar`, `data.description`, `data.practice[]`, `data.grounding[]`, `data.attribution`, `data.order`, `data.draft`.
 
-- [ ] **Step 1: Add the schema**
+- [x] **Step 1: Add the schema**
 
 In `src/content.config.ts`, add before the `export const collections` block:
 
@@ -726,7 +726,7 @@ const concepts = defineCollection({
 
 Then add `concepts,` to the `export const collections` object.
 
-- [ ] **Step 2: Create the seed file**
+- [x] **Step 2: Create the seed file**
 
 Create `src/content/concepts/tawadu.md`:
 
@@ -757,7 +757,7 @@ Add the Arabic `name_ar` when writing the real entry — it is omitted here so t
 
 This entry is `draft: true` and its only citation is `unverified`. It is a template and must not publish; Task 7's script proves it cannot.
 
-- [ ] **Step 3: Verify the schema accepts it and rejects a bad entry**
+- [x] **Step 3: Verify the schema accepts it and rejects a bad entry**
 
 Run: `npm run build`
 Expected: PASS.
@@ -766,7 +766,7 @@ Now prove attribution is genuinely enforced. Temporarily delete the two lines un
 Expected: FAIL, naming `attribution` as required on the `concepts` entry.
 Restore the lines and rebuild to confirm PASS.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/content.config.ts src/content/concepts
@@ -797,7 +797,7 @@ Modelled on Al-Mizan's `assert-schema-counts.py`. Its lesson is that drift betwe
   - `parseConcept(file: string, source: string): ConceptFile`
   - CLI exit status 0 (clean) or 1 (violations found)
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `scripts/assert-citations.test.ts`:
 
@@ -881,12 +881,12 @@ test('parseConcept treats a missing draft field as draft', () => {
 
 Note the last test: a missing `draft` field means draft. The Zod schema defaults `draft` to `true`, and this script must agree with it — defaulting to published would let an un-flagged file bypass the check.
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `npm test`
 Expected: FAIL — cannot find module `./assert-citations.ts`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 Create `scripts/assert-citations.ts`:
 
@@ -1007,12 +1007,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 }
 ```
 
-- [ ] **Step 4: Run the test to verify it passes**
+- [x] **Step 4: Run the test to verify it passes**
 
 Run: `npm test`
 Expected: all tests pass — 8 from Task 2 plus 8 here.
 
-- [ ] **Step 5: Add the scripts to `package.json`**
+- [x] **Step 5: Add the scripts to `package.json`**
 
 In `scripts`, add:
 
@@ -1021,7 +1021,7 @@ In `scripts`, add:
     "check": "npm run check:citations && npm run build",
 ```
 
-- [ ] **Step 6: Verify the script against the real files**
+- [x] **Step 6: Verify the script against the real files**
 
 Run: `npm run check:citations`
 Expected: `Citations clean: 1 concept(s) checked.` — `tawadu.md` is a draft, so its unverified citation is allowed.
@@ -1033,7 +1033,7 @@ Confirm the exit status is really non-zero: `npm run check:citations; echo "exit
 
 Restore `draft: true` and re-run to confirm it is clean.
 
-- [ ] **Step 7: Wire it into CI**
+- [x] **Step 7: Wire it into CI**
 
 In `.github/workflows/deploy.yml`, insert a step between `Install dependencies` and `Build`:
 
@@ -1042,7 +1042,7 @@ In `.github/workflows/deploy.yml`, insert a step between `Install dependencies` 
         run: npm run check:citations
 ```
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add scripts package.json .github/workflows/deploy.yml
@@ -1067,7 +1067,7 @@ check has to be mechanical."
 - Consumes: the `concepts` collection.
 - Produces: route `/adab/`.
 
-- [ ] **Step 1: Create the card component**
+- [x] **Step 1: Create the card component**
 
 Create `src/components/ConceptCard.astro`:
 
@@ -1122,7 +1122,7 @@ const { nameEn, nameAr, description, practice, issuedBy, epistemicStatus, body }
 
 The attribution footer is not decoration. A reader must never mistake an interpretive mapping for an established teaching, and that risk is highest precisely because the material is attractive and the page looks authoritative.
 
-- [ ] **Step 2: Create the page**
+- [x] **Step 2: Create the page**
 
 Create `src/pages/adab.astro`:
 
@@ -1180,7 +1180,7 @@ const concepts = (await getCollection('concepts'))
 </BaseLayout>
 ```
 
-- [ ] **Step 3: Build and verify the empty state**
+- [x] **Step 3: Build and verify the empty state**
 
 Run: `npm run build`
 Expected: PASS, now `7 page(s) built`.
@@ -1188,7 +1188,7 @@ Expected: PASS, now `7 page(s) built`.
 Run: `grep -c "Being written" dist/adab/index.html`
 Expected: `1` — the only concept is a draft, so the empty state shows. This confirms drafts do not leak.
 
-- [ ] **Step 4: Verify a published concept renders with its attribution notice**
+- [x] **Step 4: Verify a published concept renders with its attribution notice**
 
 Temporarily set `draft: false` **and** change the grounding `status` to `verified` in `src/content/concepts/tawadu.md`, then:
 
@@ -1200,7 +1200,7 @@ Expected: `1`.
 
 Now restore `draft: true` and `status: unverified`, run `npm run check` again, and confirm the page returns to the empty state.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/components/ConceptCard.astro src/pages/adab.astro
@@ -1226,7 +1226,7 @@ Spec section 4.3 gives Home the job of answering what/when/where, first-class-fr
 - Consumes: `training` and `registrationUrl` from `src/config/site.ts`; route `/adab/` from Task 8.
 - Produces: nothing other tasks depend on.
 
-- [ ] **Step 1: Add the essentials block to the home page**
+- [x] **Step 1: Add the essentials block to the home page**
 
 In `src/pages/index.astro`, confirm the frontmatter imports `training` (add it to the existing `site` import if absent):
 
@@ -1269,7 +1269,7 @@ Insert this section directly below the hero, above the Latest Activities section
 </section>
 ```
 
-- [ ] **Step 2: Add the Adab teaser to the home page**
+- [x] **Step 2: Add the Adab teaser to the home page**
 
 Insert directly after the FAQ section added in Task 5:
 
@@ -1289,7 +1289,7 @@ Insert directly after the FAQ section added in Task 5:
 </section>
 ```
 
-- [ ] **Step 3: Add "what a first class is like" to Train**
+- [x] **Step 3: Add "what a first class is like" to Train**
 
 In `src/pages/train.astro`, insert above the FAQ section:
 
@@ -1310,7 +1310,7 @@ In `src/pages/train.astro`, insert above the FAQ section:
 </section>
 ```
 
-- [ ] **Step 4: Verify**
+- [x] **Step 4: Verify**
 
 Run: `npm run check`
 Expected: PASS.
@@ -1322,7 +1322,7 @@ grep -c "Your First Class" dist/train/index.html   # expect 1
 grep -o 'href="/AikidoClub/adab"' dist/index.html  # expect a match, with no double slash
 ```
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/pages/index.astro src/pages/train.astro
@@ -1344,7 +1344,7 @@ Spec section 4.5. `CLAUDE.md` carries the architecture; `memory.md` carries the 
 **Files:**
 - Create: `memory.md`
 
-- [ ] **Step 1: Create `memory.md`**
+- [x] **Step 1: Create `memory.md`**
 
 ```markdown
 # Memory
@@ -1379,7 +1379,7 @@ does; this says why. Modelled on the same file in Al-Mizan.
   spec section 3.
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add memory.md
@@ -1398,13 +1398,13 @@ part that evaporates."
 - Modify: `README.md`
 - Modify: `docs/EDITING.md`
 
-- [ ] **Step 1: Add the collection to the table in `CLAUDE.md`**
+- [x] **Step 1: Add the collection to the table in `CLAUDE.md`**
 
 ```markdown
 | `concepts` | `glob` \*\*/\*.md | `src/content/concepts/` | `attribution` required; `draft` gates publication; author-owned, absent from the CMS |
 ```
 
-- [ ] **Step 2: Document the new commands and behaviour in `CLAUDE.md`**
+- [x] **Step 2: Document the new commands and behaviour in `CLAUDE.md`**
 
 In the commands section, add:
 
@@ -1423,11 +1423,11 @@ without a push. Routes are Home / Train / Adab / Club; `/activities/` is a
 redirect stub kept for old links.
 ```
 
-- [ ] **Step 3: Update `README.md`**
+- [x] **Step 3: Update `README.md`**
 
 Add `npm test` and `npm run check` to the commands table. Amend the "`npm run build` is the test suite" paragraph to say `npm run check` is now the pre-push command.
 
-- [ ] **Step 4: Update `docs/EDITING.md`**
+- [x] **Step 4: Update `docs/EDITING.md`**
 
 In the sections table, note that Mainboard and Past Activities now appear on the **Club** page, and the FAQ appears on both **Home** and **Train**. Add to "Things worth knowing":
 
@@ -1436,7 +1436,7 @@ In the sections table, note that Mainboard and Past Activities now appear on the
 and are not club-editable by design.
 ```
 
-- [ ] **Step 5: Verify and commit**
+- [x] **Step 5: Verify and commit**
 
 Run: `npm run check`
 Expected: PASS.
