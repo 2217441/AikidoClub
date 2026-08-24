@@ -15,9 +15,9 @@ repository first — ask whoever maintains the site (see [CMS-SETUP.md](CMS-SETU
 | :--- | :--- |
 | **News** | Announcements — registration open, upcoming events, results |
 | **Activities** | Ongoing or upcoming activities shown on the home page |
-| **Past Activities** | The archive of events that have happened |
-| **Mainboard** | Each tenure's committee chart |
-| **FAQ** | Questions newcomers ask |
+| **Past Activities** | The archive of events that have happened — appears on the **Club** page |
+| **Mainboard** | Each tenure's committee chart — appears on the **Club** page |
+| **FAQ** | Questions newcomers ask — appears on both **Home** and **Train** |
 | **Testimonials** | Quotes from members |
 
 ## How to post
@@ -50,6 +50,9 @@ most students will see it.
 
 **Mainboard needs a `tenure`** in the form `24/25`. That's what groups and
 labels the charts.
+
+**There is no Adab section in the CMS.** Those pages are maintained in code
+and are not club-editable by design.
 
 ## If something looks wrong
 

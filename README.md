@@ -40,11 +40,14 @@ Press `Ctrl+C` in the terminal to stop it.
 | `npm run dev` | Local preview at `localhost:4321`, updates as you edit |
 | `npm run build` | Builds the real site into `dist/` |
 | `npm run preview` | Serves what `npm run build` produced |
+| `npm test` | Runs the unit tests (news freshness, citation checks) |
+| `npm run check` | Citation assertion, then the build — the pre-push command |
 
-**`npm run build` is the test suite.** There are no unit tests. The build
-checks page code *and* validates every content file against its schema, so if
-a news post is missing a required field, the build fails and tells you which
-file. Run it before pushing.
+**`npm run check` is the test suite.** It asserts that no published concept
+cites an unverified source, then builds. The build checks page code *and*
+validates every content file against its schema, so if a news post is missing
+a required field, the build fails and tells you which file. Run it before
+pushing.
 
 ---
 

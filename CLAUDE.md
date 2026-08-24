@@ -14,9 +14,12 @@ npm run dev        # dev server on localhost:4321
 npm run build      # static output to ./dist
 npm run preview    # serve ./dist
 npm run astro -- check   # type/diagnostics check (tsconfig extends astro/tsconfigs/strict)
+npm test                 # node --test over src/**/*.test.ts and scripts/**/*.test.ts
+npm run check:citations  # fails if a published concept cites an unverified source
+npm run check            # check:citations, then build - run this before pushing
 ```
 
-There is no test suite and no linter configured. `npm run build` is the verification step — it type-checks `.astro` frontmatter and validates every content collection entry against its Zod schema, so a bad frontmatter field fails the build.
+There is no linter configured. `npm run check` is the verification step: it runs the citation assertion, type-checks `.astro` frontmatter, and validates every content collection entry against its Zod schema, so a bad frontmatter field fails the build. Pure logic lives in `src/lib/` and is unit-tested with Node's built-in runner (`node --test` runs TypeScript natively on Node 22).
 
 ## Deployment
 
@@ -31,24 +34,30 @@ Netlify was evaluated for CMS auth and **rejected** — a Cloudflare Worker give
 Image paths inside content collections are inconsistent by convention: some entries use `/img/...` (leading slash), others `img/...`. Consumers handle both:
 
 - `ActivityCard.astro` and `LatestCard.astro` resolve `base` themselves and guard against double-prefixing (`imageSrc.startsWith(base)`).
-- Several pages (`index.astro`, `activities.astro`, `mainboard.astro`) *also* pre-resolve with the `startsWith('/') ? base + slice(1) : raw` idiom before passing down.
+- Several pages (`index.astro`, `club.astro`) *also* pre-resolve with the `startsWith('/') ? base + slice(1) : raw` idiom before passing down.
 
 When adding a component that takes an image path, replicate the `http` / leading-slash / bare-relative triage in `ActivityCard.astro` rather than assuming a single form.
 
 ## Content architecture
 
-`src/content.config.ts` defines six collections; the Zod schemas there are the source of truth for frontmatter. Astro 6 removed the legacy `type: 'content'`/`type: 'data'` API, so every collection declares a `glob` loader — including the YAML data ones. Entries still expose `.data` and, for markdown, `.body` (raw, unrendered):
+`src/content.config.ts` defines seven collections; the Zod schemas there are the source of truth for frontmatter. Astro 6 removed the legacy `type: 'content'`/`type: 'data'` API, so every collection declares a `glob` loader — including the YAML data ones. Entries still expose `.data` and, for markdown, `.body` (raw, unrendered):
 
 | Collection | Loader | Location | Notable fields |
 |---|---|---|---|
-| `news` | `glob` \*\*/\*.md | `src/content/news/` | `pinned`, optional `ctaText`/`ctaLink` |
-| `activities` | `glob` \*\*/\*.md | `src/content/activities/` | `featured` — drives the "Latest" carousel on `index.astro` and `activities.astro` |
+| `news` | `glob` \*\*/\*.md | `src/content/news/` | `pinned`, optional `ctaText`/`ctaLink`; `date` is a real date |
+| `activities` | `glob` \*\*/\*.md | `src/content/activities/` | `featured` — drives the "Latest" carousel on `index.astro` |
 | `pastActivities` | `glob` \*\*/\*.md | `src/content/pastActivities/` | `year` ("23/24") groups the archive; `order` sorts within a year |
 | `mainboard` | `glob` \*\*/\*.yaml | `src/content/mainboard/` | flat object with `tenure` + `order` |
 | `faq` | `glob` \*\*/\*.md | `src/content/faq/` | `order`, `defaultOpen` |
 | `testimonials` | `glob` \*\*/\*.md | `src/content/testimonials/` | `order` |
+| `concepts` | `glob` \*\*/\*.md | `src/content/concepts/` | `attribution` required; `draft` gates publication; author-owned, absent from the CMS |
 
-Pages call `getCollection(...)` in frontmatter, then sort/group/reshape into plain objects before passing to components — components never touch `astro:content`. Sorting rules live in the pages (e.g. `news.astro` puts `pinned` first then `date.localeCompare` descending; `date` is a free-form string like "January 2026", not a Date).
+News expires at build time (`src/lib/news.ts`, four-month shelf life) and the
+nav item disappears when nothing is fresh. A weekly cron rebuild applies expiry
+without a push. Routes are Home / Train / Adab / Club; `/activities/` is a
+redirect stub kept for old links.
+
+Pages call `getCollection(...)` in frontmatter, then sort/group/reshape into plain objects before passing to components — components never touch `astro:content` (the exceptions are `Nav.astro` and `FaqList.astro`, which read collections themselves). Sorting rules live in the pages (e.g. `news.astro` puts `pinned` first then `date.getTime()` descending; `date` is a real `Date`).
 
 Adding a field means editing three places: the Zod schema in `src/content.config.ts`, the widget list in `public/admin/config.yml`, and the consuming page.
 
@@ -74,7 +83,7 @@ The CMS field lists mirror the Zod schemas one-for-one as of the last sync; when
 
 ## Shared values
 
-`src/config/site.ts` exports `registrationUrl`, `contactEmail`, and `training` (schedule/time/venue/campus/map embed). `index.astro`, `news.astro`, `about-us.astro`, and `Footer.astro` import from it — edit there, not in the markup. Vite does not resolve `.yaml` imports, which is why this is a TS module rather than YAML.
+`src/config/site.ts` exports `registrationUrl`, `contactEmail`, and `training` (schedule/time/venue/campus/map embed). `index.astro`, `news.astro`, `train.astro`, and `Footer.astro` import from it — edit there, not in the markup. Vite does not resolve `.yaml` imports, which is why this is a TS module rather than YAML.
 
 **Social links stay duplicated** between `Footer.astro` and `news.astro`, because each embeds inline SVG path data alongside the URL.
 
