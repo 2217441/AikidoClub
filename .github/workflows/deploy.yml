@@ -4,6 +4,10 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+  schedule:
+    # Expiry is computed at build time, so rebuild weekly to retire stale
+    # news without needing anyone to push. Mondays 00:00 UTC.
+    - cron: '0 0 * * 1'
 
 permissions:
   contents: read

@@ -2,14 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { registrationUrl } from '../config/site';
+import { isFresh, formatNewsDate } from '../lib/news.ts';
 
 const base = import.meta.env.BASE_URL;
 
 // Get news from content collection
 const newsCollection = await getCollection('news');
 
-// Sort: pinned items first, then by date descending
+const now = new Date();
+
+// Expired items stop rendering entirely; pinned-first, then newest first.
 const newsItems = newsCollection
+  .filter(item => isFresh(item.data.date, now))
   .sort((a, b) => {
     // Pinned items first
     if (a.data.pinned && !b.data.pinned) return -1;
@@ -18,7 +22,7 @@ const newsItems = newsCollection
     return b.data.date.getTime() - a.data.date.getTime();
   })
   .map(item => ({
-    date: item.data.date,
+    date: formatNewsDate(item.data.date),
     title: item.data.title,
     content: item.body,
     pinned: item.data.pinned,
@@ -88,7 +92,16 @@ const socialLinks = [
       </div>
 
       <!-- News Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      {newsItems.length === 0 && (
+        <p class="text-center text-gray-500 italic py-12">
+          No announcements right now. Training runs as usual — see
+          <a href={`${base}train`} class="text-accent-pink underline">Train</a>
+          for the schedule.
+        </p>
+      )}
+
+      {newsItems.length > 0 && (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         {newsItems.map((item) => (
           <article class={`news-card bg-white rounded-xl p-6 shadow-md border-l-4 
                           ${item.pinned ? 'md:col-span-2 border-l-red-500 bg-gradient-to-br from-white to-red-50' : 'border-l-accent-pink'}
@@ -119,7 +132,8 @@ const socialLinks = [
             )}
           </article>
         ))}
-      </div>
+        </div>
+      )}
 
       <!-- Social Media Section -->
       <div class="bg-white rounded-xl p-8 text-center shadow-sm">
