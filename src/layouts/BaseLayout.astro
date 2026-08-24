@@ -17,6 +17,10 @@ const {
   description = 'Aikido Club - Martial arts training and community',
   currentPath = Astro.url.pathname 
 } = Astro.props;
+
+const site = Astro.site;
+const pageUrl = new URL(currentPath, site).href;
+const ogImage = new URL(`${base}img/og-cover.jpg`, site).href;
 ---
 
 <!doctype html>
@@ -26,6 +30,18 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Social share previews (WhatsApp, Facebook, Telegram, Slack...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="IIUM Aikido Club" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href={`${base}favicons/favicon-32x32.png`} />
