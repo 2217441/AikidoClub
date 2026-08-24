@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConceptCard from '../components/ConceptCard.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+
+// Drafts never publish. This is the only filter here - the citation check
+// in scripts/assert-citations.ts guarantees anything past it is verified.
+const concepts = (await getCollection('concepts'))
+  .filter(entry => !entry.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Adab | IIUM Aikido Club"
+  description="Aikido as a discipline of adab - the ethic of the art, named and grounded."
+>
+  <section class="bg-[#f5f5f5] py-12 px-4 sm:px-8">
+    <div class="max-w-3xl mx-auto">
+      <header class="text-center mb-10">
+        <h1 class="text-primary-dark text-2xl sm:text-3xl font-bold mb-4">Adab</h1>
+        <div class="deco-line mx-auto"></div>
+        <p class="text-gray-600 mt-6 leading-relaxed">
+          A martial art is a training of character before it is a training of
+          the body. These pages name the virtues the practice cultivates, and
+          say plainly where each connection comes from.
+        </p>
+      </header>
+
+      {concepts.length === 0 ? (
+        <p class="text-center text-gray-500 italic py-12">
+          Being written. Come train in the meantime:
+          <a href={`${base}train`} class="text-accent-pink underline">here is when and where</a>.
+        </p>
+      ) : (
+        concepts.map((entry) => (
+          <ConceptCard
+            nameEn={entry.data.name_en}
+            nameAr={entry.data.name_ar}
+            description={entry.data.description}
+            practice={entry.data.practice}
+            issuedBy={entry.data.attribution.issued_by}
+            epistemicStatus={entry.data.attribution.epistemic_status}
+            body={entry.body ?? ''}
+          />
+        ))
+      )}
+    </div>
+  </section>
+</BaseLayout>

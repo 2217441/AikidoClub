@@ -1,0 +1,46 @@
+---
+interface Props {
+  nameEn: string;
+  nameAr?: string;
+  description: string;
+  practice: { art: string; element: string; claim: string }[];
+  issuedBy: string;
+  epistemicStatus: 'documented' | 'interpretive';
+  body: string;
+}
+
+const { nameEn, nameAr, description, practice, issuedBy, epistemicStatus, body } = Astro.props;
+---
+
+<article class="bg-white rounded-lg border-l-4 border-l-accent-cyan shadow-sm p-6 mb-6">
+  <header class="flex items-baseline justify-between gap-4 flex-wrap mb-3">
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-800">{nameEn}</h2>
+    {nameAr && <span lang="ar" dir="rtl" class="text-2xl text-gray-600">{nameAr}</span>}
+  </header>
+
+  <p class="text-gray-600 italic mb-4">{description}</p>
+
+  {practice.map((p) => (
+    <p class="text-gray-700 mb-2">
+      <span class="font-semibold capitalize">{p.art} - {p.element}:</span> {p.claim}
+    </p>
+  ))}
+
+  <p class="text-gray-700 leading-relaxed mt-4">{body}</p>
+
+  <footer class={`mt-5 pt-4 border-t text-sm ${
+    epistemicStatus === 'interpretive'
+      ? 'border-amber-300 bg-amber-50 -mx-6 -mb-6 px-6 py-4 text-amber-900'
+      : 'border-gray-200 text-gray-500'
+  }`}>
+    {epistemicStatus === 'interpretive' ? (
+      <p>
+        <strong>A personal reading, not an established ruling.</strong>
+        This connection between practice and virtue is the reflection of {issuedBy},
+        offered as one way of seeing, not as a teaching transmitted from the tradition.
+      </p>
+    ) : (
+      <p>Documented mapping. Attributed to {issuedBy}.</p>
+    )}
+  </footer>
+</article>
